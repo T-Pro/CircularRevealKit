@@ -1,0 +1,6 @@
+framework module Pods_CircularRevealKit_Example {
+  umbrella header "Pods-CircularRevealKit_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

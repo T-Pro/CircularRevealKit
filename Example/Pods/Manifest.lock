@@ -1,0 +1,16 @@
+PODS:
+  - CircularRevealKit (0.1.0)
+
+DEPENDENCIES:
+  - CircularRevealKit (from `../`)
+
+EXTERNAL SOURCES:
+  CircularRevealKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CircularRevealKit: 43a1db94bea5e4e66436fe138fad1d8d400b3ba3
+
+PODFILE CHECKSUM: fe24aa566560148352a162140f1938b91be64a80
+
+COCOAPODS: 1.2.1

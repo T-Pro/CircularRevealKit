@@ -1,0 +1,6 @@
+framework module CircularRevealKit {
+  umbrella header "CircularRevealKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

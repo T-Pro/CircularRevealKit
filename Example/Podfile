@@ -1,0 +1,5 @@
+use_frameworks!
+
+target 'CircularRevealKit_Example' do
+  pod 'CircularRevealKit', :path => '../'
+end

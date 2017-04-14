@@ -11,7 +11,9 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-## Installation
+Swift 3 and iOS 9
+
+## Installation(Not avaliable)
 
 CircularRevealKit is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
@@ -22,7 +24,7 @@ pod "CircularRevealKit"
 
 ## Author
 
-ppamorim, pepa.amorim@gmail.com
+T-Pro, engineer@tpro.ie
 
 ## License
 

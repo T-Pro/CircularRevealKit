@@ -4,6 +4,7 @@
 [![Version](https://img.shields.io/cocoapods/v/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)
 [![License](https://img.shields.io/cocoapods/l/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)
 [![Platform](https://img.shields.io/cocoapods/p/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)
+[![Swift 3](https://img.shields.io/badge/Swift-3-orange.svg?style=flat)]
 
 ## Example
 

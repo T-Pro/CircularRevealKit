@@ -1,4 +1,4 @@
-# CircularRevealKit
+# [![CircularRevealKit](./Art/CircularRevealKit.png)](#)
 
 [![CI Status](http://img.shields.io/travis/ppamorim/CircularRevealKit.svg?style=flat)](https://travis-ci.org/ppamorim/CircularRevealKit)
 [![Version](https://img.shields.io/cocoapods/v/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)

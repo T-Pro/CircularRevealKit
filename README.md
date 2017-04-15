@@ -27,6 +27,12 @@ pod "CircularRevealKit"
 
 T-Pro, engineer@tpro.ie
 
+## Based on:
+
+* [RadialTransition_swift][1]
+
 ## License
 
 CircularRevealKit is available under the MIT license. See the LICENSE file for more info.
+
+[1]: https://github.com/apadalko/RadialTransition_swift

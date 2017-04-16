@@ -8,6 +8,9 @@
 
 This library was created to allow developers to implement the material design's reveal effect.
 
+## Sample
+![GIF sample](https://media.giphy.com/media/3cwSEnIK1GJEs/giphy.gif)
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.

@@ -55,7 +55,7 @@ class SecondViewController: UICircularViewController {
   override func updateViewConstraints() {
     if !viewReady {
       viewReady = true
-      view.addConstraint(
+      let constraints = [
         NSLayoutConstraint(
           item: view,
           attribute: .centerX,
@@ -63,8 +63,7 @@ class SecondViewController: UICircularViewController {
           toItem: randomButton,
           attribute: .centerX,
           multiplier: 1,
-          constant: 0))
-      view.addConstraint(
+          constant: 0),
         NSLayoutConstraint(
           item: view,
           attribute: .centerY,
@@ -72,13 +71,14 @@ class SecondViewController: UICircularViewController {
           toItem: randomButton,
           attribute: .centerY,
           multiplier: 1,
-          constant: 0))
+          constant: 0)]
+      view.addConstraints(constraints)
     }
     super.updateViewConstraints()
   }
 
   @objc private func randomButtonClick() {
-    self.navigationController?.radialPopViewController()
+    radialPopViewController()
   }
 
 }

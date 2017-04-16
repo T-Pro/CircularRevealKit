@@ -126,7 +126,7 @@ extension FirstViewController: UITableViewDelegate {
     tableView.deselectRow(at: indexPath, animated: true)
     switch indexPath.row {
       case 0:
-        navigationController?.radialPushViewController(SecondViewController())
+        radialPushViewController(SecondViewController())
         break
       default: break
     }

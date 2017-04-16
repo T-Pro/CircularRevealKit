@@ -20,7 +20,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
+import UIKit
 
-internal let DEFAULT_CIRCULAR_ANIMATION_DURATION: TimeInterval = 0.33
-internal let ANIMATION_KEY_PATH: String = "path"
+public extension UIViewController {
+  
+  open func radialPushViewController(
+    _ viewController: UIViewController,
+    _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
+    _ startFrame: CGRect = CGRect.zero,
+    revealType: RevealType = .reveal,
+    _ transitionCompletion: (() -> ())? = nil) {
+    navigationController?.radialPushViewController(
+      viewController,
+      duration,
+      startFrame,
+      revealType: revealType,
+      transitionCompletion)
+  }
+  
+  open func radialPopViewController() {
+    navigationController?.radialPopViewController()
+  }
+  
+  func setupBackButton(title: String = "Back", style: UIBarButtonItemStyle = UIBarButtonItemStyle.plain) {
+    navigationItem.hidesBackButton = true
+    navigationItem.leftBarButtonItem = UIBarButtonItem(
+      title: title, style: style, target: self, action: #selector(handleBackButton))
+  }
+  
+  @objc func handleBackButton() {
+    self.navigationController?.radialPopViewController()
+  }
+  
+}

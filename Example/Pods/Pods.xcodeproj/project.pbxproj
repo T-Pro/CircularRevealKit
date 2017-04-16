@@ -13,13 +13,14 @@
 		42F7D9BFD931FB921CC9864C /* DefaultCircularAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7D5F4C2EB2A366D58348B /* DefaultCircularAnimation.swift */; };
 		42F7DFB17CE781ABE4357671 /* RevealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7DF5A0C34F4C79F5B6CD6 /* RevealType.swift */; };
 		481DF32B1EA14374005576BC /* CicularTransactionDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481DF32A1EA14374005576BC /* CicularTransactionDirector.swift */; };
+		48FF0DA21EA437D0004A571F /* UICircularViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF0DA11EA437D0004A571F /* UICircularViewControllerExtension.swift */; };
 		4AFA2E2A6E5024A310A8A211CEEA342B /* CircularRevealKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C7C1A208D10B7406BC4FF3602108D154 /* CircularRevealKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		540463D2669FF7EA7D28834419449B8F /* CircularRevealKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF832B77BEB2FC784E423562B9052B0 /* CircularRevealKit-dummy.m */; };
 		70569695494877CAD54FEADDBDA3EF0E /* Pods-CircularRevealKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E28E0498F58811D0D514147AABE5913 /* Pods-CircularRevealKit_Example-dummy.m */; };
 		80D0EB73169FC5BF99EDECF1CFFE52D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		8669DEFCCFE93CC5F52B007D01CFDA67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		A2E6E332DC1D0E72BFCFDDEEF1F737F6 /* LayerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC93826CD050F2AB4A3AC3665E165E55 /* LayerAnimator.swift */; };
-		DC7E258CDF84C7AB1FBDE9213EBB5A32 /* UICircularNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationController.swift */; };
+		DC7E258CDF84C7AB1FBDE9213EBB5A32 /* UICircularNavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UICircularNavigationController.swift; sourceTree = "<group>"; };
+		10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationControllerExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UICircularNavigationControllerExtension.swift; sourceTree = "<group>"; };
 		135E54EDC0C0D92BFC144D6C11F6CE89 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1972C6463293A977DF8087B7458262A1 /* UIViewRadial.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIViewRadial.swift; sourceTree = "<group>"; };
 		29CFBE2CF63A7AF80C33635DE1FBC3D8 /* Pods-CircularRevealKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CircularRevealKit_Example-umbrella.h"; sourceTree = "<group>"; };
@@ -42,6 +43,7 @@
 		42F7D7D16A41E9421EE75CAA /* UICircularViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICircularViewController.swift; sourceTree = "<group>"; };
 		42F7DF5A0C34F4C79F5B6CD6 /* RevealType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealType.swift; sourceTree = "<group>"; };
 		481DF32A1EA14374005576BC /* CicularTransactionDirector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CicularTransactionDirector.swift; sourceTree = "<group>"; };
+		48FF0DA11EA437D0004A571F /* UICircularViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICircularViewControllerExtension.swift; sourceTree = "<group>"; };
 		64C5DD6C33A6C583D946FA2B5FF61516 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		6F9E7F0DC30C4403554660DFCC1EB7CE /* Pods-CircularRevealKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CircularRevealKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,12 +115,13 @@
 			isa = PBXGroup;
 			children = (
 				EC93826CD050F2AB4A3AC3665E165E55 /* LayerAnimator.swift */,
-				10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationController.swift */,
+				10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationControllerExtension.swift */,
 				1972C6463293A977DF8087B7458262A1 /* UIViewRadial.swift */,
 				481DF32A1EA14374005576BC /* CicularTransactionDirector.swift */,
 				42F7D7D16A41E9421EE75CAA /* UICircularViewController.swift */,
 				42F7DF5A0C34F4C79F5B6CD6 /* RevealType.swift */,
 				42F7D5F4C2EB2A366D58348B /* DefaultCircularAnimation.swift */,
+				48FF0DA11EA437D0004A571F /* UICircularViewControllerExtension.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -290,8 +293,9 @@
 				540463D2669FF7EA7D28834419449B8F /* CircularRevealKit-dummy.m in Sources */,
 				A2E6E332DC1D0E72BFCFDDEEF1F737F6 /* LayerAnimator.swift in Sources */,
 				481DF32B1EA14374005576BC /* CicularTransactionDirector.swift in Sources */,
-				DC7E258CDF84C7AB1FBDE9213EBB5A32 /* UICircularNavigationController.swift in Sources */,
+				DC7E258CDF84C7AB1FBDE9213EBB5A32 /* UICircularNavigationControllerExtension.swift in Sources */,
 				19F57F0FBB42447E3462C1048E20E967 /* UIViewRadial.swift in Sources */,
+				48FF0DA21EA437D0004A571F /* UICircularViewControllerExtension.swift in Sources */,
 				42F7D8FE0E3E246563041209 /* UICircularViewController.swift in Sources */,
 				42F7DFB17CE781ABE4357671 /* RevealType.swift in Sources */,
 				42F7D9BFD931FB921CC9864C /* DefaultCircularAnimation.swift in Sources */,

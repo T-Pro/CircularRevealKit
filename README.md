@@ -11,13 +11,9 @@ This library was created to allow developers to implement the material design's 
 ## Sample
 ![GIF sample](https://media.giphy.com/media/3cwSEnIK1GJEs/giphy.gif)
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
 ## Requirements
 
-Swift 3 and iOS 9
+Swift 3 and iOS 9+
 
 ## Installation
 
@@ -27,6 +23,16 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod "CircularRevealKit"
 ```
+
+and run `pod install`.
+
+## How to
+
+You can simply import the library using `import CircularRevealKit` and to show and dismiss 
+
+## Example
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Author
 

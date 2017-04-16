@@ -22,20 +22,6 @@
 
 import UIKit
 
-public extension UIViewController {
-
-  func setupBackButton(title: String = "Back", style: UIBarButtonItemStyle = UIBarButtonItemStyle.plain) {
-    navigationItem.hidesBackButton = true
-    navigationItem.leftBarButtonItem = UIBarButtonItem(
-      title: title, style: style, target: self, action: #selector(handleBackButton))
-  }
-
-  @objc func handleBackButton() {
-    self.navigationController?.radialPopViewController()
-  }
-
-}
-
 public extension UINavigationController {
 
   func radialPushViewController(

@@ -22,8 +22,6 @@
 
 import UIKit
 
-let defaultRadialDuration: TimeInterval = 0.5
-
 public extension UIViewController {
 
   func setupBackButton(title: String = "Back", style: UIBarButtonItemStyle = UIBarButtonItemStyle.plain) {
@@ -42,9 +40,9 @@ public extension UINavigationController {
 
   func radialPushViewController(
     _ viewController: UIViewController? = nil,
-    _ duration: TimeInterval = defaultRadialDuration,
+    _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
-    show: Bool = true,
+    revealType: RevealType = .reveal,
     _ transitionCompletion: (() -> ())? = nil) {
     
     let rect: CGRect
@@ -70,31 +68,56 @@ public extension UINavigationController {
       let toViewController = transactionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
       let fromViewController = transactionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
 
-      if let toView = toViewController?.view, let fromView = fromViewController?.view {
-        transactionContext.containerView.insertSubview(toView, aboveSubview: fromView)
-      }
+      if let toView = toViewController?.view,
+         let fromView = fromViewController?.view {
 
-      toViewController?.view.drawAnimatedCircularMask(startFrame: rect, duration: animationTime) { () -> Void in
-        completion()
-        transitionCompletion?()
+        switch revealType {
+
+          case RevealType.reveal:
+            transactionContext.containerView.insertSubview(toView, aboveSubview: fromView)
+            toView.drawAnimatedCircularMask(
+              startFrame: rect,
+              duration: animationTime,
+              revealType: revealType) { () -> Void in
+              completion()
+              transitionCompletion?()
+            }
+            break
+
+          case RevealType.unreveal:
+            transactionContext.containerView.insertSubview(toView, belowSubview: fromView)
+            fromView.drawAnimatedCircularMask(
+              startFrame: rect,
+              duration: animationTime,
+              revealType: revealType) { () -> Void in
+              completion()
+              transitionCompletion?()
+            }
+            break
+
+        }
+
       }
 
     }
 
-    if show {
-      if let viewController = viewController {
-        pushViewController(viewController, animated: true)
-      } else {
-        print("ViewController is nil")
-      }
-    } else {
-      popViewController(animated: true)
+    switch revealType {
+      case RevealType.reveal:
+        if let viewController = viewController {
+          pushViewController(viewController, animated: true)
+        } else {
+          print("ViewController is nil")
+        }
+        break
+      case RevealType.unreveal:
+        popViewController(animated: true)
+        break
     }
 
   }
 
   func radialPopViewController() {
-    radialPushViewController(show: false)
+    radialPushViewController(revealType: .unreveal)
   }
 
 }

@@ -23,14 +23,13 @@
 import Foundation
 import UIKit
 
-public let DEFAULT_DURATION: TimeInterval = 0.5
 public typealias AnimationBlock = (( _ transactionContext: UIViewControllerContextTransitioning,
                                      _ animationTime: TimeInterval,
                                      _ transitionCompletion: @escaping ()->()) ->())
 
 public class CicularTransactionDirector: NSObject {
 
-  public var duration: TimeInterval = DEFAULT_DURATION
+  public var duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION
   public var transitionContext: UIViewControllerContextTransitioning?
   public var animationBlock: AnimationBlock?
 

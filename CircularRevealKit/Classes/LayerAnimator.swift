@@ -21,6 +21,8 @@
 //
 
 import Foundation
+import UIKit
+import QuartzCore.CALayer
 
 class LayerAnimator: NSObject, CAAnimationDelegate {
   
@@ -39,15 +41,17 @@ class LayerAnimator: NSObject, CAAnimationDelegate {
   }
   
   func startAnimationWithBlock(block: @escaping ()->()) {
-    self.completionBlock = block
+    completionBlock = block
     if let caAnimation = self.caAnimation {
       caAnimation.delegate = self
+      animLayer?.removeAllAnimations()
       animLayer?.add(caAnimation, forKey: "anim")
     }
   }
   
   func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-    self.completionBlock?()
+    animLayer?.removeAllAnimations()
+    completionBlock?()
   }
   
 }

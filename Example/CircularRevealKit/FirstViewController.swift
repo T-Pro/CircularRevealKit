@@ -23,63 +23,138 @@
 import UIKit
 import CircularRevealKit
 
+let CIRCULAR_ANIMATION_CELL = "QueueTaskCell"
+
 class FirstViewController: UIViewController {
   
-  var viewReady = false
+  internal var viewReady = false
+  internal var needsUnreveal = true
+  internal var cellHeight: CGFloat = 0.0
 
-  lazy var randomButton: UIButton = {
-    let view = UIButton()
+  internal lazy var tableView: UITableView = {
+    let view = UITableView()
     view.translatesAutoresizingMaskIntoConstraints = false
-    view.setTitle("Click me", for: UIControlState.normal)
+    view.register(CircularViewCell.self, forCellReuseIdentifier: CIRCULAR_ANIMATION_CELL)
+    view.tableFooterView = UIView()
+    return view
+  }()
+  
+  internal lazy var stubView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
     view.backgroundColor = UIColor.black
     return view
   }()
   
+  internal lazy var logoView: UIView = {
+    let view = UIImageView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = UIColor.black
+    view.image = UIImage(named: "lib_icon")
+    return view
+  }()
+  
+  internal let images = ["view_controller", "view_cell"]
+  
+  deinit {
+    tableView.delegate = nil
+    tableView.dataSource = nil
+  }
+  
   override func loadView() {
     super.loadView()
-    title = "FirstViewController"
-    setupBackButton()
+    navigationController?.isNavigationBarHidden = true
     view.backgroundColor = UIColor.white
-    view.addSubview(randomButton)
+    view.addSubview(tableView)
+    view.addSubview(stubView)
+    stubView.addSubview(logoView)
     view.updateConstraintsIfNeeded()
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    randomButton.addTarget(self, action: #selector(randomButtonClick), for: .touchUpInside)
+    configTableView()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    dismissStubView()
   }
   
   override func updateViewConstraints() {
     if !viewReady {
       viewReady = true
-      view.addConstraint(
-        NSLayoutConstraint(
-          item: view,
-          attribute: .centerX,
-          relatedBy: .equal,
-          toItem: randomButton,
-          attribute: .centerX,
-          multiplier: 1,
-          constant: 0))
-      view.addConstraint(
-        NSLayoutConstraint(
-          item: view,
-          attribute: .centerY,
-          relatedBy: .equal,
-          toItem: randomButton,
-          attribute: .centerY,
-          multiplier: 1,
-          constant: 0))
+      configTableViewConstraints()
+      configStubViewConstraints()
+      configLogoViewConstraints()
     }
     super.updateViewConstraints()
   }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
+  
+  func configTableView() {
+    tableView.delegate = self
+    tableView.dataSource = self
   }
+  
+  func dismissStubView() {
+    
+    let viewControllerSize = view.frame.size
+    let width = viewControllerSize.width
+    let height = viewControllerSize.height
+    let rect = CGRect(
+      origin: CGPoint(
+        x: width/2,
+        y: height/2),
+      size: CGSize(
+        width: 0,
+        height: 0))
+    
+    stubView.drawAnimatedCircularMask(
+      startFrame: rect,
+      duration: 0.33,
+      revealType: RevealType.unreveal) { [weak self] in
+        self?.stubView.isHidden = true
+    }
+  
+  }
+  
+}
 
-  @objc private func randomButtonClick() {
-    self.navigationController?.radialPushViewController(SecondViewController())
+extension FirstViewController: UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+    switch indexPath.row {
+      case 0:
+        navigationController?.radialPushViewController(SecondViewController())
+        break
+      default: break
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if cellHeight == 0.0 {
+      cellHeight = (view.frame.width * 9)/16
+    }
+    return cellHeight
+  }
+  
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    if let cell = cell as? CircularViewCell {
+      cell.loadImage(named: images[indexPath.row], disabled: indexPath.row != 0)
+    }
+  }
+  
+}
+
+extension FirstViewController: UITableViewDataSource {
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 2
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    return tableView.dequeueReusableCell(withIdentifier: CIRCULAR_ANIMATION_CELL, for: indexPath)
   }
   
 }

@@ -1,0 +1,133 @@
+//
+//  CircularViewCell.swift
+//  CircularRevealKit
+//
+//  Created by Pedro Paulo de Amorim on 16/04/2017.
+//  Copyright © 2017 CocoaPods. All rights reserved.
+//
+
+import UIKit
+import CircularRevealKit
+
+class CircularViewCell: UITableViewCell {
+  
+  var viewReady = false
+  
+  internal lazy var cardImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.backgroundColor = UIColor.white
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.layer.cornerRadius = 8
+    imageView.roundCornersForAspectFit(radius: 8)
+    imageView.layer.shadowColor = UIColor.black.cgColor
+    imageView.layer.masksToBounds = true
+    return imageView
+  }()
+  
+  internal lazy var titleLabel: UILabel = {
+    let view = UILabel()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.text = "Not ready"
+    view.textColor = UIColor.white
+    view.isHidden = false
+    return view
+  }()
+  
+//  internal lazy var detailView: UIView = {
+//    let view = UIView()
+//    view.translatesAutoresizingMaskIntoConstraints = false
+//    view.backgroundColor = UIColor.black
+//    view.isHidden = true
+//    return view
+//  }()
+ 
+  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    addSubview(cardImageView)
+    addSubview(titleLabel)
+    updateConstraintsIfNeeded()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  func loadImage(named: String, disabled: Bool) {
+    cardImageView.contentMode = UIViewContentMode.scaleAspectFill
+    cardImageView.center = imageView?.superview?.center ?? CGPoint.zero
+    cardImageView.image = UIImage(named: named)
+    titleLabel.isHidden = !disabled
+    cardImageView.alpha = disabled ? 0.1 : 1.0
+    backgroundColor = disabled ? UIColor.black : UIColor.white
+  }
+  
+  override func updateConstraints() {
+    if !viewReady {
+      viewReady = true
+      configTableViewConstraints()
+      configTitleConstraints()
+    }
+    super.updateConstraints()
+  }
+ 
+  func configTableViewConstraints() {
+    let contraints = [
+      NSLayoutConstraint(
+        item: self,
+        attribute: .top,
+        relatedBy: .equal,
+        toItem: cardImageView,
+        attribute: .top,
+        multiplier: 1,
+        constant: -8),
+      NSLayoutConstraint(
+        item: self,
+        attribute: .bottom,
+        relatedBy: .equal,
+        toItem: cardImageView,
+        attribute: .bottom,
+        multiplier: 1,
+        constant: 8),
+      NSLayoutConstraint(
+        item: self,
+        attribute: .left,
+        relatedBy: .equal,
+        toItem: cardImageView,
+        attribute: .left,
+        multiplier: 1,
+        constant: -8),
+      NSLayoutConstraint(
+        item: self,
+        attribute: .right,
+        relatedBy: .equal,
+        toItem: cardImageView,
+        attribute: .right,
+        multiplier: 1,
+        constant: 8)
+    ]
+    addConstraints(contraints)
+  }
+  
+  func configTitleConstraints() {
+    let contraints = [
+      NSLayoutConstraint(
+        item: self,
+        attribute: .centerX,
+        relatedBy: .equal,
+        toItem: titleLabel,
+        attribute: .centerX,
+        multiplier: 1,
+        constant: 0),
+      NSLayoutConstraint(
+        item: self,
+        attribute: .centerY,
+        relatedBy: .equal,
+        toItem: titleLabel,
+        attribute: .centerY,
+        multiplier: 1,
+        constant: 0)
+    ]
+    addConstraints(contraints)
+  }
+  
+}

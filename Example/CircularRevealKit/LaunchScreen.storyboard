@@ -20,12 +20,29 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.1333333333" green="0.1332704723" blue="0.13739228249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lib_icon" translatesAutoresizingMaskIntoConstraints="NO" id="FI8-4b-LhZ">
+                                <rect key="frame" x="131" y="277" width="113" height="113"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="113" id="MPW-I9-tOe"/>
+                                    <constraint firstAttribute="width" constant="113" id="NaJ-qY-Lyw"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="FI8-4b-LhZ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="7GW-Fd-ZHv"/>
+                            <constraint firstItem="FI8-4b-LhZ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="lWJ-FA-6vu"/>
+                        </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="lib_icon" width="380" height="380"/>
+    </resources>
 </document>

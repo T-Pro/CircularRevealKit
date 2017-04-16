@@ -23,13 +23,62 @@
 import UIKit
 import CircularRevealKit
 
-class SecondViewController: UIViewController {
-  
+class SecondViewController: UICircularViewController {
+
+  internal var viewReady = false
+
+  internal lazy var randomButton: UIButton = {
+    let view = UIButton()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.setTitle("Click me", for: UIControlState.normal)
+    view.backgroundColor = UIColor.black
+    return view
+  }()
+
   override func loadView() {
     super.loadView()
     title = "SecondViewController"
     view.backgroundColor = UIColor.black
-    setupBackButton()
+    view.addSubview(randomButton)
+    view.updateConstraintsIfNeeded()
+  }
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    randomButton.addTarget(self, action: #selector(randomButtonClick), for: .touchUpInside)
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+
+  override func updateViewConstraints() {
+    if !viewReady {
+      viewReady = true
+      view.addConstraint(
+        NSLayoutConstraint(
+          item: view,
+          attribute: .centerX,
+          relatedBy: .equal,
+          toItem: randomButton,
+          attribute: .centerX,
+          multiplier: 1,
+          constant: 0))
+      view.addConstraint(
+        NSLayoutConstraint(
+          item: view,
+          attribute: .centerY,
+          relatedBy: .equal,
+          toItem: randomButton,
+          attribute: .centerY,
+          multiplier: 1,
+          constant: 0))
+    }
+    super.updateViewConstraints()
+  }
+
+  @objc private func randomButtonClick() {
+    self.navigationController?.radialPopViewController()
   }
 
 }

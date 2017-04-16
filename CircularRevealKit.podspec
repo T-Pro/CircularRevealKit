@@ -3,8 +3,7 @@ Pod::Spec.new do |s|
   s.version          = '0.0.1'
   s.summary          = 'Circular reveal animations made easy'
   s.homepage         = 'https://github.com/T-Pro/CircularRevealKit'
-  s.description      = 'This library was created to allow developers to implement the material design's reveal effect.'
-  s.homepage         = 'https://github.com/T-Pro/CircularRevealKit'
+  s.description      = 'This library was created to allow developers to implement the material design reveal effect.'
   s.screenshots    = 'https://media.giphy.com/media/3cwSEnIK1GJEs/giphy.gif'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'ppamorim' => 'pp.amorim@hotmail.com' }

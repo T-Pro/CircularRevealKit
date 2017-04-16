@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/ppamorim/CircularRevealKit'
+  s.homepage         = 'https://github.com/T-Pro/CircularRevealKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'ppamorim' => 'pepa.amorim@gmail.com' }

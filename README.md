@@ -1,6 +1,6 @@
 # [![CircularRevealKit](./Art/CircularRevealKit.png)](#)
 
-[![CI Status](http://img.shields.io/travis/ppamorim/CircularRevealKit.svg?style=flat)](https://travis-ci.org/ppamorim/CircularRevealKit)
+[![CI Status](https://www.bitrise.io/app/7bb98f99ce35b4e8.svg?token=vd860qvOkKynwpA0I19wDg)](https://www.bitrise.io/app/7bb98f99ce35b4e8#/builds)
 [![Version](https://img.shields.io/cocoapods/v/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)
 [![License](https://img.shields.io/cocoapods/l/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)
 [![Platform](https://img.shields.io/cocoapods/p/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)

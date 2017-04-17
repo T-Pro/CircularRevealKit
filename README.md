@@ -33,7 +33,7 @@ You can simply import the library using `import CircularRevealKit`, then:
 To push your view controller, use:
 
 ```swift
-func radialPushViewController(viewController: duration: startFrame: revealType: completionBlock)
+radialPushViewController(viewController, duration, startFrame, revealType, completionBlock)
 ```
 
 To close it:

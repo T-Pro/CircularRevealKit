@@ -24,7 +24,7 @@ import UIKit
 
 public extension UIViewController {
   
-  open func radialPushViewController(
+  func radialPushViewController(
     _ viewController: UIViewController,
     _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
@@ -42,7 +42,7 @@ public extension UIViewController {
       transitionCompletion)
   }
   
-  @objc open func radialPopViewController() {
+  @objc func radialPopViewController() {
     guard let navigationController = navigationController else {
       print("UIViewController is not a UINavigationViewController")
       return

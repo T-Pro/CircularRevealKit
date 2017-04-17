@@ -30,7 +30,11 @@ public extension UIViewController {
     _ startFrame: CGRect = CGRect.zero,
     revealType: RevealType = .reveal,
     _ transitionCompletion: (() -> ())? = nil) {
-    navigationController?.radialPresentPushViewController(
+    guard let navigationController = navigationController else {
+      print("UIViewController is not a UINavigationViewController")
+      return
+    }
+    navigationController.radialPresentPushViewController(
       viewController,
       duration,
       startFrame,
@@ -39,7 +43,11 @@ public extension UIViewController {
   }
   
   @objc open func radialPopViewController() {
-    navigationController?.radialPresentPopViewController()
+    guard let navigationController = navigationController else {
+      print("UIViewController is not a UINavigationViewController")
+      return
+    }
+    navigationController.radialPresentPopViewController()
   }
   
   func setupBackButton(

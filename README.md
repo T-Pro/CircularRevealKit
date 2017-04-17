@@ -31,6 +31,8 @@ and run `pod install`.
 
 You can simply import the library using `import CircularRevealKit`, then:
 
+Please assert if your root ViewController is a instance of `UINavigationViewController`, otherwise the library will throw a message.
+
 To push your view controller, use:
 
 ```swift

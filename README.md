@@ -7,6 +7,7 @@
 ![Swift 3](https://img.shields.io/badge/Swift-3-orange.svg?style=flat)
 
 This library was created to allow developers to implement the material design's reveal effect.
+You can simply use this component to reveal and unvereal a ViewController/View, this component is very small (approx. 40kb), written purely in Swift 3.
 
 ## Sample
 ![GIF sample](https://media.giphy.com/media/3cwSEnIK1GJEs/giphy.gif)
@@ -33,13 +34,19 @@ You can simply import the library using `import CircularRevealKit`, then:
 To push your view controller, use:
 
 ```swift
-radialPushViewController(viewController, duration, startFrame, revealType, completionBlock)
+radialPushViewController(viewController, duration, startFrame, revealType, completionBlock?)
 ```
 
 To close it:
 
 ```swift
 radialPopViewController()
+```
+
+To use with view:
+
+```swift
+view.drawAnimatedCircularMask(startFrame, duration, revealType, completionBlock?)
 ```
 
 ## Example

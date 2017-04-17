@@ -42,10 +42,15 @@ public extension UIViewController {
     navigationController?.radialPresentPopViewController()
   }
   
-  func setupBackButton(title: String = "Back", style: UIBarButtonItemStyle = UIBarButtonItemStyle.plain) {
+  func setupBackButton(
+    title: String = "Back",
+    style: UIBarButtonItemStyle = UIBarButtonItemStyle.plain) {
     navigationItem.hidesBackButton = true
     navigationItem.leftBarButtonItem = UIBarButtonItem(
-      title: title, style: style, target: self, action: #selector(radialPopViewController))
+      title: title,
+      style: style,
+      target: self,
+      action: #selector(radialPopViewController))
   }
   
 }

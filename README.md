@@ -28,7 +28,19 @@ and run `pod install`.
 
 ## How to
 
-You can simply import the library using `import CircularRevealKit` and to show and dismiss 
+You can simply import the library using `import CircularRevealKit`, then:
+
+To push your view controller, use:
+
+```swift
+func radialPushViewController(viewController: duration: startFrame: revealType: completionBlock)
+```
+
+To close it:
+
+```swift
+radialPopViewController()
+```
 
 ## Example
 

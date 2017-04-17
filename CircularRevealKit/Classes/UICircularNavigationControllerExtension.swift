@@ -51,8 +51,10 @@ public extension UINavigationController {
     delegate = animatorDirector
     animatorDirector.animationBlock = { (transactionContext, animationTime, completion) in
 
-      let toViewController = transactionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
-      let fromViewController = transactionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
+      let toViewController = transactionContext.viewController(
+        forKey: UITransitionContextViewControllerKey.to)
+      let fromViewController = transactionContext.viewController(
+        forKey: UITransitionContextViewControllerKey.from)
 
       if let toView = toViewController?.view,
          let fromView = fromViewController?.view {
@@ -60,7 +62,8 @@ public extension UINavigationController {
         switch revealType {
 
           case RevealType.reveal:
-            transactionContext.containerView.insertSubview(toView, aboveSubview: fromView)
+            transactionContext.containerView.insertSubview(
+              toView, aboveSubview: fromView)
             toView.drawAnimatedCircularMask(
               startFrame: rect,
               duration: animationTime,
@@ -71,7 +74,8 @@ public extension UINavigationController {
             break
 
           case RevealType.unreveal:
-            transactionContext.containerView.insertSubview(toView, belowSubview: fromView)
+            transactionContext.containerView.insertSubview(
+              toView, belowSubview: fromView)
             fromView.drawAnimatedCircularMask(
               startFrame: rect,
               duration: animationTime,

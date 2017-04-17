@@ -24,7 +24,7 @@ import UIKit
 
 public extension UINavigationController {
 
-  func radialPushViewController(
+  func radialPresentPushViewController(
     _ viewController: UIViewController? = nil,
     _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
@@ -102,8 +102,8 @@ public extension UINavigationController {
 
   }
 
-  func radialPopViewController() {
-    radialPushViewController(revealType: .unreveal)
+  func radialPresentPopViewController() {
+    radialPresentPushViewController(revealType: .unreveal)
   }
 
 }

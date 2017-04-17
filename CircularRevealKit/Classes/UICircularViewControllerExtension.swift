@@ -30,7 +30,7 @@ public extension UIViewController {
     _ startFrame: CGRect = CGRect.zero,
     revealType: RevealType = .reveal,
     _ transitionCompletion: (() -> ())? = nil) {
-    navigationController?.radialPushViewController(
+    navigationController?.radialPresentPushViewController(
       viewController,
       duration,
       startFrame,
@@ -38,18 +38,14 @@ public extension UIViewController {
       transitionCompletion)
   }
   
-  open func radialPopViewController() {
-    navigationController?.radialPopViewController()
+  @objc open func radialPopViewController() {
+    navigationController?.radialPresentPopViewController()
   }
   
   func setupBackButton(title: String = "Back", style: UIBarButtonItemStyle = UIBarButtonItemStyle.plain) {
     navigationItem.hidesBackButton = true
     navigationItem.leftBarButtonItem = UIBarButtonItem(
-      title: title, style: style, target: self, action: #selector(handleBackButton))
-  }
-  
-  @objc func handleBackButton() {
-    self.navigationController?.radialPopViewController()
+      title: title, style: style, target: self, action: #selector(radialPopViewController))
   }
   
 }

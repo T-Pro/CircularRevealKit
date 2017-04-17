@@ -115,13 +115,13 @@
 			isa = PBXGroup;
 			children = (
 				EC93826CD050F2AB4A3AC3665E165E55 /* LayerAnimator.swift */,
-				10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationControllerExtension.swift */,
 				1972C6463293A977DF8087B7458262A1 /* UIViewRadial.swift */,
 				481DF32A1EA14374005576BC /* CicularTransactionDirector.swift */,
 				42F7D7D16A41E9421EE75CAA /* UICircularViewController.swift */,
 				42F7DF5A0C34F4C79F5B6CD6 /* RevealType.swift */,
 				42F7D5F4C2EB2A366D58348B /* DefaultCircularAnimation.swift */,
 				48FF0DA11EA437D0004A571F /* UICircularViewControllerExtension.swift */,
+				10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationControllerExtension.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

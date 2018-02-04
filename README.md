@@ -8,7 +8,7 @@
 ![Swift 4](https://img.shields.io/badge/Swift-4-orange.svg?style=flat)
 
 This library was created to allow developers to implement the material design's reveal effect.
-You can simply use this component to reveal and unvereal a ViewController/View, this component is very small (approx. 40kb), written purely in Swift 3.
+You can simply use this component to reveal and unvereal a ViewController/View, this component is very small (approx. 40kb), written purely in Swift 4.
 
 ## Sample
 ![GIF sample](https://media.giphy.com/media/3cwSEnIK1GJEs/giphy.gif)
@@ -35,7 +35,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'CircularRevealKit', '~> 0.7'
+pod 'CircularRevealKit', '~> 0.8'
 end
 ```
 
@@ -59,7 +59,7 @@ $ brew install carthage
 To integrate CircularRevealKit into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "T-Pro/CircularRevealKit" ~> 0.7
+github "T-Pro/CircularRevealKit" ~> 0.8
 ```
 
 Run `carthage update` to build the framework and drag the built `CircularRevealKit.framework` into your Xcode project.

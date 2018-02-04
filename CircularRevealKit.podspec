@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CircularRevealKit'
-  s.version          = '0.7'
+  s.version          = '0.8'
   s.summary          = 'Circular reveal animations made easy'
   s.homepage         = 'https://github.com/T-Pro/CircularRevealKit'
   s.description      = 'This library was created to allow developers to implement the material design reveal effect.'

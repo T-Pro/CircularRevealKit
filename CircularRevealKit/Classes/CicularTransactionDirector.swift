@@ -44,7 +44,7 @@ extension CicularTransactionDirector: UIViewControllerAnimatedTransitioning {
   
   public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
     self.transitionContext = transitionContext
-    self.animationBlock?(transitionContext, duration) { _ in
+    self.animationBlock?(transitionContext, duration) { 
       transitionContext.completeTransition(true)
     }
   }
@@ -55,7 +55,7 @@ extension CicularTransactionDirector: UIViewControllerInteractiveTransitioning {
 
   public func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
     self.transitionContext = transitionContext
-    self.animationBlock?(transitionContext, duration) { _ in }
+    self.animationBlock?(transitionContext, duration) {  }
   }
 
 }

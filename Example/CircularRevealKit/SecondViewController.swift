@@ -30,7 +30,7 @@ class SecondViewController: UICircularViewController {
   internal lazy var randomButton: UIButton = {
     let view = UIButton()
     view.translatesAutoresizingMaskIntoConstraints = false
-    view.setTitle("Click me", for: UIControlState.normal)
+    view.setTitle("Click me", for: UIControl.State.normal)
     view.backgroundColor = UIColor.black
     return view
   }()

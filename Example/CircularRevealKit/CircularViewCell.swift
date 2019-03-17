@@ -55,7 +55,7 @@ class CircularViewCell: UITableViewCell {
 //    return view
 //  }()
  
-  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     addSubview(cardImageView)
     addSubview(titleLabel)
@@ -67,7 +67,7 @@ class CircularViewCell: UITableViewCell {
   }
   
   func loadImage(named: String, disabled: Bool) {
-    cardImageView.contentMode = UIViewContentMode.scaleAspectFill
+    cardImageView.contentMode = UIView.ContentMode.scaleAspectFill
     cardImageView.center = imageView?.superview?.center ?? CGPoint.zero
     cardImageView.image = UIImage(named: named)
     titleLabel.isHidden = !disabled

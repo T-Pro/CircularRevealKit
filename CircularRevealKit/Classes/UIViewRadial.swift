@@ -49,7 +49,7 @@ public extension UIView {
           size: CGSize(
             width: radius,
             height: radius))
-        timingFunction = kCAMediaTimingFunctionEaseIn
+        timingFunction = CAMediaTimingFunctionName.easeIn.rawValue
         break
       case RevealType.unreveal:
         originRect = CGRect(
@@ -60,7 +60,7 @@ public extension UIView {
             width: radius,
             height: radius))
         newRect = startFrame
-        timingFunction = kCAMediaTimingFunctionEaseOut
+        timingFunction = CAMediaTimingFunctionName.easeOut.rawValue
         break
     }
 
@@ -73,7 +73,7 @@ public extension UIView {
     layer.mask = maskLayer
 
     let revealAnimation = CABasicAnimation(keyPath: ANIMATION_KEY_PATH)
-    revealAnimation.timingFunction = CAMediaTimingFunction(name: timingFunction)
+    revealAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName(rawValue: timingFunction))
     revealAnimation.fromValue = oldPath
     revealAnimation.toValue = newPath
     revealAnimation.duration = duration

@@ -28,7 +28,7 @@ extension FirstViewController {
   func configTableViewConstraints() {
     let contraints = [
       NSLayoutConstraint(
-        item: view,
+        item: view!,
         attribute: .top,
         relatedBy: .equal,
         toItem: tableView,
@@ -36,7 +36,7 @@ extension FirstViewController {
         multiplier: 1,
         constant: 0),
       NSLayoutConstraint(
-        item: view,
+        item: view!,
         attribute: .bottom,
         relatedBy: .equal,
         toItem: tableView,
@@ -44,7 +44,7 @@ extension FirstViewController {
         multiplier: 1,
         constant: 0),
       NSLayoutConstraint(
-        item: view,
+        item: view!,
         attribute: .left,
         relatedBy: .equal,
         toItem: tableView,
@@ -52,7 +52,7 @@ extension FirstViewController {
         multiplier: 1,
         constant: 0),
       NSLayoutConstraint(
-        item: view,
+        item: view!,
         attribute: .right,
         relatedBy: .equal,
         toItem: tableView,
@@ -65,7 +65,7 @@ extension FirstViewController {
   func configStubViewConstraints() {
     let contraints = [
       NSLayoutConstraint(
-        item: view,
+        item: view!,
         attribute: .top,
         relatedBy: .equal,
         toItem: stubView,
@@ -73,7 +73,7 @@ extension FirstViewController {
         multiplier: 1,
         constant: 0),
       NSLayoutConstraint(
-        item: view,
+        item: view!,
         attribute: .bottom,
         relatedBy: .equal,
         toItem: stubView,
@@ -81,7 +81,7 @@ extension FirstViewController {
         multiplier: 1,
         constant: 0),
       NSLayoutConstraint(
-        item: view,
+        item: view!,
         attribute: .left,
         relatedBy: .equal,
         toItem: stubView,
@@ -89,7 +89,7 @@ extension FirstViewController {
         multiplier: 1,
         constant: 0),
       NSLayoutConstraint(
-        item: view,
+        item: view!,
         attribute: .right,
         relatedBy: .equal,
         toItem: stubView,

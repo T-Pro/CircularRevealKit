@@ -1,23 +1,16 @@
 PODS:
-  - CircularRevealKit (0.9)
-  - SwiftLint (0.32.0)
+  - CircularRevealKit (0.9.1)
 
 DEPENDENCIES:
   - CircularRevealKit (from `../`)
-  - SwiftLint
-
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - SwiftLint
 
 EXTERNAL SOURCES:
   CircularRevealKit:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CircularRevealKit: a657cd22872afae6a423b6f0c1edbfa505311b39
-  SwiftLint: 009a898ef2a1c851f45e1b59349bf6ff2ddc990d
+  CircularRevealKit: 811384bdfeb7ca149eb6d36dd8390434bf85e173
 
-PODFILE CHECKSUM: cfaef9accb0dc9b8b53bbb3f279f9e29bb3cb9cd
+PODFILE CHECKSUM: fe24aa566560148352a162140f1938b91be64a80
 
 COCOAPODS: 1.6.1

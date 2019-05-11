@@ -60,7 +60,7 @@ class SecondViewController: UIViewController {
       viewReady = true
       let constraints = [
         NSLayoutConstraint(
-          item: view,
+          item: view!,
           attribute: .centerX,
           relatedBy: .equal,
           toItem: randomButton,
@@ -68,7 +68,7 @@ class SecondViewController: UIViewController {
           multiplier: 1,
           constant: 0),
         NSLayoutConstraint(
-          item: view,
+          item: view!,
           attribute: .centerY,
           relatedBy: .equal,
           toItem: randomButton,

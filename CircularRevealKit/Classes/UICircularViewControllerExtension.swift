@@ -52,9 +52,19 @@ public extension UIViewController {
     
     let rect: CGRect
     
-    let isNavigationController: Bool = revealType == .reveal
-      ? self.presentingViewController is UINavigationController
-      : self.presentingViewController is UINavigationController
+    var isNavigationController: Bool = false
+    
+    if self.presentingViewController != nil {
+      isNavigationController = self.presentingViewController is UINavigationController
+    }
+    
+    if self.parent != nil {
+      isNavigationController = self.parent is UINavigationController
+    }
+//
+//    revealType == .reveal
+//      ? self.presentingViewController is UINavigationController
+//      : self.presentingViewController is UINavigationController
     
     if startFrame == CGRect.zero {
       

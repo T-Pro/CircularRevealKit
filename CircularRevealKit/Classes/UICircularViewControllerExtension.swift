@@ -37,7 +37,7 @@ public extension UIViewController {
     _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
     _ completion: (() -> Void)? = nil) {
-    self.push(nil, duration, revealType: .unreveal, completion)
+    self.push(nil, duration, startFrame, revealType: .unreveal, completion)
   }
   
   private func push(

@@ -29,22 +29,19 @@ public extension UIViewController {
     viewController: UIViewController,
     _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
-    revealType: RevealType = .reveal,
-    _ transitionCompletion: (() -> Void)? = nil) {
-    self.push(
-      viewController,
-      duration,
-      startFrame,
-      revealType: revealType,
-      transitionCompletion)
+    _ completion: (() -> Void)? = nil) {
+    self.push(viewController, duration, startFrame, revealType: .reveal, completion)
   }
 
-  func radialDismiss() {
-    self.push(revealType: .unreveal)
+  func radialDismiss(
+    _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
+    _ startFrame: CGRect = CGRect.zero,
+    _ completion: (() -> Void)? = nil) {
+    self.push(nil, duration, revealType: .unreveal, completion)
   }
   
   private func push(
-    _ viewController: UIViewController? = nil,
+    _ viewController: UIViewController?,
     _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
     revealType: RevealType = .reveal,

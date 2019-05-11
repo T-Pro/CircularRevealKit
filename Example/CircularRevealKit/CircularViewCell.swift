@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 T-Pro
+// Copyright (c) 2019 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -24,9 +24,9 @@ import UIKit
 import CircularRevealKit
 
 class CircularViewCell: UITableViewCell {
-  
+
   var viewReady = false
-  
+
   internal lazy var cardImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.backgroundColor = UIColor.white
@@ -37,7 +37,7 @@ class CircularViewCell: UITableViewCell {
     imageView.layer.masksToBounds = true
     return imageView
   }()
-  
+
   internal lazy var titleLabel: UILabel = {
     let view = UILabel()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +46,7 @@ class CircularViewCell: UITableViewCell {
     view.isHidden = false
     return view
   }()
-  
+
 //  internal lazy var detailView: UIView = {
 //    let view = UIView()
 //    view.translatesAutoresizingMaskIntoConstraints = false
@@ -54,27 +54,27 @@ class CircularViewCell: UITableViewCell {
 //    view.isHidden = true
 //    return view
 //  }()
- 
-  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     addSubview(cardImageView)
     addSubview(titleLabel)
     updateConstraintsIfNeeded()
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   func loadImage(named: String, disabled: Bool) {
-    cardImageView.contentMode = UIViewContentMode.scaleAspectFill
+    cardImageView.contentMode = UIView.ContentMode.scaleAspectFill
     cardImageView.center = imageView?.superview?.center ?? CGPoint.zero
     cardImageView.image = UIImage(named: named)
     titleLabel.isHidden = !disabled
     cardImageView.alpha = disabled ? 0.1 : 1.0
     backgroundColor = disabled ? UIColor.black : UIColor.white
   }
-  
+
   override func updateConstraints() {
     if !viewReady {
       viewReady = true
@@ -83,7 +83,7 @@ class CircularViewCell: UITableViewCell {
     }
     super.updateConstraints()
   }
- 
+
   func configTableViewConstraints() {
     let contraints = [
       NSLayoutConstraint(
@@ -121,7 +121,7 @@ class CircularViewCell: UITableViewCell {
     ]
     addConstraints(contraints)
   }
-  
+
   func configTitleConstraints() {
     let contraints = [
       NSLayoutConstraint(
@@ -143,5 +143,5 @@ class CircularViewCell: UITableViewCell {
     ]
     addConstraints(contraints)
   }
-  
+
 }

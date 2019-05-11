@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 T-Pro
+// Copyright (c) 2019 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,14 +23,14 @@
 import UIKit
 import CircularRevealKit
 
-class SecondViewController: UICircularViewController {
+class SecondViewController: UIViewController {
 
   internal var viewReady = false
 
   internal lazy var randomButton: UIButton = {
     let view = UIButton()
     view.translatesAutoresizingMaskIntoConstraints = false
-    view.setTitle("Click me", for: UIControlState.normal)
+    view.setTitle("Click me", for: UIControl.State.normal)
     view.backgroundColor = UIColor.black
     return view
   }()
@@ -45,9 +45,12 @@ class SecondViewController: UICircularViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    randomButton.addTarget(self, action: #selector(randomButtonClick), for: .touchUpInside)
+    randomButton.addTarget(
+      self,
+      action: #selector(randomButtonClick),
+      for: .touchUpInside)
   }
-  
+
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
@@ -78,7 +81,7 @@ class SecondViewController: UICircularViewController {
   }
 
   @objc private func randomButtonClick() {
-    radialPopViewController()
+    self.radialPop()
   }
 
 }

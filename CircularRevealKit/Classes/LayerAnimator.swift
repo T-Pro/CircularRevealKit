@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 T-Pro
+// Copyright (c) 2019 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -25,33 +25,41 @@ import UIKit
 import QuartzCore.CALayer
 
 class LayerAnimator: NSObject, CAAnimationDelegate {
-  
-  var completionBlock: (()->())?
+
+  var completionBlock: (()->Void)?
   var animLayer: CALayer?
   var caAnimation: CAAnimation?
-  
+
+  deinit {
+    completionBlock = nil
+    animLayer?.removeAllAnimations()
+    animLayer = nil
+    caAnimation = nil
+  }
+
   init(layer: CALayer, animation: CAAnimation) {
     super.init()
     self.animLayer = layer
     self.caAnimation = animation
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  func startAnimationWithBlock(block: @escaping ()->()) {
+
+  func startAnimationWithBlock(block: (() -> Void)?) {
     completionBlock = block
-    if let caAnimation = self.caAnimation {
+    if let caAnimation: CAAnimation = self.caAnimation {
       caAnimation.delegate = self
       animLayer?.removeAllAnimations()
       animLayer?.add(caAnimation, forKey: "anim")
+      animLayer = nil
     }
   }
-  
+
   func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
     animLayer?.removeAllAnimations()
     completionBlock?()
   }
-  
+
 }

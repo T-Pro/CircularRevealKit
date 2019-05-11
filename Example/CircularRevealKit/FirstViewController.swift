@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 T-Pro
+// Copyright (c) 2019 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,10 +23,10 @@
 import UIKit
 import CircularRevealKit
 
-let CIRCULAR_ANIMATION_CELL = "QueueTaskCell"
+let CIRCULAR_ANIMATION_CELL = "Cell"
 
 class FirstViewController: UIViewController {
-  
+
   internal var viewReady = false
   internal var needsUnreveal = true
   internal var cellHeight: CGFloat = 0.0
@@ -38,14 +38,14 @@ class FirstViewController: UIViewController {
     view.tableFooterView = UIView()
     return view
   }()
-  
+
   internal lazy var stubView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     view.backgroundColor = UIColor.black
     return view
   }()
-  
+
   internal lazy var logoView: UIView = {
     let view = UIImageView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -53,14 +53,14 @@ class FirstViewController: UIViewController {
     view.image = UIImage(named: "lib_icon")
     return view
   }()
-  
+
   internal let images = ["view_controller", "view_cell"]
-  
+
   deinit {
     tableView.delegate = nil
     tableView.dataSource = nil
   }
-  
+
   override func loadView() {
     super.loadView()
     navigationController?.isNavigationBarHidden = true
@@ -70,17 +70,18 @@ class FirstViewController: UIViewController {
     stubView.addSubview(logoView)
     view.updateConstraintsIfNeeded()
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
     configTableView()
   }
-  
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     dismissStubView()
+//    self.presentingViewController
   }
-  
+
   override func updateViewConstraints() {
     if !viewReady {
       viewReady = true
@@ -90,14 +91,14 @@ class FirstViewController: UIViewController {
     }
     super.updateViewConstraints()
   }
-  
+
   func configTableView() {
     tableView.delegate = self
     tableView.dataSource = self
   }
-  
+
   func dismissStubView() {
-    
+
     let viewControllerSize = view.frame.size
     let width = viewControllerSize.width
     let height = viewControllerSize.height
@@ -115,36 +116,36 @@ class FirstViewController: UIViewController {
       revealType: RevealType.unreveal) { [weak self] in
         self?.stubView.isHidden = true
     }
-  
+
   }
-  
+
 }
 
 extension FirstViewController: UITableViewDelegate {
-  
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     switch indexPath.row {
       case 0:
-        radialPushViewController(SecondViewController())
+        self.radialPresent(viewController: SecondViewController())
         break
       default: break
     }
   }
-  
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if cellHeight == 0.0 {
       cellHeight = (view.frame.width * 9)/16
     }
     return cellHeight
   }
-  
+
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if let cell = cell as? CircularViewCell {
       cell.loadImage(named: images[indexPath.row], disabled: indexPath.row != 0)
     }
   }
-  
+
 }
 
 extension FirstViewController: UITableViewDataSource {
@@ -152,10 +153,9 @@ extension FirstViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 2
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     return tableView.dequeueReusableCell(withIdentifier: CIRCULAR_ANIMATION_CELL, for: indexPath)
   }
-  
-}
 
+}

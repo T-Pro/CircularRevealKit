@@ -6,230 +6,272 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		C1132722490646592BE49A9C2D389296 /* SwiftLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 15D3E24DC81F66CB7D9A0E45A7A73567 /* Build configuration list for PBXAggregateTarget "SwiftLint" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = SwiftLint;
+			productName = SwiftLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		19F57F0FBB42447E3462C1048E20E967 /* UIViewRadial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1972C6463293A977DF8087B7458262A1 /* UIViewRadial.swift */; };
-		1F8B0C5DA6F045C6AF148C044864127C /* Pods-CircularRevealKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 29CFBE2CF63A7AF80C33635DE1FBC3D8 /* Pods-CircularRevealKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		42F7D8FE0E3E246563041209 /* UICircularViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7D7D16A41E9421EE75CAA /* UICircularViewController.swift */; };
-		42F7D9BFD931FB921CC9864C /* DefaultCircularAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7D5F4C2EB2A366D58348B /* DefaultCircularAnimation.swift */; };
-		42F7DFB17CE781ABE4357671 /* RevealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7DF5A0C34F4C79F5B6CD6 /* RevealType.swift */; };
-		481DF32B1EA14374005576BC /* CicularTransactionDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481DF32A1EA14374005576BC /* CicularTransactionDirector.swift */; };
-		48FF0DA21EA437D0004A571F /* UICircularViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF0DA11EA437D0004A571F /* UICircularViewControllerExtension.swift */; };
-		4AFA2E2A6E5024A310A8A211CEEA342B /* CircularRevealKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C7C1A208D10B7406BC4FF3602108D154 /* CircularRevealKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		540463D2669FF7EA7D28834419449B8F /* CircularRevealKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF832B77BEB2FC784E423562B9052B0 /* CircularRevealKit-dummy.m */; };
-		70569695494877CAD54FEADDBDA3EF0E /* Pods-CircularRevealKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E28E0498F58811D0D514147AABE5913 /* Pods-CircularRevealKit_Example-dummy.m */; };
-		80D0EB73169FC5BF99EDECF1CFFE52D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		8669DEFCCFE93CC5F52B007D01CFDA67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		A2E6E332DC1D0E72BFCFDDEEF1F737F6 /* LayerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC93826CD050F2AB4A3AC3665E165E55 /* LayerAnimator.swift */; };
-		DC7E258CDF84C7AB1FBDE9213EBB5A32 /* UICircularNavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationControllerExtension.swift */; };
+		01D6694A7D82BA9B368A66F5A464B1E0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */; };
+		27E08FA6C301F28D0DB0CC3B83178B98 /* CicularTransactionDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC82E447850A79DA88DC3D77319508F /* CicularTransactionDirector.swift */; };
+		340E9345E40349ED5B08C5EBC983D971 /* UIViewRadial.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ECAD85382E022291F1D36AB4C091CE /* UIViewRadial.swift */; };
+		3BE6AFAE8EE9E62D2F7AD3BA1D539F38 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */; };
+		50FCC7F3E4513EC9A24A79ADB0706C29 /* CircularRevealKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7400112F339E428DD73626BE8688730E /* CircularRevealKit-dummy.m */; };
+		60FA9A6EC522187C92E9AE12CEF74D7F /* LayerAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5333673FD3C8BAB1A71290C662A52B /* LayerAnimator.swift */; };
+		B43174476870CD42A2A12D9717BE6F4F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF2A2B0720AE923C22BED3192888BE0 /* UIKit.framework */; };
+		BF3DCC9F04F30DF272E1D79768CECE90 /* UICircularViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A68BC5D23E90C675FAC574DA65AE31E /* UICircularViewControllerExtension.swift */; };
+		CFF25EC25583B3E23B16D40196A30392 /* Pods-CircularRevealKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B5DC72FC6A2785CEA5C139F65CE396A /* Pods-CircularRevealKit_Example-dummy.m */; };
+		E1F58E99EA03F6BACAFF6E9E2F2BA27A /* CircularRevealKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 474585B39B90815C26B4224660D771E5 /* CircularRevealKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6C11BB769A46A66C177B18FDB3E2375 /* DefaultCircularAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA3EE5B120CC8DC9E06886005EAA724 /* DefaultCircularAnimation.swift */; };
+		EFC3A9D7DA6C3B781C2009E293F5CC85 /* Pods-CircularRevealKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FA25C4841678C62407622D0374E7FD4 /* Pods-CircularRevealKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F556CBB32DFB82AD629EC4B58E734E10 /* RevealType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C960AECF09AFF3EA09637FB91D2A4DF /* RevealType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8A51B2268106058B2696530A84D6EFE0 /* PBXContainerItemProxy */ = {
+		06D13FEDE8444DEBABBD0B5A16DAC7B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 620262E46EBE0662BFA0EC654F7B13F0;
+			remoteGlobalIDString = 4D7D53536F9E93B94FF2E2DE275F185D;
 			remoteInfo = CircularRevealKit;
+		};
+		6806BD29D6BBE4CC69954E0708BBDB10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C1132722490646592BE49A9C2D389296;
+			remoteInfo = SwiftLint;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationControllerExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UICircularNavigationControllerExtension.swift; sourceTree = "<group>"; };
-		135E54EDC0C0D92BFC144D6C11F6CE89 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1972C6463293A977DF8087B7458262A1 /* UIViewRadial.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIViewRadial.swift; sourceTree = "<group>"; };
-		29CFBE2CF63A7AF80C33635DE1FBC3D8 /* Pods-CircularRevealKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CircularRevealKit_Example-umbrella.h"; sourceTree = "<group>"; };
-		343EC88147F939A4DF05B16326674B88 /* Pods-CircularRevealKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-CircularRevealKit_Example.modulemap"; sourceTree = "<group>"; };
-		42F7D5F4C2EB2A366D58348B /* DefaultCircularAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultCircularAnimation.swift; sourceTree = "<group>"; };
-		42F7D7D16A41E9421EE75CAA /* UICircularViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICircularViewController.swift; sourceTree = "<group>"; };
-		42F7DF5A0C34F4C79F5B6CD6 /* RevealType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealType.swift; sourceTree = "<group>"; };
-		481DF32A1EA14374005576BC /* CicularTransactionDirector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CicularTransactionDirector.swift; sourceTree = "<group>"; };
-		48FF0DA11EA437D0004A571F /* UICircularViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICircularViewControllerExtension.swift; sourceTree = "<group>"; };
-		64C5DD6C33A6C583D946FA2B5FF61516 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		6F9E7F0DC30C4403554660DFCC1EB7CE /* Pods-CircularRevealKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CircularRevealKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		7DF832B77BEB2FC784E423562B9052B0 /* CircularRevealKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CircularRevealKit-dummy.m"; sourceTree = "<group>"; };
-		8E28E0498F58811D0D514147AABE5913 /* Pods-CircularRevealKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CircularRevealKit_Example-dummy.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A76424DF09FA44C4D300A8685DF37150 /* CircularRevealKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CircularRevealKit-prefix.pch"; sourceTree = "<group>"; };
-		B6750930058B2B5697CBC697FB7DBBF9 /* Pods-CircularRevealKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CircularRevealKit_Example-frameworks.sh"; sourceTree = "<group>"; };
-		B9582B881D55E7DECC4FAD99714706B8 /* CircularRevealKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CircularRevealKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BFE1D76F0A7E74325A57156412F643E5 /* Pods-CircularRevealKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CircularRevealKit_Example.release.xcconfig"; sourceTree = "<group>"; };
-		C7C1A208D10B7406BC4FF3602108D154 /* CircularRevealKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CircularRevealKit-umbrella.h"; sourceTree = "<group>"; };
-		C89D472093FA756DB351C04F34F2D891 /* Pods-CircularRevealKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CircularRevealKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D54D0790E8088928AA22580DD2DB8A64 /* Pods-CircularRevealKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CircularRevealKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		DA77155F366E005A93ACE590FE5E6473 /* CircularRevealKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CircularRevealKit.modulemap; sourceTree = "<group>"; };
-		E2BCCF6784DE431F8F6B15BE4F6CE5CB /* Pods-CircularRevealKit_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CircularRevealKit_Example-resources.sh"; sourceTree = "<group>"; };
-		EC93826CD050F2AB4A3AC3665E165E55 /* LayerAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LayerAnimator.swift; sourceTree = "<group>"; };
-		FE7C412B98443F39341B5D8038FEE4DD /* CircularRevealKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CircularRevealKit.xcconfig; sourceTree = "<group>"; };
-		FFC18062BDF204B319C53026AB83A101 /* Pods_CircularRevealKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CircularRevealKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		055EFAB398DE18B5215827A409A05F63 /* Pods-CircularRevealKit_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CircularRevealKit_Example-Info.plist"; sourceTree = "<group>"; };
+		0C960AECF09AFF3EA09637FB91D2A4DF /* RevealType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RevealType.swift; path = CircularRevealKit/Classes/RevealType.swift; sourceTree = "<group>"; };
+		0CC82E447850A79DA88DC3D77319508F /* CicularTransactionDirector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CicularTransactionDirector.swift; path = CircularRevealKit/Classes/CicularTransactionDirector.swift; sourceTree = "<group>"; };
+		12B69D7B63960124B059429A9C848588 /* Pods-CircularRevealKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CircularRevealKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		18A7C6098CA1748B81BFCB01B8C7AFC3 /* CircularRevealKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "CircularRevealKit-Info.plist"; sourceTree = "<group>"; };
+		28ECB2F305D0BB8BD288FB39C7C266B4 /* Pods_CircularRevealKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CircularRevealKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EC23C34D2527AC0FA3C9F072D808553 /* Pods-CircularRevealKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CircularRevealKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3860AB6DE247EA5073CC1258F5D393C5 /* CircularRevealKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CircularRevealKit.modulemap; sourceTree = "<group>"; };
+		40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		474585B39B90815C26B4224660D771E5 /* CircularRevealKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CircularRevealKit-umbrella.h"; sourceTree = "<group>"; };
+		4F4B6D9C9F266F73E8E32BC017387AFB /* Pods-CircularRevealKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CircularRevealKit_Example.modulemap"; sourceTree = "<group>"; };
+		4FA25C4841678C62407622D0374E7FD4 /* Pods-CircularRevealKit_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CircularRevealKit_Example-umbrella.h"; sourceTree = "<group>"; };
+		5E5333673FD3C8BAB1A71290C662A52B /* LayerAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayerAnimator.swift; path = CircularRevealKit/Classes/LayerAnimator.swift; sourceTree = "<group>"; };
+		5E542376248A89DC36D4B58280E95885 /* Pods-CircularRevealKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CircularRevealKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		6312E4B1C793813E812371A172224DD2 /* CircularRevealKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CircularRevealKit.xcconfig; sourceTree = "<group>"; };
+		6B5DC72FC6A2785CEA5C139F65CE396A /* Pods-CircularRevealKit_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CircularRevealKit_Example-dummy.m"; sourceTree = "<group>"; };
+		7400112F339E428DD73626BE8688730E /* CircularRevealKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CircularRevealKit-dummy.m"; sourceTree = "<group>"; };
+		7A68BC5D23E90C675FAC574DA65AE31E /* UICircularViewControllerExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UICircularViewControllerExtension.swift; path = CircularRevealKit/Classes/UICircularViewControllerExtension.swift; sourceTree = "<group>"; };
+		8952D45BD920B50DF36A9D1C1E676B5E /* CircularRevealKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = CircularRevealKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		89F85ACF3D78B39506B75103B4694B36 /* SwiftLint.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.xcconfig; sourceTree = "<group>"; };
+		9195C1FCA45F1E28030E5FD139BC93A1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B0A943184266114E27EC9C9E4096C016 /* Pods-CircularRevealKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CircularRevealKit_Example-frameworks.sh"; sourceTree = "<group>"; };
+		B6B7F128F1B7F324AF358F9874510045 /* CircularRevealKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CircularRevealKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8A9DBA8C9F50605DCEABED6D0D9FF0E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		CDA3EE5B120CC8DC9E06886005EAA724 /* DefaultCircularAnimation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultCircularAnimation.swift; path = CircularRevealKit/Classes/DefaultCircularAnimation.swift; sourceTree = "<group>"; };
+		E5BDB9A3315C1C5754D7846B112CF78B /* CircularRevealKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CircularRevealKit-prefix.pch"; sourceTree = "<group>"; };
+		ECF2A2B0720AE923C22BED3192888BE0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		F1ECAD85382E022291F1D36AB4C091CE /* UIViewRadial.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIViewRadial.swift; path = CircularRevealKit/Classes/UIViewRadial.swift; sourceTree = "<group>"; };
+		FCB8EDBD6B70B84249C4318D23F8E196 /* Pods-CircularRevealKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CircularRevealKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		829B28EF84EB3CECA8F402C3CE1F3E5A /* Frameworks */ = {
+		6BB21BFE801E0248D67614D43B9B3817 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8669DEFCCFE93CC5F52B007D01CFDA67 /* Foundation.framework in Frameworks */,
+				01D6694A7D82BA9B368A66F5A464B1E0 /* Foundation.framework in Frameworks */,
+				B43174476870CD42A2A12D9717BE6F4F /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C60AB8F842A061CAFFC974EF27924910 /* Frameworks */ = {
+		DBC099934BD4BE23CFA89CC4D8719C28 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80D0EB73169FC5BF99EDECF1CFFE52D8 /* Foundation.framework in Frameworks */,
+				3BE6AFAE8EE9E62D2F7AD3BA1D539F38 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3DA6515FA8100F3A7E5CCBEB6D0CCB3F /* Development Pods */ = {
+		116963FCC99A5296B5900193842E9AD2 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				F722079C277DC3749F76204D98031B26 /* CircularRevealKit */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		3E8AA39689E981DDF7AEAF2F33350D75 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				9C2DE9967737A901A874EA0DC7059794 /* Pods-CircularRevealKit_Example */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				3DA6515FA8100F3A7E5CCBEB6D0CCB3F /* Development Pods */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				AD13DFB16AA3091D8A53C3B0ABABF9D3 /* Products */,
-				3E8AA39689E981DDF7AEAF2F33350D75 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		9875BD81E21D3FF5F2C3263DF90308F1 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				EC93826CD050F2AB4A3AC3665E165E55 /* LayerAnimator.swift */,
-				1972C6463293A977DF8087B7458262A1 /* UIViewRadial.swift */,
-				481DF32A1EA14374005576BC /* CicularTransactionDirector.swift */,
-				42F7D7D16A41E9421EE75CAA /* UICircularViewController.swift */,
-				42F7DF5A0C34F4C79F5B6CD6 /* RevealType.swift */,
-				42F7D5F4C2EB2A366D58348B /* DefaultCircularAnimation.swift */,
-				48FF0DA11EA437D0004A571F /* UICircularViewControllerExtension.swift */,
-				10D6E8BC0BF15632D114D2EC54D1BF33 /* UICircularNavigationControllerExtension.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		99A93FE28DDE98C6169BC77F32A6312C /* CircularRevealKit */ = {
-			isa = PBXGroup;
-			children = (
-				9875BD81E21D3FF5F2C3263DF90308F1 /* Classes */,
-			);
-			path = CircularRevealKit;
-			sourceTree = "<group>";
-		};
-		9C2DE9967737A901A874EA0DC7059794 /* Pods-CircularRevealKit_Example */ = {
-			isa = PBXGroup;
-			children = (
-				64C5DD6C33A6C583D946FA2B5FF61516 /* Info.plist */,
-				343EC88147F939A4DF05B16326674B88 /* Pods-CircularRevealKit_Example.modulemap */,
-				C89D472093FA756DB351C04F34F2D891 /* Pods-CircularRevealKit_Example-acknowledgements.markdown */,
-				D54D0790E8088928AA22580DD2DB8A64 /* Pods-CircularRevealKit_Example-acknowledgements.plist */,
-				8E28E0498F58811D0D514147AABE5913 /* Pods-CircularRevealKit_Example-dummy.m */,
-				B6750930058B2B5697CBC697FB7DBBF9 /* Pods-CircularRevealKit_Example-frameworks.sh */,
-				E2BCCF6784DE431F8F6B15BE4F6CE5CB /* Pods-CircularRevealKit_Example-resources.sh */,
-				29CFBE2CF63A7AF80C33635DE1FBC3D8 /* Pods-CircularRevealKit_Example-umbrella.h */,
-				6F9E7F0DC30C4403554660DFCC1EB7CE /* Pods-CircularRevealKit_Example.debug.xcconfig */,
-				BFE1D76F0A7E74325A57156412F643E5 /* Pods-CircularRevealKit_Example.release.xcconfig */,
-			);
-			name = "Pods-CircularRevealKit_Example";
-			path = "Target Support Files/Pods-CircularRevealKit_Example";
-			sourceTree = "<group>";
-		};
-		AD13DFB16AA3091D8A53C3B0ABABF9D3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B9582B881D55E7DECC4FAD99714706B8 /* CircularRevealKit.framework */,
-				FFC18062BDF204B319C53026AB83A101 /* Pods_CircularRevealKit_Example.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		E6C045F3CAE11342515DF9B76B622D42 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				DA77155F366E005A93ACE590FE5E6473 /* CircularRevealKit.modulemap */,
-				FE7C412B98443F39341B5D8038FEE4DD /* CircularRevealKit.xcconfig */,
-				7DF832B77BEB2FC784E423562B9052B0 /* CircularRevealKit-dummy.m */,
-				A76424DF09FA44C4D300A8685DF37150 /* CircularRevealKit-prefix.pch */,
-				C7C1A208D10B7406BC4FF3602108D154 /* CircularRevealKit-umbrella.h */,
-				135E54EDC0C0D92BFC144D6C11F6CE89 /* Info.plist */,
+				3860AB6DE247EA5073CC1258F5D393C5 /* CircularRevealKit.modulemap */,
+				6312E4B1C793813E812371A172224DD2 /* CircularRevealKit.xcconfig */,
+				7400112F339E428DD73626BE8688730E /* CircularRevealKit-dummy.m */,
+				18A7C6098CA1748B81BFCB01B8C7AFC3 /* CircularRevealKit-Info.plist */,
+				E5BDB9A3315C1C5754D7846B112CF78B /* CircularRevealKit-prefix.pch */,
+				474585B39B90815C26B4224660D771E5 /* CircularRevealKit-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/CircularRevealKit";
 			sourceTree = "<group>";
 		};
-		F722079C277DC3749F76204D98031B26 /* CircularRevealKit */ = {
+		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				99A93FE28DDE98C6169BC77F32A6312C /* CircularRevealKit */,
-				E6C045F3CAE11342515DF9B76B622D42 /* Support Files */,
+				E169A450ED27AC725DF52953F66D11E0 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		290C2E6F9F21D68F2CF1B837474BD2F0 /* Pods-CircularRevealKit_Example */ = {
+			isa = PBXGroup;
+			children = (
+				4F4B6D9C9F266F73E8E32BC017387AFB /* Pods-CircularRevealKit_Example.modulemap */,
+				2EC23C34D2527AC0FA3C9F072D808553 /* Pods-CircularRevealKit_Example-acknowledgements.markdown */,
+				12B69D7B63960124B059429A9C848588 /* Pods-CircularRevealKit_Example-acknowledgements.plist */,
+				6B5DC72FC6A2785CEA5C139F65CE396A /* Pods-CircularRevealKit_Example-dummy.m */,
+				B0A943184266114E27EC9C9E4096C016 /* Pods-CircularRevealKit_Example-frameworks.sh */,
+				055EFAB398DE18B5215827A409A05F63 /* Pods-CircularRevealKit_Example-Info.plist */,
+				4FA25C4841678C62407622D0374E7FD4 /* Pods-CircularRevealKit_Example-umbrella.h */,
+				5E542376248A89DC36D4B58280E95885 /* Pods-CircularRevealKit_Example.debug.xcconfig */,
+				FCB8EDBD6B70B84249C4318D23F8E196 /* Pods-CircularRevealKit_Example.release.xcconfig */,
+			);
+			name = "Pods-CircularRevealKit_Example";
+			path = "Target Support Files/Pods-CircularRevealKit_Example";
+			sourceTree = "<group>";
+		};
+		5996DE6946C66CF3CCD5ED4AAD97404B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B6B7F128F1B7F324AF358F9874510045 /* CircularRevealKit.framework */,
+				28ECB2F305D0BB8BD288FB39C7C266B4 /* Pods_CircularRevealKit_Example.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6B6BE8C95AE34158E3E2EC68A0377FA2 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				290C2E6F9F21D68F2CF1B837474BD2F0 /* Pods-CircularRevealKit_Example */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		965877409E01FB3D85D85E90E6B30185 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9AED61B9A1CFA211C061344F741DBA07 /* SwiftLint */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9AED61B9A1CFA211C061344F741DBA07 /* SwiftLint */ = {
+			isa = PBXGroup;
+			children = (
+				EEA599FE5C15138FF0981CCFB01E55AA /* Support Files */,
+			);
+			path = SwiftLint;
+			sourceTree = "<group>";
+		};
+		A19FDF977DA01DFB3B2463677ED07107 /* CircularRevealKit */ = {
+			isa = PBXGroup;
+			children = (
+				0CC82E447850A79DA88DC3D77319508F /* CicularTransactionDirector.swift */,
+				CDA3EE5B120CC8DC9E06886005EAA724 /* DefaultCircularAnimation.swift */,
+				5E5333673FD3C8BAB1A71290C662A52B /* LayerAnimator.swift */,
+				0C960AECF09AFF3EA09637FB91D2A4DF /* RevealType.swift */,
+				7A68BC5D23E90C675FAC574DA65AE31E /* UICircularViewControllerExtension.swift */,
+				F1ECAD85382E022291F1D36AB4C091CE /* UIViewRadial.swift */,
+				F622173DA6CB6CF2F5158C5B5E468F86 /* Pod */,
+				116963FCC99A5296B5900193842E9AD2 /* Support Files */,
 			);
 			name = CircularRevealKit;
 			path = ../..;
 			sourceTree = "<group>";
 		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				E04C85EF6D32BD3D72E6ADDB6301FD56 /* Development Pods */,
+				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
+				965877409E01FB3D85D85E90E6B30185 /* Pods */,
+				5996DE6946C66CF3CCD5ED4AAD97404B /* Products */,
+				6B6BE8C95AE34158E3E2EC68A0377FA2 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		E04C85EF6D32BD3D72E6ADDB6301FD56 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A19FDF977DA01DFB3B2463677ED07107 /* CircularRevealKit */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		E169A450ED27AC725DF52953F66D11E0 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */,
+				ECF2A2B0720AE923C22BED3192888BE0 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		EEA599FE5C15138FF0981CCFB01E55AA /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				89F85ACF3D78B39506B75103B4694B36 /* SwiftLint.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftLint";
+			sourceTree = "<group>";
+		};
+		F622173DA6CB6CF2F5158C5B5E468F86 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				8952D45BD920B50DF36A9D1C1E676B5E /* CircularRevealKit.podspec */,
+				C8A9DBA8C9F50605DCEABED6D0D9FF0E /* LICENSE */,
+				9195C1FCA45F1E28030E5FD139BC93A1 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		28FB9E3B35B532169603306C3C9B301B /* Headers */ = {
+		90B1C2543191FD9775CEA512D074CA3C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AFA2E2A6E5024A310A8A211CEEA342B /* CircularRevealKit-umbrella.h in Headers */,
+				EFC3A9D7DA6C3B781C2009E293F5CC85 /* Pods-CircularRevealKit_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4E824B3D5E0FAB4C6F3953360151BD5F /* Headers */ = {
+		D3FD70E3D55E40B0D9839E6DD7412948 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F8B0C5DA6F045C6AF148C044864127C /* Pods-CircularRevealKit_Example-umbrella.h in Headers */,
+				E1F58E99EA03F6BACAFF6E9E2F2BA27A /* CircularRevealKit-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		620262E46EBE0662BFA0EC654F7B13F0 /* CircularRevealKit */ = {
+		4D7D53536F9E93B94FF2E2DE275F185D /* CircularRevealKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 271BFCE2A88EA34778C7392FD7A9CF5F /* Build configuration list for PBXNativeTarget "CircularRevealKit" */;
+			buildConfigurationList = F91720AABE67DF7B0CF9E7F3D9870523 /* Build configuration list for PBXNativeTarget "CircularRevealKit" */;
 			buildPhases = (
-				2CF2181A7F944F10035D9533052A4D2A /* Sources */,
-				C60AB8F842A061CAFFC974EF27924910 /* Frameworks */,
-				28FB9E3B35B532169603306C3C9B301B /* Headers */,
+				D3FD70E3D55E40B0D9839E6DD7412948 /* Headers */,
+				5562658C72713F74FFF600765395BF78 /* Sources */,
+				6BB21BFE801E0248D67614D43B9B3817 /* Frameworks */,
+				A2EB71A4EB3582347D722653B8341AC8 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -237,129 +279,153 @@
 			);
 			name = CircularRevealKit;
 			productName = CircularRevealKit;
-			productReference = B9582B881D55E7DECC4FAD99714706B8 /* CircularRevealKit.framework */;
+			productReference = B6B7F128F1B7F324AF358F9874510045 /* CircularRevealKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		82E1FEB7F0AAA41C3C052E35CF008B3E /* Pods-CircularRevealKit_Example */ = {
+		6EE9ADBC8133743E9F629B00989D3555 /* Pods-CircularRevealKit_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B8CAAD394E599BF703D2E2730B9A7D29 /* Build configuration list for PBXNativeTarget "Pods-CircularRevealKit_Example" */;
+			buildConfigurationList = 27FF86E312458AABA9CEEB81DC083542 /* Build configuration list for PBXNativeTarget "Pods-CircularRevealKit_Example" */;
 			buildPhases = (
-				EE0C9F7EEE3936AC853A3A3A13B86168 /* Sources */,
-				829B28EF84EB3CECA8F402C3CE1F3E5A /* Frameworks */,
-				4E824B3D5E0FAB4C6F3953360151BD5F /* Headers */,
+				90B1C2543191FD9775CEA512D074CA3C /* Headers */,
+				A89919C3E1398EBB537EB10B2D59AF7E /* Sources */,
+				DBC099934BD4BE23CFA89CC4D8719C28 /* Frameworks */,
+				49A632DFF5E1613228F463B2320B2844 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				240C78DDF22B0C109D45346B14844C86 /* PBXTargetDependency */,
+				B0570801D27C091F4AA04C26CC082D31 /* PBXTargetDependency */,
+				787E4BA321A90FDA2597EA572ED4B7C7 /* PBXTargetDependency */,
 			);
 			name = "Pods-CircularRevealKit_Example";
 			productName = "Pods-CircularRevealKit_Example";
-			productReference = FFC18062BDF204B319C53026AB83A101 /* Pods_CircularRevealKit_Example.framework */;
+			productReference = 28ECB2F305D0BB8BD288FB39C7C266B4 /* Pods_CircularRevealKit_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0920;
-				TargetAttributes = {
-					620262E46EBE0662BFA0EC654F7B13F0 = {
-						LastSwiftMigration = 0920;
-					};
-				};
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
 			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = AD13DFB16AA3091D8A53C3B0ABABF9D3 /* Products */;
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 5996DE6946C66CF3CCD5ED4AAD97404B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				620262E46EBE0662BFA0EC654F7B13F0 /* CircularRevealKit */,
-				82E1FEB7F0AAA41C3C052E35CF008B3E /* Pods-CircularRevealKit_Example */,
+				4D7D53536F9E93B94FF2E2DE275F185D /* CircularRevealKit */,
+				6EE9ADBC8133743E9F629B00989D3555 /* Pods-CircularRevealKit_Example */,
+				C1132722490646592BE49A9C2D389296 /* SwiftLint */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXSourcesBuildPhase section */
-		2CF2181A7F944F10035D9533052A4D2A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+/* Begin PBXResourcesBuildPhase section */
+		49A632DFF5E1613228F463B2320B2844 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				540463D2669FF7EA7D28834419449B8F /* CircularRevealKit-dummy.m in Sources */,
-				A2E6E332DC1D0E72BFCFDDEEF1F737F6 /* LayerAnimator.swift in Sources */,
-				481DF32B1EA14374005576BC /* CicularTransactionDirector.swift in Sources */,
-				DC7E258CDF84C7AB1FBDE9213EBB5A32 /* UICircularNavigationControllerExtension.swift in Sources */,
-				19F57F0FBB42447E3462C1048E20E967 /* UIViewRadial.swift in Sources */,
-				48FF0DA21EA437D0004A571F /* UICircularViewControllerExtension.swift in Sources */,
-				42F7D8FE0E3E246563041209 /* UICircularViewController.swift in Sources */,
-				42F7DFB17CE781ABE4357671 /* RevealType.swift in Sources */,
-				42F7D9BFD931FB921CC9864C /* DefaultCircularAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EE0C9F7EEE3936AC853A3A3A13B86168 /* Sources */ = {
+		A2EB71A4EB3582347D722653B8341AC8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5562658C72713F74FFF600765395BF78 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70569695494877CAD54FEADDBDA3EF0E /* Pods-CircularRevealKit_Example-dummy.m in Sources */,
+				27E08FA6C301F28D0DB0CC3B83178B98 /* CicularTransactionDirector.swift in Sources */,
+				50FCC7F3E4513EC9A24A79ADB0706C29 /* CircularRevealKit-dummy.m in Sources */,
+				E6C11BB769A46A66C177B18FDB3E2375 /* DefaultCircularAnimation.swift in Sources */,
+				60FA9A6EC522187C92E9AE12CEF74D7F /* LayerAnimator.swift in Sources */,
+				F556CBB32DFB82AD629EC4B58E734E10 /* RevealType.swift in Sources */,
+				BF3DCC9F04F30DF272E1D79768CECE90 /* UICircularViewControllerExtension.swift in Sources */,
+				340E9345E40349ED5B08C5EBC983D971 /* UIViewRadial.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A89919C3E1398EBB537EB10B2D59AF7E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFF25EC25583B3E23B16D40196A30392 /* Pods-CircularRevealKit_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		240C78DDF22B0C109D45346B14844C86 /* PBXTargetDependency */ = {
+		787E4BA321A90FDA2597EA572ED4B7C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftLint;
+			target = C1132722490646592BE49A9C2D389296 /* SwiftLint */;
+			targetProxy = 6806BD29D6BBE4CC69954E0708BBDB10 /* PBXContainerItemProxy */;
+		};
+		B0570801D27C091F4AA04C26CC082D31 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CircularRevealKit;
-			target = 620262E46EBE0662BFA0EC654F7B13F0 /* CircularRevealKit */;
-			targetProxy = 8A51B2268106058B2696530A84D6EFE0 /* PBXContainerItemProxy */;
+			target = 4D7D53536F9E93B94FF2E2DE275F185D /* CircularRevealKit */;
+			targetProxy = 06D13FEDE8444DEBABBD0B5A16DAC7B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		345CC476DF4A7516DBD2220CF5035FF3 /* Debug */ = {
+		07B3DBAD4E15EC23FB08F6B8B4C9D9F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -368,252 +434,281 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		4E69D7ABDC968E5CB6A6EC6D7E8501F3 /* Debug */ = {
+		43F57FAFB5841E6F2BAB6F6846C667D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F9E7F0DC30C4403554660DFCC1EB7CE /* Pods-CircularRevealKit_Example.debug.xcconfig */;
+			baseConfigurationReference = 89F85ACF3D78B39506B75103B4694B36 /* SwiftLint.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		69507665378EC442246FD448CDFB9846 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E542376248A89DC36D4B58280E95885 /* Pods-CircularRevealKit_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-CircularRevealKit_Example/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-CircularRevealKit_Example/Pods-CircularRevealKit_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-CircularRevealKit_Example/Pods-CircularRevealKit_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_CircularRevealKit_Example;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		717E77604BFBB04BEAF56608A1CB2EDE /* Release */ = {
+		6A0A6F0A418AEBCC8ED1ED7E9B9FA3E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6312E4B1C793813E812371A172224DD2 /* CircularRevealKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/CircularRevealKit/CircularRevealKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CircularRevealKit/CircularRevealKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CircularRevealKit/CircularRevealKit.modulemap";
+				PRODUCT_MODULE_NAME = CircularRevealKit;
+				PRODUCT_NAME = CircularRevealKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B435E01EEDF828BF3E5147F60A7AB1C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89F85ACF3D78B39506B75103B4694B36 /* SwiftLint.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C4A20FC25A54EBDAAA218BFA26BCE697 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6312E4B1C793813E812371A172224DD2 /* CircularRevealKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/CircularRevealKit/CircularRevealKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CircularRevealKit/CircularRevealKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CircularRevealKit/CircularRevealKit.modulemap";
+				PRODUCT_MODULE_NAME = CircularRevealKit;
+				PRODUCT_NAME = CircularRevealKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E1BAFCB6611C2CB2155C143ECDE1D3D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCB8EDBD6B70B84249C4318D23F8E196 /* Pods-CircularRevealKit_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-CircularRevealKit_Example/Pods-CircularRevealKit_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-CircularRevealKit_Example/Pods-CircularRevealKit_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FF54A72E467D2FE6A514F52E26280B06 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-		};
-		A9353504D707E24D424DB79B257F439C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFE1D76F0A7E74325A57156412F643E5 /* Pods-CircularRevealKit_Example.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-CircularRevealKit_Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-CircularRevealKit_Example/Pods-CircularRevealKit_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_CircularRevealKit_Example;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		A962B373FB3EFD4EDE6F80959B8A4171 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE7C412B98443F39341B5D8038FEE4DD /* CircularRevealKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CircularRevealKit/CircularRevealKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CircularRevealKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CircularRevealKit/CircularRevealKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = CircularRevealKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		E803AC81DCFBCE6572579E582BC6EF12 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE7C412B98443F39341B5D8038FEE4DD /* CircularRevealKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CircularRevealKit/CircularRevealKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CircularRevealKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CircularRevealKit/CircularRevealKit.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = CircularRevealKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		271BFCE2A88EA34778C7392FD7A9CF5F /* Build configuration list for PBXNativeTarget "CircularRevealKit" */ = {
+		15D3E24DC81F66CB7D9A0E45A7A73567 /* Build configuration list for PBXAggregateTarget "SwiftLint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E803AC81DCFBCE6572579E582BC6EF12 /* Debug */,
-				A962B373FB3EFD4EDE6F80959B8A4171 /* Release */,
+				B435E01EEDF828BF3E5147F60A7AB1C9 /* Debug */,
+				43F57FAFB5841E6F2BAB6F6846C667D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+		27FF86E312458AABA9CEEB81DC083542 /* Build configuration list for PBXNativeTarget "Pods-CircularRevealKit_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				345CC476DF4A7516DBD2220CF5035FF3 /* Debug */,
-				717E77604BFBB04BEAF56608A1CB2EDE /* Release */,
+				69507665378EC442246FD448CDFB9846 /* Debug */,
+				E1BAFCB6611C2CB2155C143ECDE1D3D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B8CAAD394E599BF703D2E2730B9A7D29 /* Build configuration list for PBXNativeTarget "Pods-CircularRevealKit_Example" */ = {
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4E69D7ABDC968E5CB6A6EC6D7E8501F3 /* Debug */,
-				A9353504D707E24D424DB79B257F439C /* Release */,
+				07B3DBAD4E15EC23FB08F6B8B4C9D9F2 /* Debug */,
+				FF54A72E467D2FE6A514F52E26280B06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F91720AABE67DF7B0CF9E7F3D9870523 /* Build configuration list for PBXNativeTarget "CircularRevealKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4A20FC25A54EBDAAA218BFA26BCE697 /* Debug */,
+				6A0A6F0A418AEBCC8ED1ED7E9B9FA3E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }

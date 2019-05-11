@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 T-Pro
+// Copyright (c) 2019 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -24,7 +24,7 @@ import Foundation
 import UIKit
 
 extension FirstViewController {
-  
+
   func configTableViewConstraints() {
     let contraints = [
       NSLayoutConstraint(
@@ -61,7 +61,7 @@ extension FirstViewController {
         constant: 0)]
     view.addConstraints(contraints)
   }
-  
+
   func configStubViewConstraints() {
     let contraints = [
       NSLayoutConstraint(
@@ -98,7 +98,7 @@ extension FirstViewController {
         constant: 0)]
     view.addConstraints(contraints)
   }
-  
+
   func configLogoViewConstraints() {
     let contraints = [
       NSLayoutConstraint(
@@ -136,5 +136,5 @@ extension FirstViewController {
       ]
     view.addConstraints(contraints)
   }
-  
+
 }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 T-Pro
+// Copyright (c) 2019 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -25,15 +25,15 @@ import QuartzCore
 import CoreGraphics
 
 public extension UIView {
-  
+
   func drawAnimatedCircularMask(
     startFrame: CGRect,
     duration: TimeInterval,
     revealType: RevealType,
-    _ completeBlock: (() -> ())? = nil) {
+    _ completeBlock: (() -> Void)? = nil) {
 
-    let maskLayer = CAShapeLayer()
-    let radius = sqrt(pow(frame.size.width, 2) + pow(frame.size.height, 2)) * 2
+    let maskLayer: CAShapeLayer = CAShapeLayer()
+    let radius: CGFloat = sqrt(pow(frame.size.width, 2) + pow(frame.size.height, 2)) * 2
 
     let originRect: CGRect
     let newRect: CGRect
@@ -49,7 +49,7 @@ public extension UIView {
           size: CGSize(
             width: radius,
             height: radius))
-        timingFunction = kCAMediaTimingFunctionEaseIn
+        timingFunction = CAMediaTimingFunctionName.easeIn.rawValue
         break
       case RevealType.unreveal:
         originRect = CGRect(
@@ -60,30 +60,28 @@ public extension UIView {
             width: radius,
             height: radius))
         newRect = startFrame
-        timingFunction = kCAMediaTimingFunctionEaseOut
+        timingFunction = CAMediaTimingFunctionName.easeOut.rawValue
         break
     }
 
-    let originPath = CGPath(ellipseIn: originRect, transform: nil)
+    let originPath: CGPath = CGPath(ellipseIn: originRect, transform: nil)
     maskLayer.path = originPath
 
-    let oldPath = maskLayer.path
+    let oldPath: CGPath? = maskLayer.path
     let newPath = CGPath(ellipseIn: newRect, transform: nil)
 
     layer.mask = maskLayer
 
-    let revealAnimation = CABasicAnimation(keyPath: ANIMATION_KEY_PATH)
-    revealAnimation.timingFunction = CAMediaTimingFunction(name: timingFunction)
+    let revealAnimation: CABasicAnimation = CABasicAnimation(keyPath: ANIMATION_KEY_PATH)
+    revealAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName(rawValue: timingFunction))
     revealAnimation.fromValue = oldPath
     revealAnimation.toValue = newPath
     revealAnimation.duration = duration
-    
+
     maskLayer.path = newPath
 
     LayerAnimator(layer: maskLayer, animation: revealAnimation)
-      .startAnimationWithBlock { () -> Void in
-        completeBlock?()
-      }
+      .startAnimationWithBlock(block: completeBlock)
 
   }
 

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 T-Pro
+// Copyright (c) 2019 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -20,45 +20,179 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+import Foundation
 import UIKit
 
 public extension UIViewController {
-  
-  func radialPushViewController(
-    _ viewController: UIViewController,
+
+  func radialPresent(
+    viewController: UIViewController,
     _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
     revealType: RevealType = .reveal,
-    _ transitionCompletion: (() -> ())? = nil) {
-    guard let navigationController = navigationController else {
-      print("UIViewController is not a UINavigationViewController")
-      return
-    }
-    navigationController.radialPresentPushViewController(
+    _ transitionCompletion: (() -> Void)? = nil) {
+    self.push(
       viewController,
       duration,
       startFrame,
       revealType: revealType,
       transitionCompletion)
   }
+
+  func radialDismiss() {
+    self.push(revealType: .unreveal)
+  }
   
-  @objc func radialPopViewController() {
-    guard let navigationController = navigationController else {
-      print("UIViewController is not a UINavigationViewController")
-      return
+  private func push(
+    _ viewController: UIViewController? = nil,
+    _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
+    _ startFrame: CGRect = CGRect.zero,
+    revealType: RevealType = .reveal,
+    _ transitionCompletion: (() -> Void)? = nil) {
+    
+    let rect: CGRect
+    
+    var isNavigationController: Bool = false
+    
+    if self.presentingViewController != nil {
+      isNavigationController = self.presentingViewController is UINavigationController
     }
-    navigationController.radialPresentPopViewController()
+    
+    if self.parent != nil {
+      isNavigationController = self.parent is UINavigationController
+    }
+    
+    if startFrame == CGRect.zero {
+      
+      let viewControllerSize: CGSize?
+      
+      if isNavigationController {
+        viewControllerSize = (self.parent as? UINavigationController)?.view.frame.size
+      } else {
+        viewControllerSize = self.view.frame.size
+      }
+      rect = CGRect(
+        origin: CGPoint(
+          x: (viewControllerSize?.width ?? 0)/2,
+          y: (viewControllerSize?.height ?? 0)/2),
+        size: CGSize(
+          width: 0,
+          height: 0))
+    } else {
+      rect = startFrame
+    }
+    
+    if isNavigationController {
+    
+      let animatorDirector = CicularTransactionDirector()
+      animatorDirector.duration = duration
+      (self.parent as? UINavigationController)?.delegate = animatorDirector
+      animatorDirector.animationBlock = { (transactionContext, animationTime, completion) in
+        
+        let toViewController: UIViewController? = transactionContext.viewController(
+          forKey: UITransitionContextViewControllerKey.to)
+        let fromViewController: UIViewController? = transactionContext.viewController(
+          forKey: UITransitionContextViewControllerKey.from)
+        
+        if let toView: UIView = toViewController?.view,
+          let fromView: UIView = fromViewController?.view {
+          
+          switch revealType {
+            
+          case RevealType.reveal:
+            transactionContext.containerView.insertSubview(
+              toView, aboveSubview: fromView)
+            toView.drawAnimatedCircularMask(
+              startFrame: rect,
+              duration: animationTime,
+              revealType: revealType) { () -> Void in
+                completion()
+                transitionCompletion?()
+            }
+            
+          case RevealType.unreveal:
+            transactionContext.containerView.insertSubview(
+              toView, belowSubview: fromView)
+            fromView.drawAnimatedCircularMask(
+              startFrame: rect,
+              duration: animationTime,
+              revealType: revealType) { () -> Void in
+                completion()
+                transitionCompletion?()
+            }
+            
+          }
+          
+        }
+        
+      }
+      
+      switch revealType {
+      case RevealType.reveal:
+        if let viewController: UIViewController = viewController {
+          (self.parent as? UINavigationController)?.pushViewController(viewController, animated: true)
+          return
+        }
+        fatalError("ViewController is nil")
+      case RevealType.unreveal:
+        (self.parent as? UINavigationController)?.popViewController(animated: true)
+      }
+      
+    } else {
+      
+      switch revealType {
+        
+      case RevealType.reveal:
+        
+        guard let fromViewControllerSnapshot: UIView = self.view.snapshotView(afterScreenUpdates: true),
+          let toViewControllerSnapshot: UIView = viewController?.view.snapshotView(afterScreenUpdates: true) else {
+            fatalError("Error to take snapshots")
+        }
+        
+        self.view?.addSubview(fromViewControllerSnapshot)
+        self.view?.addSubview(toViewControllerSnapshot)
+        
+        toViewControllerSnapshot.drawAnimatedCircularMask(
+          startFrame: rect,
+          duration: duration,
+          revealType: revealType) { () -> Void in
+            self.present(viewController!, animated: false, completion: {
+              fromViewControllerSnapshot.removeFromSuperview()
+              toViewControllerSnapshot.removeFromSuperview()
+              transitionCompletion?()
+            })
+        }
+        
+      case RevealType.unreveal:
+        
+        guard let fromViewControllerSnapshot: UIView =
+          self.view.snapshotView(afterScreenUpdates: true) else {
+          fatalError("Error to take sel snapshot")
+        }
+        
+        guard let toViewControllerSnapshot: UIView = self.presentingViewController?.view.snapshotView(afterScreenUpdates: true) else {
+          fatalError("Error to take snapshot of presentingViewController")
+        }
+        
+        self.view?.addSubview(toViewControllerSnapshot)
+        self.view?.addSubview(fromViewControllerSnapshot)
+        
+        fromViewControllerSnapshot.drawAnimatedCircularMask(
+          startFrame: rect,
+          duration: duration,
+          revealType: revealType) { () -> Void in
+            self.dismiss(animated: false, completion: {
+              toViewControllerSnapshot.removeFromSuperview()
+              fromViewControllerSnapshot.removeFromSuperview()
+              transitionCompletion?()
+            })
+        }
+        
+      }
+          
+      
+    }
+    
   }
-  
-  func setupBackButton(
-    title: String = "Back",
-    style: UIBarButtonItemStyle = UIBarButtonItemStyle.plain) {
-    navigationItem.hidesBackButton = true
-    navigationItem.leftBarButtonItem = UIBarButtonItem(
-      title: title,
-      style: style,
-      target: self,
-      action: #selector(radialPopViewController))
-  }
-  
+
 }

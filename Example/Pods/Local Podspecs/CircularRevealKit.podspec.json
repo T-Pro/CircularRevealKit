@@ -1,22 +1,24 @@
 {
   "name": "CircularRevealKit",
-  "version": "0.1.0",
-  "summary": "A short description of CircularRevealKit.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/ppamorim/CircularRevealKit",
+  "version": "0.9",
+  "summary": "Circular reveal animations made easy",
+  "homepage": "https://github.com/T-Pro/CircularRevealKit",
+  "description": "This library was created to allow developers to implement the material design reveal effect.",
+  "screenshots": "https://media.giphy.com/media/3cwSEnIK1GJEs/giphy.gif",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "ppamorim": "pepa.amorim@gmail.com"
+    "ppamorim": "pp.amorim@hotmail.com"
   },
   "source": {
-    "git": "https://github.com/ppamorim/CircularRevealKit.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/T-Pro/CircularRevealKit.git",
+    "tag": "0.9"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
-  "source_files": "CircularRevealKit/Classes/**/*"
+  "source_files": "CircularRevealKit/Classes/**/*",
+  "frameworks": "UIKit"
 }

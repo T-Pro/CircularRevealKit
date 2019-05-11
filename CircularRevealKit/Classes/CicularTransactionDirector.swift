@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2017 T-Pro
+// Copyright (c) 2019 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,9 +23,10 @@
 import Foundation
 import UIKit
 
-public typealias AnimationBlock = (( _ transactionContext: UIViewControllerContextTransitioning,
-                                     _ animationTime: TimeInterval,
-                                     _ transitionCompletion: @escaping ()->()) ->())
+public typealias AnimationBlock = ((
+  _ transactionContext: UIViewControllerContextTransitioning,
+  _ animationTime: TimeInterval,
+  _ transitionCompletion: @escaping () -> Void) -> Void)
 
 public class CicularTransactionDirector: NSObject {
 
@@ -36,19 +37,19 @@ public class CicularTransactionDirector: NSObject {
 }
 
 extension CicularTransactionDirector: UIViewControllerAnimatedTransitioning {
-  
+
   public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?)
       -> TimeInterval {
     return duration
   }
-  
+
   public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
     self.transitionContext = transitionContext
-    self.animationBlock?(transitionContext, duration) { 
+    self.animationBlock?(transitionContext, duration) {
       transitionContext.completeTransition(true)
     }
   }
-  
+
 }
 
 extension CicularTransactionDirector: UIViewControllerInteractiveTransitioning {
@@ -64,7 +65,7 @@ extension CicularTransactionDirector: UINavigationControllerDelegate {
 
   public func navigationController(
     _ navigationController: UINavigationController,
-    animationControllerFor operation: UINavigationControllerOperation,
+    animationControllerFor operation: UINavigationController.Operation,
     from fromVC: UIViewController,
     to toVC: UIViewController)
       -> UIViewControllerAnimatedTransitioning? {

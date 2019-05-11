@@ -79,7 +79,6 @@ class FirstViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     dismissStubView()
-//    self.presentingViewController
   }
 
   override func updateViewConstraints() {

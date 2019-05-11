@@ -81,7 +81,7 @@ class SecondViewController: UIViewController {
   }
 
   @objc private func randomButtonClick() {
-    self.radialPop()
+    self.radialDismiss()
   }
 
 }

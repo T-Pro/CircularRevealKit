@@ -35,7 +35,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'CircularRevealKit', '~> 0.8'
+pod 'CircularRevealKit', '~> 0.9'
 end
 ```
 
@@ -59,7 +59,7 @@ $ brew install carthage
 To integrate CircularRevealKit into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "T-Pro/CircularRevealKit" ~> 0.8
+github "T-Pro/CircularRevealKit" ~> 0.9
 ```
 
 Run `carthage update` to build the framework and drag the built `CircularRevealKit.framework` into your Xcode project.
@@ -73,13 +73,19 @@ You can simply import the library using `import CircularRevealKit`, then:
 To push your view controller, use:
 
 ```swift
-radialPushViewController(viewController, duration, startFrame, revealType, completionBlock?)
+radialPresent(viewController: viewController)
+```
+
+or 
+
+```swift
+radialPresent(viewController: viewController, duration, startFrame, revealType, completionBlock?)
 ```
 
 To close it:
 
 ```swift
-radialPopViewController()
+radialDismiss()
 ```
 
 To use with view:
@@ -94,7 +100,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Author
 
-T-Pro, engineer@tpro.ie
+Pedro Paulo de Amorim
 
 ## Based on:
 

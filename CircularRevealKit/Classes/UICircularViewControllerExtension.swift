@@ -39,7 +39,7 @@ public extension UIViewController {
       transitionCompletion)
   }
 
-  func radialPop() {
+  func radialDismiss() {
     self.push(revealType: .unreveal)
   }
   

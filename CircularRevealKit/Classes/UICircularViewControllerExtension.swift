@@ -55,8 +55,12 @@ public extension UIViewController {
       isNavigationController = self.presentingViewController is UINavigationController
     }
     
-    if self.parent != nil {
+    if !isNavigationController && self.parent != nil {
       isNavigationController = self.parent is UINavigationController
+    }
+    
+    if !isNavigationController {
+      isNavigationController = self is UINavigationController
     }
     
     if startFrame == CGRect.zero {

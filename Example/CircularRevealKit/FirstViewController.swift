@@ -126,7 +126,9 @@ extension FirstViewController: UITableViewDelegate {
     tableView.deselectRow(at: indexPath, animated: true)
     switch indexPath.row {
       case 0:
-        self.radialPresent(viewController: SecondViewController())
+        let vc = SecondViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        self.radialPresent(viewController: vc)
         break
       default: break
     }

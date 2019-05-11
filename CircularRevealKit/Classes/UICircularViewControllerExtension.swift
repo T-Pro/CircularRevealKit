@@ -61,10 +61,6 @@ public extension UIViewController {
     if self.parent != nil {
       isNavigationController = self.parent is UINavigationController
     }
-//
-//    revealType == .reveal
-//      ? self.presentingViewController is UINavigationController
-//      : self.presentingViewController is UINavigationController
     
     if startFrame == CGRect.zero {
       

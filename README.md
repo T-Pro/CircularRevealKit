@@ -5,10 +5,10 @@
 [![License](https://img.shields.io/cocoapods/l/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)
 [![Platform](https://img.shields.io/cocoapods/p/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-![Swift 4](https://img.shields.io/badge/Swift-5-orange.svg?style=flat)
+![Swift 5](https://img.shields.io/badge/Swift-5-orange.svg?style=flat)
 
 This library was created to allow developers to implement the material design's reveal effect.
-You can simply use this component to reveal and unvereal a ViewController/View, this component is very small (approx. 40kb), written purely in Swift 4.
+You can simply use this component to reveal and unvereal a ViewController/View, this component is very small (approx. 40kb), written purely in Swift 5 with support of Swift 4.2.
 
 ## Sample
 ![GIF sample](https://media.giphy.com/media/3cwSEnIK1GJEs/giphy.gif)

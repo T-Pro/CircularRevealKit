@@ -68,8 +68,6 @@ Run `carthage update` to build the framework and drag the built `CircularRevealK
 
 You can simply import the library using `import CircularRevealKit`, then:
 
-##### Please assert if your root ViewController is a instance of `UINavigationViewController`, otherwise the library will throw a error message.
-
 To push your view controller, use:
 
 ```swift

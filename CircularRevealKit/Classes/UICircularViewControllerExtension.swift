@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 T-Pro
+// Copyright (c) 2020 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -29,21 +29,24 @@ public extension UIViewController {
     viewController: UIViewController,
     _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
+    _ fadeColor: UIColor? = nil,
     _ completion: (() -> Void)? = nil) {
-    self.push(viewController, duration, startFrame, revealType: .reveal, completion)
+    self.push(viewController, duration, startFrame, fadeColor, revealType: .reveal, completion)
   }
 
   func radialDismiss(
     _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
+    _ fadeColor: UIColor?,
     _ completion: (() -> Void)? = nil) {
-    self.push(nil, duration, startFrame, revealType: .unreveal, completion)
+    self.push(nil, duration, startFrame, fadeColor, revealType: .unreveal, completion)
   }
   
   private func push(
     _ viewController: UIViewController?,
     _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
+    _ fadeColor: UIColor?,
     revealType: RevealType = .reveal,
     _ transitionCompletion: (() -> Void)? = nil) {
     
@@ -98,6 +101,9 @@ public extension UIViewController {
         if let toView: UIView = toViewController?.view,
           let fromView: UIView = fromViewController?.view {
 
+          let fadeView: UIView = UIView(frame: fromView.frame)
+          fadeView.backgroundColor = fadeColor
+
           toView.isOpaque = true
           fromView.isOpaque = true
 
@@ -110,8 +116,20 @@ public extension UIViewController {
           switch revealType {
             
           case RevealType.reveal:
+
             transactionContext.containerView.insertSubview(
-              toView, aboveSubview: fromView)
+              toView,
+              aboveSubview: fromView)
+
+            fadeView.alpha = 0.0
+            transactionContext.containerView.insertSubview(
+              fadeView,
+              belowSubview: toView)
+
+            UIView.animate(withDuration: duration) {
+              fadeView.alpha = 1.0
+            }
+
             toView.drawAnimatedCircularMask(
               startFrame: rect,
               duration: animationTime,
@@ -121,8 +139,20 @@ public extension UIViewController {
             }
             
           case RevealType.unreveal:
+
             transactionContext.containerView.insertSubview(
-              toView, belowSubview: fromView)
+              toView,
+              belowSubview: fromView)
+
+            fadeView.alpha = 1.0
+            transactionContext.containerView.insertSubview(
+              fadeView,
+              aboveSubview: toView)
+
+            UIView.animate(withDuration: duration) {
+              fadeView.alpha = 0.01
+            }
+
             fromView.drawAnimatedCircularMask(
               startFrame: rect,
               duration: animationTime,
@@ -159,6 +189,10 @@ public extension UIViewController {
             fatalError("Error to take snapshots")
         }
 
+        let fadeView: UIView = UIView(frame: fromViewControllerSnapshot.frame)
+        fadeView.backgroundColor = fadeColor
+        fadeView.alpha = 0.0
+
         fromViewControllerSnapshot.isOpaque = true
         toViewControllerSnapshot.isOpaque = true
 
@@ -169,7 +203,12 @@ public extension UIViewController {
         toViewControllerSnapshot.layer.rasterizationScale = UIScreen.main.scale
         
         self.view?.addSubview(fromViewControllerSnapshot)
+        self.view?.addSubview(fadeView)
         self.view?.addSubview(toViewControllerSnapshot)
+
+        UIView.animate(withDuration: duration) {
+          fadeView.alpha = 1.0
+        }
         
         toViewControllerSnapshot.drawAnimatedCircularMask(
           startFrame: rect,

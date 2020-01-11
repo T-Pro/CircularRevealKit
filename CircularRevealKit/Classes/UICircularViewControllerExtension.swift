@@ -85,7 +85,7 @@ public extension UIViewController {
     
     if isNavigationController {
     
-      let animatorDirector = CicularTransactionDirector()
+      let animatorDirector: CicularTransactionDirector = CicularTransactionDirector()
       animatorDirector.duration = duration
       (self.parent as? UINavigationController)?.delegate = animatorDirector
       animatorDirector.animationBlock = { (transactionContext, animationTime, completion) in
@@ -97,6 +97,15 @@ public extension UIViewController {
         
         if let toView: UIView = toViewController?.view,
           let fromView: UIView = fromViewController?.view {
+
+          toView.isOpaque = true
+          fromView.isOpaque = true
+
+          toView.layer.shouldRasterize = true
+          toView.layer.rasterizationScale = UIScreen.main.scale
+
+          fromView.layer.shouldRasterize = true
+          fromView.layer.rasterizationScale = UIScreen.main.scale
           
           switch revealType {
             
@@ -149,6 +158,15 @@ public extension UIViewController {
           let toViewControllerSnapshot: UIView = viewController?.view.snapshotView(afterScreenUpdates: true) else {
             fatalError("Error to take snapshots")
         }
+
+        fromViewControllerSnapshot.isOpaque = true
+        toViewControllerSnapshot.isOpaque = true
+
+        fromViewControllerSnapshot.layer.shouldRasterize = true
+        toViewControllerSnapshot.layer.rasterizationScale = UIScreen.main.scale
+
+        fromViewControllerSnapshot.layer.shouldRasterize = true
+        toViewControllerSnapshot.layer.rasterizationScale = UIScreen.main.scale
         
         self.view?.addSubview(fromViewControllerSnapshot)
         self.view?.addSubview(toViewControllerSnapshot)
@@ -174,6 +192,15 @@ public extension UIViewController {
         guard let toViewControllerSnapshot: UIView = self.presentingViewController?.view.snapshotView(afterScreenUpdates: true) else {
           fatalError("Error to take snapshot of presentingViewController")
         }
+
+        fromViewControllerSnapshot.isOpaque = true
+        toViewControllerSnapshot.isOpaque = true
+
+        fromViewControllerSnapshot.layer.shouldRasterize = true
+        toViewControllerSnapshot.layer.rasterizationScale = UIScreen.main.scale
+
+        fromViewControllerSnapshot.layer.shouldRasterize = true
+        toViewControllerSnapshot.layer.rasterizationScale = UIScreen.main.scale
         
         self.view?.addSubview(toViewControllerSnapshot)
         self.view?.addSubview(fromViewControllerSnapshot)

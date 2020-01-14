@@ -95,23 +95,17 @@ public extension UIViewController {
         
         let toViewController: UIViewController? = transactionContext.viewController(
           forKey: UITransitionContextViewControllerKey.to)
+
         let fromViewController: UIViewController? = transactionContext.viewController(
           forKey: UITransitionContextViewControllerKey.from)
-        
+
         if let toView: UIView = toViewController?.view,
-          let fromView: UIView = fromViewController?.view {
+          let fromView: UIView = fromViewController?.view,
+          let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
+          let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) {
 
           let fadeView: UIView = UIView(frame: fromView.frame)
           fadeView.backgroundColor = fadeColor
-
-          toView.isOpaque = true
-          fromView.isOpaque = true
-
-          toView.layer.shouldRasterize = true
-          toView.layer.rasterizationScale = UIScreen.main.scale
-
-          fromView.layer.shouldRasterize = true
-          fromView.layer.rasterizationScale = UIScreen.main.scale
           
           switch revealType {
             
@@ -121,19 +115,25 @@ public extension UIViewController {
               toView,
               aboveSubview: fromView)
 
-            fadeView.alpha = 0.0
-            transactionContext.containerView.insertSubview(
-              fadeView,
-              belowSubview: toView)
+            fromViewSnapshot.isOpaque = true
+            transactionContext.containerView.addSubview(fromViewSnapshot)
 
-            UIView.animate(withDuration: duration) {
+            fadeView.alpha = 0.01
+            transactionContext.containerView.addSubview(fadeView)
+
+            transactionContext.containerView.addSubview(toViewSnapshot)
+
+            UIView.animate(withDuration: animationTime) {
               fadeView.alpha = 1.0
             }
 
-            toView.drawAnimatedCircularMask(
+            toViewSnapshot.drawAnimatedCircularMask(
               startFrame: rect,
               duration: animationTime,
               revealType: revealType) { () -> Void in
+                fromViewSnapshot.removeFromSuperview()
+                fadeView.removeFromSuperview()
+                toViewSnapshot.removeFromSuperview()
                 completion()
                 transitionCompletion?()
             }
@@ -144,19 +144,25 @@ public extension UIViewController {
               toView,
               belowSubview: fromView)
 
-            fadeView.alpha = 1.0
-            transactionContext.containerView.insertSubview(
-              fadeView,
-              aboveSubview: toView)
+            toViewSnapshot.isOpaque = true
+            transactionContext.containerView.addSubview(toViewSnapshot)
 
-            UIView.animate(withDuration: duration) {
+            fadeView.alpha = 0.0
+            transactionContext.containerView.addSubview(fadeView)
+
+            transactionContext.containerView.addSubview(fromViewSnapshot)
+
+            UIView.animate(withDuration: animationTime) {
               fadeView.alpha = 0.01
             }
 
-            fromView.drawAnimatedCircularMask(
+            fromViewSnapshot.drawAnimatedCircularMask(
               startFrame: rect,
               duration: animationTime,
               revealType: revealType) { () -> Void in
+                fromViewSnapshot.removeFromSuperview()
+                fadeView.removeFromSuperview()
+                toViewSnapshot.removeFromSuperview()
                 completion()
                 transitionCompletion?()
             }

@@ -234,8 +234,12 @@ public extension UIViewController {
           fatalError("Error to take sel snapshot")
         }
         
-        guard let toViewControllerSnapshot: UIView = self.presentingViewController?.view.snapshotView(afterScreenUpdates: true) else {
-          fatalError("Error to take snapshot of presentingViewController")
+        guard let toViewControllerSnapshot: UIView = self.presentingViewController?.view.snapshotView(afterScreenUpdates: true) 
+          ?? self.presentingViewController?.view.snapshotView(afterScreenUpdates: false) else {
+          self.dismiss(animated: false, completion: {
+            transitionCompletion?()
+          })
+          return
         }
 
         fromViewControllerSnapshot.isOpaque = true

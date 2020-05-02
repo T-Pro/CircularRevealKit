@@ -74,10 +74,6 @@ class FirstViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configTableView()
-  }
-
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
     dismissStubView()
   }
 
@@ -125,11 +121,12 @@ extension FirstViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     switch indexPath.row {
-      case 0:
-        let vc = SecondViewController()
-        vc.modalPresentationStyle = .overCurrentContext
-        self.radialPresent(viewController: vc)
-        break
+    case 0:
+      let vc = SecondViewController()
+      vc.modalPresentationStyle = .overCurrentContext
+      self.radialPresent(viewController: vc, fadeColor: UIColor.blue)
+    case 1:
+      self.present(SecondViewController(), animated: true)
       default: break
     }
   }

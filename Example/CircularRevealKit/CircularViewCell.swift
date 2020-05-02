@@ -47,14 +47,6 @@ class CircularViewCell: UITableViewCell {
     return view
   }()
 
-//  internal lazy var detailView: UIView = {
-//    let view = UIView()
-//    view.translatesAutoresizingMaskIntoConstraints = false
-//    view.backgroundColor = UIColor.black
-//    view.isHidden = true
-//    return view
-//  }()
-
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     addSubview(cardImageView)

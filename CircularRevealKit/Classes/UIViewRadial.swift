@@ -32,6 +32,8 @@ public extension UIView {
     revealType: RevealType,
     _ completeBlock: (() -> Void)? = nil) {
 
+    self.isHidden = false
+
     let maskLayer: CAShapeLayer = CAShapeLayer()
     let radius: CGFloat = sqrt(pow(frame.size.width, 2) + pow(frame.size.height, 2)) * 2
 

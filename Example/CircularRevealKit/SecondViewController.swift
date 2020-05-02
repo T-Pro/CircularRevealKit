@@ -35,10 +35,14 @@ class SecondViewController: UIViewController {
     return view
   }()
 
+  deinit {
+    print("Deinit SecondViewController")
+  }
+
   override func loadView() {
     super.loadView()
     title = "SecondViewController"
-    view.backgroundColor = UIColor.black
+    view.backgroundColor = UIColor.white
     view.addSubview(randomButton)
     view.updateConstraintsIfNeeded()
   }
@@ -81,7 +85,7 @@ class SecondViewController: UIViewController {
   }
 
   @objc private func randomButtonClick() {
-    self.radialDismiss()
+    self.radialDismiss(fadeColor: UIColor.blue)
   }
 
 }

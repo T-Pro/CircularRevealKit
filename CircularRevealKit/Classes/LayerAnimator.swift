@@ -59,7 +59,11 @@ class LayerAnimator: NSObject, CAAnimationDelegate {
 
   func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
     animLayer?.removeAllAnimations()
+    animLayer = nil
+    caAnimation = nil
     completionBlock?()
+    completionBlock = nil
+    
   }
 
 }

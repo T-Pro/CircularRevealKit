@@ -35,7 +35,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'CircularRevealKit', '~> 0.9'
+pod 'CircularRevealKit', '~> 0.9.2'
 end
 ```
 
@@ -59,7 +59,7 @@ $ brew install carthage
 To integrate CircularRevealKit into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "T-Pro/CircularRevealKit" ~> 0.9
+github "T-Pro/CircularRevealKit" ~> 0.9.2
 ```
 
 Run `carthage update` to build the framework and drag the built `CircularRevealKit.framework` into your Xcode project.
@@ -90,6 +90,12 @@ To use with view:
 
 ```swift
 view.drawAnimatedCircularMask(startFrame, duration, revealType, completionBlock?)
+```
+
+To include a fade color between the transition, use the fadeColor:` option when presenting or dismisssing the view controller or view.
+
+```swift
+radialPresent(viewController: viewController, fadeColor: UIColor.blue)
 ```
 
 ## Example

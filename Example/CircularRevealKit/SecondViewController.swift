@@ -35,6 +35,23 @@ class SecondViewController: UIViewController {
     return view
   }()
 
+  internal lazy var navigationBar: UINavigationBar = {
+    let view = UINavigationBar()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = UIColor.blue
+    let navigationItem: UINavigationItem = UINavigationItem()
+    navigationItem.title = "SecondViewController"
+    view.items = [navigationItem]
+    return view
+  }()
+
+  internal lazy var bottomBar: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = UIColor.green
+    return view
+  }()
+
   deinit {
     print("Deinit SecondViewController")
   }
@@ -44,6 +61,8 @@ class SecondViewController: UIViewController {
     title = "SecondViewController"
     view.backgroundColor = UIColor.white
     view.addSubview(randomButton)
+    view.addSubview(navigationBar)
+    view.addSubview(bottomBar)
     view.updateConstraintsIfNeeded()
   }
 
@@ -80,6 +99,81 @@ class SecondViewController: UIViewController {
           multiplier: 1,
           constant: 0)]
       view.addConstraints(constraints)
+
+      if #available(iOS 11, *) {
+        let guide = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+          navigationBar.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
+        ])
+      } else {
+        let standardSpacing: CGFloat = 8.0
+        NSLayoutConstraint.activate([
+          navigationBar.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor, constant: standardSpacing),
+        ])
+      }
+
+      let navigationBarConstraints = [
+        NSLayoutConstraint(
+          item: view!,
+          attribute: .left,
+          relatedBy: .equal,
+          toItem: navigationBar,
+          attribute: .left,
+          multiplier: 1,
+          constant: 0),
+        NSLayoutConstraint(
+          item: view!,
+          attribute: .right,
+          relatedBy: .equal,
+          toItem: navigationBar,
+          attribute: .right,
+          multiplier: 1,
+          constant: 0)
+      ]
+
+      view.addConstraints(navigationBarConstraints)
+
+      if #available(iOS 11, *) {
+        let guide = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+          bottomBar.bottomAnchor.constraint(equalToSystemSpacingBelow: guide.bottomAnchor, multiplier: 1.0),
+        ])
+      } else {
+        let standardSpacing: CGFloat = 8.0
+        NSLayoutConstraint.activate([
+          bottomBar.bottomAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: standardSpacing),
+        ])
+      }
+
+      let bottomBarConstraints = [
+        NSLayoutConstraint(
+          item: view!,
+          attribute: .left,
+          relatedBy: .equal,
+          toItem: bottomBar,
+          attribute: .left,
+          multiplier: 1,
+          constant: 0),
+        NSLayoutConstraint(
+          item: view!,
+          attribute: .right,
+          relatedBy: .equal,
+          toItem: bottomBar,
+          attribute: .right,
+          multiplier: 1,
+          constant: 0),
+        NSLayoutConstraint(
+          item: bottomBar,
+          attribute: .height,
+          relatedBy: .equal,
+          toItem: nil,
+          attribute: .notAnAttribute,
+          multiplier: 1,
+          constant: 44)
+      ]
+
+      view.addConstraints(bottomBarConstraints)
+
     }
     super.updateViewConstraints()
   }

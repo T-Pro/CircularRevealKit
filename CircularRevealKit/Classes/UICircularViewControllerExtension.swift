@@ -115,115 +115,119 @@ public extension UIViewController {
         let fromViewController: UIViewController? = transactionContext.viewController(
           forKey: UITransitionContextViewControllerKey.from)
 
-        if let toView: UIView = toViewController?.view,
-          let fromView: UIView = fromViewController?.view,
-          let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
-          let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) {
+        guard let toView: UIView = toViewController?.view,
+          let fromView: UIView = fromViewController?.view else {
+            return
+        }
 
-          let fadeView: UIView? = self.buildFadeView(fadeColor, fromView.frame)
-          
-          switch revealType {
-            
-          case RevealType.reveal:
+        toView.isHidden = false
+        transactionContext.containerView.insertSubview(
+          toView,
+          aboveSubview: fromView)
 
-            fromViewSnapshot.isOpaque = true
-            fromViewSnapshot.isHidden = true
-            transactionContext.containerView.addSubview(fromViewSnapshot)
+        guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
+          let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
+            return
+        }
 
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
+        let fadeView: UIView? = self.buildFadeView(fadeColor, fromView.frame)
 
-              if let fadeView: UIView = fadeView {
-                fadeView.alpha = 0.01
-                transactionContext.containerView.addSubview(fadeView)
-              }
+        switch revealType {
 
-              toViewSnapshot.isHidden = true
-              transactionContext.containerView.addSubview(toViewSnapshot)
+        case RevealType.reveal:
 
-              transactionContext.containerView.insertSubview(
-                toView,
-                aboveSubview: fromView)
+          fromViewSnapshot.isOpaque = true
+          fromViewSnapshot.isHidden = true
+          transactionContext.containerView.addSubview(fromViewSnapshot)
 
-              toViewSnapshot.layoutIfNeeded()
-              fromViewSnapshot.layoutIfNeeded()
+          DispatchQueue.main.asyncAfter(deadline: .now()) {
 
-              UIView.animate(withDuration: animationTime) {
-                fadeView?.alpha = 1.0
-              }
-
-              toViewSnapshot.drawAnimatedCircularMask(
-                startFrame: rect,
-                duration: animationTime,
-                revealType: revealType) { () -> Void in
-
-                  DispatchQueue.main.asyncAfter(deadline: .now()) {
-                    completion(true)
-                    transitionCompletion?()
-                    fromViewSnapshot.removeFromSuperview()
-                    fadeView?.removeFromSuperview()
-                    toViewSnapshot.removeFromSuperview()
-                  }
-
-              }
-
-              fromViewSnapshot.isHidden = false
-              toViewSnapshot.isHidden = false
-              fadeView?.isHidden = false
-
+            if let fadeView: UIView = fadeView {
+              fadeView.alpha = 0.01
+              transactionContext.containerView.addSubview(fadeView)
             }
 
-          case RevealType.unreveal:
-
-            toViewSnapshot.isOpaque = true
             toViewSnapshot.isHidden = true
             transactionContext.containerView.addSubview(toViewSnapshot)
 
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
+            toViewSnapshot.layoutIfNeeded()
+            fromViewSnapshot.layoutIfNeeded()
 
-              if let fadeView: UIView = fadeView {
-                fadeView.alpha = 1.0
-                fadeView.isHidden = true
-                transactionContext.containerView.addSubview(fadeView)
-              }
+            UIView.animate(withDuration: animationTime) {
+              fadeView?.alpha = 1.0
+            }
 
-              fromViewSnapshot.isHidden = true
-              transactionContext.containerView.addSubview(fromViewSnapshot)
+            toViewSnapshot.drawAnimatedCircularMask(
+              startFrame: rect,
+              duration: animationTime,
+              revealType: revealType) { () -> Void in
 
-  //            toView.isHidden = true
-              transactionContext.containerView.insertSubview(
-                toView,
-                belowSubview: fromView)
-
-              toViewSnapshot.layoutIfNeeded()
-              fromViewSnapshot.layoutIfNeeded()
-
-              UIView.animate(withDuration: animationTime) {
-                fadeView?.alpha = 0.01
-              }
-
-              fromViewSnapshot.drawAnimatedCircularMask(
-                startFrame: rect,
-                duration: animationTime,
-                revealType: revealType) { () -> Void in
-
-                  DispatchQueue.main.asyncAfter(deadline: .now()) {
-                    completion(true)
-                    transitionCompletion?()
-                    fromViewSnapshot.removeFromSuperview()
-                    fadeView?.removeFromSuperview()
-                    toViewSnapshot.removeFromSuperview()
-                    fromViewController?.view.removeFromSuperview()
-                    toView.isHidden = false
-                  }
-
-              }
-
-              fromViewSnapshot.isHidden = false
-              toViewSnapshot.isHidden = false
-              fadeView?.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                  completion(true)
+                  transitionCompletion?()
+                  fromViewSnapshot.removeFromSuperview()
+                  fadeView?.removeFromSuperview()
+                  toViewSnapshot.removeFromSuperview()
+                  toView.isHidden = false
+                }
 
             }
-            
+
+            fromViewSnapshot.isHidden = false
+            toViewSnapshot.isHidden = false
+            fadeView?.isHidden = false
+
+          }
+
+        case RevealType.unreveal:
+
+          toViewSnapshot.isOpaque = true
+          toViewSnapshot.isHidden = true
+          transactionContext.containerView.addSubview(toViewSnapshot)
+
+          DispatchQueue.main.asyncAfter(deadline: .now()) {
+
+            if let fadeView: UIView = fadeView {
+              fadeView.alpha = 1.0
+              fadeView.isHidden = true
+              transactionContext.containerView.addSubview(fadeView)
+            }
+
+            fromViewSnapshot.isHidden = true
+            transactionContext.containerView.addSubview(fromViewSnapshot)
+
+            transactionContext.containerView.insertSubview(
+              toView,
+              belowSubview: fromView)
+
+            toViewSnapshot.layoutIfNeeded()
+            fromViewSnapshot.layoutIfNeeded()
+
+            UIView.animate(withDuration: animationTime) {
+              fadeView?.alpha = 0.01
+            }
+
+            fromViewSnapshot.drawAnimatedCircularMask(
+              startFrame: rect,
+              duration: animationTime,
+              revealType: revealType) { () -> Void in
+
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                  completion(true)
+                  transitionCompletion?()
+                  fromViewSnapshot.removeFromSuperview()
+                  fadeView?.removeFromSuperview()
+                  toViewSnapshot.removeFromSuperview()
+                  fromViewController?.view.removeFromSuperview()
+                  toView.isHidden = false
+                }
+
+            }
+
+            fromViewSnapshot.isHidden = false
+            toViewSnapshot.isHidden = false
+            fadeView?.isHidden = false
+
           }
           
         }

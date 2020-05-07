@@ -35,7 +35,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'CircularRevealKit', '~> 0.9.3'
+pod 'CircularRevealKit', '~> 0.9.4'
 end
 ```
 
@@ -59,7 +59,7 @@ $ brew install carthage
 To integrate CircularRevealKit into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "T-Pro/CircularRevealKit" ~> 0.9.3
+github "T-Pro/CircularRevealKit" ~> 0.9.4
 ```
 
 Run `carthage update` to build the framework and drag the built `CircularRevealKit.framework` into your Xcode project.

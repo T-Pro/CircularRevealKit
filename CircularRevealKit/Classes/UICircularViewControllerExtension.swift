@@ -118,39 +118,34 @@ public extension UIViewController {
         let fromViewController: UIViewController? = transactionContext.viewController(
           forKey: UITransitionContextViewControllerKey.from)
 
-        print("toViewController \(String(describing: toViewController))")
-        print("fromViewController \(String(describing: fromViewController))")
-
         guard let toView: UIView = toViewController?.view,
           let fromView: UIView = fromViewController?.view else {
             return
         }
 
-//        toView.isHidden = true
-        toView.alpha = 0.0
-        transactionContext.containerView.insertSubview(
-          toView,
-          aboveSubview: fromView)
-
-        toView.alpha = 1.0
-
-        guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
-          let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
-            return
-        }
-
-        toView.alpha = 0.0
-
-        let fadeView: UIView? = self.buildFadeView(fadeColor, fromView.frame)
-
         switch revealType {
 
         case RevealType.reveal:
+          
+          toView.isHidden = true
+          transactionContext.containerView.insertSubview(
+            toView,
+            aboveSubview: fromView)
+          toView.isHidden = false
+
+          guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
+            let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
+              return
+          }
+
+          toView.isHidden = true
+
+          let fadeView: UIView? = self.buildFadeView(fadeColor, fromView.frame)
 
           fromViewSnapshot.isOpaque = true
           transactionContext.containerView.addSubview(fromViewSnapshot)
 
-          toView.alpha = 1.0
+          toView.isHidden = false
 
           DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
 
@@ -180,7 +175,7 @@ public extension UIViewController {
                   fromViewSnapshot.removeFromSuperview()
                   fadeView?.removeFromSuperview()
                   toViewSnapshot.removeFromSuperview()
-                  toView.alpha = 1.0
+                  toView.isHidden = false
                 }
 
             }
@@ -193,13 +188,20 @@ public extension UIViewController {
 
         case RevealType.unreveal:
 
-          toViewSnapshot.isOpaque = true
+          print("fromViewController: \(String(describing: fromViewController))")
+          print("toViewController: \(String(describing: toViewController))")
+
+          guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
+            let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
+              return
+          }
+
           toViewSnapshot.isHidden = true
           transactionContext.containerView.addSubview(toViewSnapshot)
 
-          toView.alpha = 1.0
-
           DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+
+            let fadeView: UIView? = self.buildFadeView(fadeColor, fromView.frame)
 
             if let fadeView: UIView = fadeView {
               fadeView.alpha = 1.0
@@ -221,6 +223,8 @@ public extension UIViewController {
               fadeView?.alpha = 0.01
             }
 
+            toViewSnapshot.isHidden = false
+
             fromViewSnapshot.drawAnimatedCircularMask(
               startFrame: rect,
               duration: animationTime,
@@ -233,6 +237,7 @@ public extension UIViewController {
                   fadeView?.removeFromSuperview()
                   toViewSnapshot.removeFromSuperview()
                   fromViewController?.view.removeFromSuperview()
+                  toView.alpha = 1.0
                   toView.isHidden = false
                 }
 

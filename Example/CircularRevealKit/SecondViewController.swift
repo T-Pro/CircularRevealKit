@@ -179,7 +179,7 @@ class SecondViewController: UIViewController {
   }
 
   @objc private func randomButtonClick() {
-    self.radialDismiss(fadeColor: UIColor.blue)
+    self.radialDismiss(fadeColor: UIColor.blue, delay: CIRCULAR_ANIMATION_DELAY)
   }
 
 }

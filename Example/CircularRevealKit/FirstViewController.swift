@@ -24,7 +24,7 @@ import UIKit
 import CircularRevealKit
 
 let CIRCULAR_ANIMATION_CELL: String = "Cell"
-let CIRCULAR_ANIMATION_DELAY: TimeInterval = 0.2
+let CIRCULAR_ANIMATION_DELAY: TimeInterval = 0.5
 
 class FirstViewController: UIViewController {
 
@@ -76,6 +76,7 @@ class FirstViewController: UIViewController {
     super.viewDidLoad()
     configTableView()
     dismissStubView()
+//    showRecursive()
   }
 
   override func updateViewConstraints() {
@@ -88,12 +89,12 @@ class FirstViewController: UIViewController {
     super.updateViewConstraints()
   }
 
-  func configTableView() {
+  private func configTableView() {
     tableView.delegate = self
     tableView.dataSource = self
   }
 
-  func dismissStubView() {
+  private func dismissStubView() {
 
     let viewControllerSize = view.frame.size
     let width = viewControllerSize.width
@@ -115,6 +116,21 @@ class FirstViewController: UIViewController {
 
   }
 
+//  private func showRecursive() {
+//    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+//      self?.show()
+//      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+//        self?.showRecursive()
+//      }
+//    }
+//  }
+
+  private func show() {
+    let vc = SecondViewController()
+    vc.modalPresentationStyle = .overCurrentContext
+    self.radialPresent(viewController: vc, fadeColor: UIColor.blue, delay: CIRCULAR_ANIMATION_DELAY)
+  }
+
 }
 
 extension FirstViewController: UITableViewDelegate {
@@ -123,9 +139,7 @@ extension FirstViewController: UITableViewDelegate {
     tableView.deselectRow(at: indexPath, animated: true)
     switch indexPath.row {
     case 0:
-      let vc = SecondViewController()
-      vc.modalPresentationStyle = .overCurrentContext
-      self.radialPresent(viewController: vc, fadeColor: UIColor.blue, delay: CIRCULAR_ANIMATION_DELAY)
+      self.show()
     case 1:
       self.present(SecondViewController(), animated: true)
       default: break

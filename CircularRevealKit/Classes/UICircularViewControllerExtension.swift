@@ -126,7 +126,7 @@ public extension UIViewController {
         switch revealType {
 
         case RevealType.reveal:
-          
+
           toView.isHidden = true
           transactionContext.containerView.insertSubview(
             toView,
@@ -187,9 +187,6 @@ public extension UIViewController {
           }
 
         case RevealType.unreveal:
-
-          print("fromViewController: \(String(describing: fromViewController))")
-          print("toViewController: \(String(describing: toViewController))")
 
           guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
             let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {

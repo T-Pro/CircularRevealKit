@@ -30,16 +30,18 @@ public extension UIViewController {
     duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     startFrame: CGRect = CGRect.zero,
     fadeColor: UIColor? = nil,
+    delay: TimeInterval = .zero,
     _ completion: (() -> Void)? = nil) {
-    self.push(viewController, duration, startFrame, fadeColor, revealType: .reveal, completion)
+    self.push(viewController, duration, startFrame, fadeColor, delay, revealType: .reveal, completion)
   }
 
   func radialDismiss(
     duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     startFrame: CGRect = CGRect.zero,
     fadeColor: UIColor? = nil,
+    delay: TimeInterval = .zero,
     _ completion: (() -> Void)? = nil) {
-    self.push(nil, duration, startFrame, fadeColor, revealType: .unreveal, completion)
+    self.push(nil, duration, startFrame, fadeColor, delay, revealType: .unreveal, completion)
   }
 
   private func validateUINavigationController() -> Bool {
@@ -97,6 +99,7 @@ public extension UIViewController {
     _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     _ startFrame: CGRect = CGRect.zero,
     _ fadeColor: UIColor?,
+    _ delay: TimeInterval,
     revealType: RevealType = .reveal,
     _ transitionCompletion: (() -> Void)? = nil) {
     
@@ -140,7 +143,7 @@ public extension UIViewController {
           fromViewSnapshot.isHidden = true
           transactionContext.containerView.addSubview(fromViewSnapshot)
 
-          DispatchQueue.main.asyncAfter(deadline: .now()) {
+          DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
 
             if let fadeView: UIView = fadeView {
               fadeView.alpha = 0.01
@@ -162,7 +165,7 @@ public extension UIViewController {
               duration: animationTime,
               revealType: revealType) { () -> Void in
 
-                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                   completion(true)
                   transitionCompletion?()
                   fromViewSnapshot.removeFromSuperview()
@@ -185,7 +188,7 @@ public extension UIViewController {
           toViewSnapshot.isHidden = true
           transactionContext.containerView.addSubview(toViewSnapshot)
 
-          DispatchQueue.main.asyncAfter(deadline: .now()) {
+          DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
 
             if let fadeView: UIView = fadeView {
               fadeView.alpha = 1.0
@@ -212,7 +215,7 @@ public extension UIViewController {
               duration: animationTime,
               revealType: revealType) { () -> Void in
 
-                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                   completion(true)
                   transitionCompletion?()
                   fromViewSnapshot.removeFromSuperview()

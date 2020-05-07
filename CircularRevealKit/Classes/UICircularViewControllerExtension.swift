@@ -118,20 +118,28 @@ public extension UIViewController {
         let fromViewController: UIViewController? = transactionContext.viewController(
           forKey: UITransitionContextViewControllerKey.from)
 
+        print("toViewController \(String(describing: toViewController))")
+        print("fromViewController \(String(describing: fromViewController))")
+
         guard let toView: UIView = toViewController?.view,
           let fromView: UIView = fromViewController?.view else {
             return
         }
 
-        toView.isHidden = false
+//        toView.isHidden = true
+        toView.alpha = 0.0
         transactionContext.containerView.insertSubview(
           toView,
           aboveSubview: fromView)
+
+        toView.alpha = 1.0
 
         guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
           let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
             return
         }
+
+        toView.alpha = 0.0
 
         let fadeView: UIView? = self.buildFadeView(fadeColor, fromView.frame)
 
@@ -140,8 +148,9 @@ public extension UIViewController {
         case RevealType.reveal:
 
           fromViewSnapshot.isOpaque = true
-          fromViewSnapshot.isHidden = true
           transactionContext.containerView.addSubview(fromViewSnapshot)
+
+          toView.alpha = 1.0
 
           DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
 
@@ -171,7 +180,7 @@ public extension UIViewController {
                   fromViewSnapshot.removeFromSuperview()
                   fadeView?.removeFromSuperview()
                   toViewSnapshot.removeFromSuperview()
-                  toView.isHidden = false
+                  toView.alpha = 1.0
                 }
 
             }
@@ -187,6 +196,8 @@ public extension UIViewController {
           toViewSnapshot.isOpaque = true
           toViewSnapshot.isHidden = true
           transactionContext.containerView.addSubview(toViewSnapshot)
+
+          toView.alpha = 1.0
 
           DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
 

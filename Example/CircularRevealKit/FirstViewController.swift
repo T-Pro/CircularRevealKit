@@ -23,7 +23,8 @@
 import UIKit
 import CircularRevealKit
 
-let CIRCULAR_ANIMATION_CELL = "Cell"
+let CIRCULAR_ANIMATION_CELL: String = "Cell"
+let CIRCULAR_ANIMATION_DELAY: TimeInterval = 0.2
 
 class FirstViewController: UIViewController {
 
@@ -124,7 +125,7 @@ extension FirstViewController: UITableViewDelegate {
     case 0:
       let vc = SecondViewController()
       vc.modalPresentationStyle = .overCurrentContext
-      self.radialPresent(viewController: vc, fadeColor: UIColor.blue)
+      self.radialPresent(viewController: vc, fadeColor: UIColor.blue, delay: CIRCULAR_ANIMATION_DELAY)
     case 1:
       self.present(SecondViewController(), animated: true)
       default: break

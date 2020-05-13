@@ -26,11 +26,13 @@ import QuartzCore.CALayer
 
 class LayerAnimator: NSObject, CAAnimationDelegate {
 
-  var completionBlock: (()->Void)?
+  var animationStarted: (() -> Void)?
+  var completionBlock: (() -> Void)?
   var animLayer: CALayer?
   var caAnimation: CAAnimation?
 
   deinit {
+    animationStarted = nil
     completionBlock = nil
     animLayer?.removeAllAnimations()
     animLayer = nil
@@ -47,6 +49,11 @@ class LayerAnimator: NSObject, CAAnimationDelegate {
     fatalError("init(coder:) has not been implemented")
   }
 
+  func addAnimationStartedBlock(block: (() -> Void)?) -> LayerAnimator {
+    animationStarted = block
+    return self
+  }
+
   func startAnimationWithBlock(block: (() -> Void)?) {
     completionBlock = block
     if let caAnimation: CAAnimation = self.caAnimation {
@@ -57,12 +64,18 @@ class LayerAnimator: NSObject, CAAnimationDelegate {
     }
   }
 
+  func animationDidStart(_ anim: CAAnimation) {
+    animationStarted?()
+    animationStarted = nil
+  }
+
   func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
     animLayer?.removeAllAnimations()
     animLayer = nil
     caAnimation = nil
     completionBlock?()
     completionBlock = nil
+    animationStarted = nil
     
   }
 

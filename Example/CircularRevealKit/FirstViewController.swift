@@ -76,7 +76,6 @@ class FirstViewController: UIViewController {
     super.viewDidLoad()
     configTableView()
     dismissStubView()
-//    showRecursive()
   }
 
   override func updateViewConstraints() {

@@ -30,6 +30,7 @@ public extension UIView {
     startFrame: CGRect,
     duration: TimeInterval,
     revealType: RevealType,
+    startBlock: (() -> Void)? = nil,
     _ completeBlock: (() -> Void)? = nil) {
 
     self.isHidden = false
@@ -83,6 +84,7 @@ public extension UIView {
     maskLayer.path = newPath
 
     LayerAnimator(layer: maskLayer, animation: revealAnimation)
+      .addAnimationStartedBlock(block: startBlock)
       .startAnimationWithBlock(block: completeBlock)
 
   }

@@ -22,6 +22,7 @@
 
 import Foundation
 import UIKit
+import QuartzCore
 
 public extension UIViewController {
 
@@ -127,62 +128,69 @@ public extension UIViewController {
 
         case RevealType.reveal:
 
-          toView.isHidden = true
-          transactionContext.containerView.insertSubview(
-            toView,
-            aboveSubview: fromView)
-          toView.isHidden = false
+          transactionContext.containerView.addSubview(toView)
+          transactionContext.containerView.addSubview(fromView)
 
-          guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
-            let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
-              return
-          }
+          DispatchQueue.main.asyncAfter(deadline: .now()) {
 
-          toView.isHidden = true
-
-          let fadeView: UIView? = self.buildFadeView(fadeColor, fromView.frame)
-
-          fromViewSnapshot.isOpaque = true
-          transactionContext.containerView.addSubview(fromViewSnapshot)
-
-          toView.isHidden = false
-
-          DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-
-            if let fadeView: UIView = fadeView {
-              fadeView.alpha = 0.01
-              transactionContext.containerView.addSubview(fadeView)
+            guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
+              let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
+                return
             }
 
-            toViewSnapshot.isHidden = true
-            transactionContext.containerView.addSubview(toViewSnapshot)
+            toView.isHidden = true
 
-            toViewSnapshot.layoutIfNeeded()
-            fromViewSnapshot.layoutIfNeeded()
+            transactionContext.containerView.bringSubviewToFront(toView)
 
-            UIView.animate(withDuration: animationTime) {
-              fadeView?.alpha = 1.0
-            }
+            fromViewSnapshot.frame.origin = fromView.frame.origin
+            toViewSnapshot.frame.origin = fromView.frame.origin
 
-            toViewSnapshot.drawAnimatedCircularMask(
-              startFrame: rect,
-              duration: animationTime,
-              revealType: revealType) { () -> Void in
+            let fadeView: UIView? = self.buildFadeView(fadeColor, fromView.frame)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                  completion(true)
-                  transitionCompletion?()
-                  fromViewSnapshot.removeFromSuperview()
-                  fadeView?.removeFromSuperview()
-                  toViewSnapshot.removeFromSuperview()
-                  toView.isHidden = false
+            fromViewSnapshot.isOpaque = true
+            transactionContext.containerView.addSubview(fromViewSnapshot)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+
+              if let fadeView: UIView = fadeView {
+                fadeView.alpha = 0.01
+                transactionContext.containerView.addSubview(fadeView)
+              }
+
+              toViewSnapshot.isHidden = true
+              transactionContext.containerView.addSubview(toViewSnapshot)
+
+              toViewSnapshot.layoutIfNeeded()
+              fromViewSnapshot.layoutIfNeeded()
+
+              UIView.animate(withDuration: animationTime) {
+                fadeView?.alpha = 1.0
+              }
+
+              toViewSnapshot.drawAnimatedCircularMask(
+                startFrame: rect,
+                duration: animationTime,
+                revealType: revealType,
+                startBlock: {
+
+                  fromViewSnapshot.isHidden = false
+                  toViewSnapshot.isHidden = false
+                  fadeView?.isHidden = false
+
+                }) { () -> Void in
+
+                  DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    completion(true)
+                    transitionCompletion?()
+                    fromViewSnapshot.removeFromSuperview()
+                    fadeView?.removeFromSuperview()
+                    toViewSnapshot.removeFromSuperview()
+                    toView.isHidden = false
+                  }
+
                 }
 
             }
-
-            fromViewSnapshot.isHidden = false
-            toViewSnapshot.isHidden = false
-            fadeView?.isHidden = false
 
           }
 
@@ -219,6 +227,8 @@ public extension UIViewController {
             UIView.animate(withDuration: animationTime) {
               fadeView?.alpha = 0.01
             }
+
+            CATransaction.flush()
 
             toViewSnapshot.isHidden = false
 
@@ -365,4 +375,26 @@ public extension UIViewController {
     
   }
 
+}
+
+// A queue of item that you want to run one per frame (to allow the display to update in between)
+class DisplayQueue {
+  static let shared = DisplayQueue()
+  init() {
+    displayLink = CADisplayLink(target: self, selector: #selector(displayLinkTick))
+    displayLink.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
+  }
+  private var displayLink:CADisplayLink!
+  @objc func displayLinkTick(){
+    if let _ = itemQueue.first {
+      itemQueue.remove(at: 0)() // Remove it from the queue and run it
+      // Stop the display link if it's not needed
+      displayLink.isPaused = (itemQueue.count == 0)
+    }
+  }
+  private var itemQueue:[()->()] = []
+  func addItem(block:@escaping ()->()) {
+    displayLink.isPaused = false // It's needed again
+    itemQueue.append(block) // Add the closure to the queue
+  }
 }

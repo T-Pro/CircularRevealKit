@@ -23,6 +23,7 @@
 import UIKit
 import QuartzCore
 import CoreGraphics
+import MetalKit
 
 public extension UIView {
 
@@ -83,9 +84,13 @@ public extension UIView {
 
     maskLayer.path = newPath
 
+    let completion: () -> Void = {
+      completeBlock?()
+    }
+
     LayerAnimator(layer: maskLayer, animation: revealAnimation)
       .addAnimationStartedBlock(block: startBlock)
-      .startAnimationWithBlock(block: completeBlock)
+      .startAnimationWithBlock(block: completion)
 
   }
 

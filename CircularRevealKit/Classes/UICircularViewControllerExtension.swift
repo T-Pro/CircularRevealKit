@@ -112,6 +112,9 @@ public extension UIViewController {
       let animatorDirector: CicularTransactionDirector = CicularTransactionDirector()
       animatorDirector.duration = duration
       animatorDirector.animationBlock = { (transactionContext, animationTime, completion) in
+
+        transactionContext.containerView.backgroundColor = UIColor.black
+        transactionContext.containerView.isOpaque = true
         
         let toViewController: UIViewController? = transactionContext.viewController(
           forKey: UITransitionContextViewControllerKey.to)
@@ -137,6 +140,11 @@ public extension UIViewController {
               let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
                 return
             }
+
+            toViewSnapshot.backgroundColor = UIColor.black
+            fromViewSnapshot.backgroundColor = UIColor.black
+            toViewSnapshot.isOpaque = true
+            fromViewSnapshot.isOpaque = true
 
             toView.isHidden = true
 
@@ -294,12 +302,6 @@ public extension UIViewController {
       fromViewControllerSnapshot.isOpaque = true
       toViewControllerSnapshot.isOpaque = true
 
-      fromViewControllerSnapshot.layer.shouldRasterize = true
-      toViewControllerSnapshot.layer.rasterizationScale = UIScreen.main.scale
-
-      fromViewControllerSnapshot.layer.shouldRasterize = true
-      toViewControllerSnapshot.layer.rasterizationScale = UIScreen.main.scale
-
       self.view?.addSubview(fromViewControllerSnapshot)
       if let fadeView: UIView = fadeView {
         self.view?.addSubview(fadeView)
@@ -343,12 +345,6 @@ public extension UIViewController {
       fromViewControllerSnapshot.isOpaque = true
       toViewControllerSnapshot.isOpaque = true
 
-      fromViewControllerSnapshot.layer.shouldRasterize = true
-      toViewControllerSnapshot.layer.rasterizationScale = UIScreen.main.scale
-
-      fromViewControllerSnapshot.layer.shouldRasterize = true
-      toViewControllerSnapshot.layer.rasterizationScale = UIScreen.main.scale
-
       self.view?.addSubview(toViewControllerSnapshot)
       if let fadeView: UIView = fadeView {
         self.view?.addSubview(fadeView)
@@ -375,26 +371,4 @@ public extension UIViewController {
     
   }
 
-}
-
-// A queue of item that you want to run one per frame (to allow the display to update in between)
-class DisplayQueue {
-  static let shared = DisplayQueue()
-  init() {
-    displayLink = CADisplayLink(target: self, selector: #selector(displayLinkTick))
-    displayLink.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
-  }
-  private var displayLink:CADisplayLink!
-  @objc func displayLinkTick(){
-    if let _ = itemQueue.first {
-      itemQueue.remove(at: 0)() // Remove it from the queue and run it
-      // Stop the display link if it's not needed
-      displayLink.isPaused = (itemQueue.count == 0)
-    }
-  }
-  private var itemQueue:[()->()] = []
-  func addItem(block:@escaping ()->()) {
-    displayLink.isPaused = false // It's needed again
-    itemQueue.append(block) // Add the closure to the queue
-  }
 }

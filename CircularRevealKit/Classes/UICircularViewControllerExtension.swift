@@ -47,7 +47,7 @@ public extension UIViewController {
   /// - Parameters:
   ///   - viewController: The view controller to present.
   ///   - duration: The duration of the circular reveal animation in seconds.
-  ///     Defaults to `DEFAULT_CIRCULAR_ANIMATION_DURATION` (0.5s).
+  ///     Defaults to `defaultCircularAnimationDuration` (0.5s).
   ///   - startFrame: The rectangle from which the circle expands. When `CGRect.zero`
   ///     (the default), the animation originates from the center of the screen.
   ///   - fadeColor: An optional overlay color that fades in during the transition.
@@ -56,7 +56,7 @@ public extension UIViewController {
   ///   - completion: An optional closure called after the transition completes.
   func radialPresent(
     viewController: UIViewController,
-    duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
+    duration: TimeInterval = defaultCircularAnimationDuration,
     startFrame: CGRect = CGRect.zero,
     fadeColor: UIColor? = nil,
     delay: TimeInterval = .zero,
@@ -79,7 +79,7 @@ public extension UIViewController {
   ///
   /// - Parameters:
   ///   - duration: The duration of the circular unreveal animation in seconds.
-  ///     Defaults to `DEFAULT_CIRCULAR_ANIMATION_DURATION` (0.5s).
+  ///     Defaults to `defaultCircularAnimationDuration` (0.5s).
   ///   - startFrame: The rectangle toward which the circle contracts. When `CGRect.zero`
   ///     (the default), the animation contracts toward the center of the screen.
   ///   - fadeColor: An optional overlay color that fades out during the transition.
@@ -87,7 +87,7 @@ public extension UIViewController {
   ///   - delay: A delay in seconds before the animation begins. Defaults to `0`.
   ///   - completion: An optional closure called after the transition completes.
   func radialDismiss(
-    duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
+    duration: TimeInterval = defaultCircularAnimationDuration,
     startFrame: CGRect = CGRect.zero,
     fadeColor: UIColor? = nil,
     delay: TimeInterval = .zero,
@@ -116,7 +116,7 @@ public extension UIViewController {
   /// - Parameters:
   ///   - viewController: The view controller to present.
   ///   - duration: The duration of the circular reveal animation in seconds.
-  ///     Defaults to `DEFAULT_CIRCULAR_ANIMATION_DURATION` (0.5s).
+  ///     Defaults to `defaultCircularAnimationDuration` (0.5s).
   ///   - startFrame: The rectangle from which the circle expands. When `CGRect.zero`
   ///     (the default), the animation originates from the center of the screen.
   ///   - fadeColor: An optional overlay color that fades in during the transition.
@@ -125,7 +125,7 @@ public extension UIViewController {
   @MainActor
   func radialPresent(
     viewController: UIViewController,
-    duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
+    duration: TimeInterval = defaultCircularAnimationDuration,
     startFrame: CGRect = CGRect.zero,
     fadeColor: UIColor? = nil,
     delay: TimeInterval = .zero
@@ -153,7 +153,7 @@ public extension UIViewController {
   ///
   /// - Parameters:
   ///   - duration: The duration of the circular unreveal animation in seconds.
-  ///     Defaults to `DEFAULT_CIRCULAR_ANIMATION_DURATION` (0.5s).
+  ///     Defaults to `defaultCircularAnimationDuration` (0.5s).
   ///   - startFrame: The rectangle toward which the circle contracts. When `CGRect.zero`
   ///     (the default), the animation contracts toward the center of the screen.
   ///   - fadeColor: An optional overlay color that fades out during the transition.
@@ -161,7 +161,7 @@ public extension UIViewController {
   ///   - delay: A delay in seconds before the animation begins. Defaults to `0`.
   @MainActor
   func radialDismiss(
-    duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
+    duration: TimeInterval = defaultCircularAnimationDuration,
     startFrame: CGRect = CGRect.zero,
     fadeColor: UIColor? = nil,
     delay: TimeInterval = .zero

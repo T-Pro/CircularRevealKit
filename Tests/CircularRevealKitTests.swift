@@ -45,12 +45,12 @@ final class CircularRevealKitTests: XCTestCase {
   // MARK: - DefaultCircularAnimation Tests
 
   func testDefaultAnimationDurationValue() {
-    XCTAssertEqual(DEFAULT_CIRCULAR_ANIMATION_DURATION, 0.5,
+    XCTAssertEqual(defaultCircularAnimationDuration, 0.5,
                    "Default animation duration should be 0.5 seconds")
   }
 
   func testDefaultAnimationDurationIsPositive() {
-    XCTAssertGreaterThan(DEFAULT_CIRCULAR_ANIMATION_DURATION, 0,
+    XCTAssertGreaterThan(defaultCircularAnimationDuration, 0,
                          "Default animation duration should be positive")
   }
 
@@ -68,7 +68,7 @@ final class CircularRevealKitTests: XCTestCase {
 
   func testDirectorDefaultDuration() {
     let director = CircularTransitionDirector()
-    XCTAssertEqual(director.duration, DEFAULT_CIRCULAR_ANIMATION_DURATION,
+    XCTAssertEqual(director.duration, defaultCircularAnimationDuration,
                    "Director default duration should match the global default")
   }
 

@@ -55,8 +55,8 @@ public class CircularTransitionDirector: NSObject {
 
   /// The duration of the transition animation in seconds.
   ///
-  /// Defaults to `DEFAULT_CIRCULAR_ANIMATION_DURATION` (0.5 seconds).
-  public var duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION
+  /// Defaults to `defaultCircularAnimationDuration` (0.5 seconds).
+  public var duration: TimeInterval = defaultCircularAnimationDuration
 
   /// The current transition context, set automatically when the transition begins.
   public var transitionContext: UIViewControllerContextTransitioning?

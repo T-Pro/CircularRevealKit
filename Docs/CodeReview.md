@@ -81,18 +81,18 @@ internal var needsUnreveal = true  // never read
 
 ## Code Quality Issues
 
-### ~~7. Inconsistent naming conventions~~ (PARTIALLY FIXED)
+### ~~7. Inconsistent naming conventions~~ (FIXED)
 
-The codebase mixes naming styles:
+All constants have been renamed from `SCREAMING_SNAKE_CASE` to Swift's `lowerCamelCase` convention:
 
-| Current | Swift Convention |
+| Old Name | New Name |
 |---|---|
 | `DEFAULT_CIRCULAR_ANIMATION_DURATION` | `defaultCircularAnimationDuration` |
 | `ANIMATION_KEY_PATH` | `animationKeyPath` |
 | `CIRCULAR_ANIMATION_CELL` | `circularAnimationCell` |
 | `CIRCULAR_ANIMATION_DELAY` | `circularAnimationDelay` |
 
-Swift convention prefers `lowerCamelCase` for constants, not `SCREAMING_SNAKE_CASE`.
+A deprecated alias is provided for `DEFAULT_CIRCULAR_ANIMATION_DURATION` to maintain backward compatibility.
 
 ### ~~8. Redundant `break` statements in `switch`~~ (FIXED)
 
@@ -137,12 +137,14 @@ iOS 9 reached end-of-life years ago. Raising the minimum to iOS 13+ would allow:
 - Using `UIWindowScene` and `@main`.
 - Leveraging modern UIKit APIs.
 
-### 14. No `async/await` support
+### ~~14. No `async/await` support~~ (FIXED)
 
-The completion-handler API could offer an `async` alternative for Swift concurrency:
+The completion-handler API now offers `async` alternatives for Swift concurrency using `withCheckedContinuation`. The existing closure-based implementation is unchanged; the async methods are thin wrappers marked `@MainActor` and `@available(iOS 13.0, *)`:
 
 ```swift
-func radialPresent(viewController: UIViewController, duration: TimeInterval = 0.5, ...) async
+await radialPresent(viewController: detailVC, fadeColor: .blue)
+await radialDismiss(fadeColor: .blue)
+await view.drawAnimatedCircularMask(startFrame: rect, duration: 0.5, revealType: .reveal)
 ```
 
 ### 15. No SwiftUI integration
@@ -181,14 +183,14 @@ In `UICircularViewControllerExtension.swift`, the `animationBlock` closure captu
 | 4 | Medium | Bug | ~~Silent transition failure on nil snapshots~~ | FIXED |
 | 5 | Medium | Bug | ~~Transition director may deallocate prematurely~~ | FIXED |
 | 6 | Low | Cleanup | ~~Unused `needsUnreveal` property~~ | FIXED |
-| 7 | Low | Style | ~~Non-Swift naming conventions for constants~~ | PARTIALLY FIXED |
+| 7 | Low | Style | ~~Non-Swift naming conventions for constants~~ | FIXED |
 | 8 | Low | Style | ~~Redundant `break` in switch cases~~ | FIXED |
 | 9 | Low | Style | ~~Typo "contraints" in variable/file names~~ | FIXED |
 | 10 | Low | Style | ~~Legacy constraint API in example~~ | FIXED |
 | 11 | Low | Style | ~~Deprecated `@UIApplicationMain`~~ | FIXED |
 | 12 | Medium | Testing | ~~Empty test file, no test coverage~~ | FIXED |
 | 13 | Medium | Modernization | ~~iOS 9 minimum deployment target~~ | FIXED |
-| 14 | Low | Modernization | No async/await API | Open |
+| 14 | Low | Modernization | ~~No async/await API~~ | FIXED |
 | 15 | Low | Modernization | No SwiftUI support | Open |
 | 16 | Low | Bug | ~~Hardcoded black backgrounds ignore Dark Mode~~ | FIXED |
 | 17 | Low | Best Practice | ~~Properties on `LayerAnimator` should be private~~ | FIXED |

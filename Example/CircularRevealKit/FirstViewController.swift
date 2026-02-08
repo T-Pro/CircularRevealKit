@@ -23,8 +23,8 @@
 import UIKit
 import CircularRevealKit
 
-let CIRCULAR_ANIMATION_CELL: String = "Cell"
-let CIRCULAR_ANIMATION_DELAY: TimeInterval = 0.5
+let circularAnimationCell: String = "Cell"
+let circularAnimationDelay: TimeInterval = 0.5
 
 class FirstViewController: UIViewController {
 
@@ -34,7 +34,7 @@ class FirstViewController: UIViewController {
   internal lazy var tableView: UITableView = {
     let view = UITableView()
     view.translatesAutoresizingMaskIntoConstraints = false
-    view.register(CircularViewCell.self, forCellReuseIdentifier: CIRCULAR_ANIMATION_CELL)
+    view.register(CircularViewCell.self, forCellReuseIdentifier: circularAnimationCell)
     view.tableFooterView = UIView()
     return view
   }()
@@ -117,7 +117,7 @@ class FirstViewController: UIViewController {
   private func show() {
     let vc = SecondViewController()
     vc.modalPresentationStyle = .overCurrentContext
-    self.radialPresent(viewController: vc, fadeColor: UIColor.blue, delay: CIRCULAR_ANIMATION_DELAY)
+    self.radialPresent(viewController: vc, fadeColor: UIColor.blue, delay: circularAnimationDelay)
   }
 
 }
@@ -157,7 +157,7 @@ extension FirstViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return tableView.dequeueReusableCell(withIdentifier: CIRCULAR_ANIMATION_CELL, for: indexPath)
+    return tableView.dequeueReusableCell(withIdentifier: circularAnimationCell, for: indexPath)
   }
 
 }

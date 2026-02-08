@@ -27,7 +27,11 @@ import Foundation
 /// This value is used when no explicit `duration` parameter is provided to
 /// `radialPresent(viewController:duration:startFrame:fadeColor:delay:_:)`
 /// or `radialDismiss(duration:startFrame:fadeColor:delay:_:)`.
-public let DEFAULT_CIRCULAR_ANIMATION_DURATION: TimeInterval = 0.5
+public let defaultCircularAnimationDuration: TimeInterval = 0.5
+
+/// Backward-compatible alias for `defaultCircularAnimationDuration`.
+@available(*, deprecated, renamed: "defaultCircularAnimationDuration")
+public let DEFAULT_CIRCULAR_ANIMATION_DURATION: TimeInterval = defaultCircularAnimationDuration
 
 /// The `CABasicAnimation` key-path used to animate the shape layer mask.
 internal let animationKeyPath: String = "path"

@@ -22,5 +22,12 @@
 
 import Foundation
 
+/// The default duration (in seconds) used for circular reveal and unreveal animations.
+///
+/// This value is used when no explicit `duration` parameter is provided to
+/// `radialPresent(viewController:duration:startFrame:fadeColor:delay:_:)`
+/// or `radialDismiss(duration:startFrame:fadeColor:delay:_:)`.
 public let DEFAULT_CIRCULAR_ANIMATION_DURATION: TimeInterval = 0.5
+
+/// The `CABasicAnimation` key-path used to animate the shape layer mask.
 internal let animationKeyPath: String = "path"

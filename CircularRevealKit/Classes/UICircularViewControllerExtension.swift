@@ -29,6 +29,29 @@ private var associatedDirectorKey: UInt8 = 0
 
 public extension UIViewController {
 
+  /// Presents a view controller with a circular reveal animation.
+  ///
+  /// The animation creates an expanding circle from `startFrame` that reveals the
+  /// presented view controller. If the current view controller is embedded in a
+  /// `UINavigationController`, the transition uses a custom push animation via
+  /// `CircularTransitionDirector`. Otherwise, it takes snapshots of both view
+  /// controllers and performs a modal presentation with `animated: false`.
+  ///
+  /// ```swift
+  /// let detailVC = DetailViewController()
+  /// radialPresent(viewController: detailVC, fadeColor: .blue)
+  /// ```
+  ///
+  /// - Parameters:
+  ///   - viewController: The view controller to present.
+  ///   - duration: The duration of the circular reveal animation in seconds.
+  ///     Defaults to `DEFAULT_CIRCULAR_ANIMATION_DURATION` (0.5s).
+  ///   - startFrame: The rectangle from which the circle expands. When `CGRect.zero`
+  ///     (the default), the animation originates from the center of the screen.
+  ///   - fadeColor: An optional overlay color that fades in during the transition.
+  ///     Pass `nil` (the default) for no overlay.
+  ///   - delay: A delay in seconds before the animation begins. Defaults to `0`.
+  ///   - completion: An optional closure called after the transition completes.
   func radialPresent(
     viewController: UIViewController,
     duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
@@ -39,6 +62,26 @@ public extension UIViewController {
     self.push(viewController, duration, startFrame, fadeColor, delay, revealType: .reveal, completion)
   }
 
+  /// Dismisses the current view controller with a circular unreveal animation.
+  ///
+  /// The animation creates a contracting circle toward `startFrame` that hides the
+  /// current view controller, revealing the one beneath. If inside a `UINavigationController`,
+  /// this triggers a pop transition with a custom animation. Otherwise, it performs
+  /// a modal dismissal with `animated: false`.
+  ///
+  /// ```swift
+  /// radialDismiss(fadeColor: .blue, delay: 0.5)
+  /// ```
+  ///
+  /// - Parameters:
+  ///   - duration: The duration of the circular unreveal animation in seconds.
+  ///     Defaults to `DEFAULT_CIRCULAR_ANIMATION_DURATION` (0.5s).
+  ///   - startFrame: The rectangle toward which the circle contracts. When `CGRect.zero`
+  ///     (the default), the animation contracts toward the center of the screen.
+  ///   - fadeColor: An optional overlay color that fades out during the transition.
+  ///     Pass `nil` (the default) for no overlay.
+  ///   - delay: A delay in seconds before the animation begins. Defaults to `0`.
+  ///   - completion: An optional closure called after the transition completes.
   func radialDismiss(
     duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
     startFrame: CGRect = CGRect.zero,

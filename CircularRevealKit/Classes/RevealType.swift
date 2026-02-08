@@ -22,7 +22,10 @@
 
 import Foundation
 
+/// Defines the direction of a circular mask animation.
 public enum RevealType {
+  /// An expanding circle that reveals content outward from the origin point.
   case reveal
+  /// A contracting circle that hides content inward toward the origin point.
   case unreveal
 }

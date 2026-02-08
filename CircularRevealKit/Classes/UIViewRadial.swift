@@ -26,6 +26,21 @@ import CoreGraphics
 
 public extension UIView {
 
+  /// Applies an animated circular mask to this view, creating a reveal or unreveal effect.
+  ///
+  /// The animation uses a `CAShapeLayer` mask with an elliptical `CGPath` that expands
+  /// or contracts between the `startFrame` and a circle large enough to cover the entire view.
+  /// The radius is calculated as `sqrt(width² + height²) × 2` to guarantee full coverage.
+  ///
+  /// - Parameters:
+  ///   - startFrame: The rectangle that defines the circle's origin (for `.reveal`) or
+  ///     destination (for `.unreveal`). Typically a zero-size rect centered on the touch point.
+  ///   - duration: The duration of the animation in seconds.
+  ///   - revealType: The direction of the animation -- `.reveal` expands outward with ease-in
+  ///     timing, `.unreveal` contracts inward with ease-out timing.
+  ///   - startBlock: An optional closure invoked when the Core Animation begins
+  ///     (via `CAAnimationDelegate.animationDidStart`). Defaults to `nil`.
+  ///   - completeBlock: An optional closure invoked when the animation finishes. Defaults to `nil`.
   func drawAnimatedCircularMask(
     startFrame: CGRect,
     duration: TimeInterval,

@@ -4,114 +4,168 @@
 [![Version](https://img.shields.io/cocoapods/v/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)
 [![License](https://img.shields.io/cocoapods/l/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)
 [![Platform](https://img.shields.io/cocoapods/p/CircularRevealKit.svg?style=flat)](http://cocoapods.org/pods/CircularRevealKit)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen.svg?style=flat)](https://swift.org/package-manager/)
 ![Swift 5](https://img.shields.io/badge/Swift-5-orange.svg?style=flat)
 
-This library was created to allow developers to implement the material design's reveal effect.
-You can simply use this component to reveal and unvereal a ViewController/View, this component is very small (approx. 40kb), written purely in Swift 5 with support of Swift 4.2.
+A lightweight library that brings Material Design's circular reveal effect to iOS. Present and dismiss view controllers or animate individual views with an expanding or contracting circular mask — written entirely in Swift 5.
 
-## Sample
+## Preview
+
 ![GIF sample](https://media.giphy.com/media/3cwSEnIK1GJEs/giphy.gif)
+
+## Features
+
+- Circular reveal and unreveal transitions for `UIViewController`
+- Works with both **navigation controller** (push/pop) and **modal** (present/dismiss) flows
+- Circular mask animation on any `UIView`
+- Optional fade color overlay between transitions
+- Configurable duration, start frame, and delay
+- **async/await** support alongside closure-based API
+- **ProMotion** support — 120fps animations on capable devices (iOS 15+)
+- Dark Mode compatible (`UIColor.systemBackground`)
+- Zero third-party dependencies
 
 ## Requirements
 
-Swift 4 and iOS 9+
+- iOS 13.0+
+- Swift 5.0+
+- Xcode 14+
 
 ## Installation
 
-### CocoaPods
+### Swift Package Manager (recommended)
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+Add CircularRevealKit to your project via **File > Add Package Dependencies** in Xcode, using the repository URL:
 
-```bash
-$ gem install cocoapods
+```
+https://github.com/T-Pro/CircularRevealKit.git
 ```
 
-To integrate CircularRevealKit into your Xcode project using CocoaPods, specify it in your `Podfile`:
+Or add it to your `Package.swift`:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/T-Pro/CircularRevealKit.git", from: "0.9.6")
+]
+```
+
+### CocoaPods
+
+Add the following to your `Podfile`:
 
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '13.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'CircularRevealKit', '~> 0.9.6'
+  pod 'CircularRevealKit', '~> 0.9.6'
 end
 ```
 
-Then, run the following command:
+Then run:
 
 ```bash
-$ pod install
+pod install
 ```
 
-### Carthage
+## Usage
 
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
-
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
-
-```bash
-$ brew update
-$ brew install carthage
-```
-
-To integrate CircularRevealKit into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-github "T-Pro/CircularRevealKit" ~> 0.9.6
-```
-
-Run `carthage update` to build the framework and drag the built `CircularRevealKit.framework` into your Xcode project.
-
-## How to
-
-You can simply import the library using `import CircularRevealKit`, then:
-
-To push your view controller, use:
+Import the library:
 
 ```swift
-radialPresent(viewController: viewController)
+import CircularRevealKit
 ```
 
-or 
+### Present a View Controller
 
 ```swift
-radialPresent(viewController: viewController, duration, startFrame, revealType, completionBlock?)
+let detailVC = DetailViewController()
+radialPresent(viewController: detailVC)
 ```
 
-To close it:
+With options:
+
+```swift
+radialPresent(
+    viewController: detailVC,
+    duration: 0.5,
+    startFrame: buttonFrame,
+    fadeColor: .blue,
+    delay: 0.1
+) {
+    print("Transition complete")
+}
+```
+
+### Dismiss a View Controller
 
 ```swift
 radialDismiss()
 ```
 
-To use with view:
+With options:
 
 ```swift
-view.drawAnimatedCircularMask(startFrame, duration, revealType, completionBlock?)
+radialDismiss(fadeColor: .blue, delay: 0.5) {
+    print("Dismissed")
+}
 ```
 
-To include a fade color between the transition, use the fadeColor:` option when presenting or dismisssing the view controller or view.
+### Animate a View Directly
+
+Apply a circular mask animation to any `UIView`:
 
 ```swift
-radialPresent(viewController: viewController, fadeColor: UIColor.blue)
+view.drawAnimatedCircularMask(
+    startFrame: originRect,
+    duration: 0.4,
+    revealType: .reveal
+) {
+    print("Animation finished")
+}
 ```
+
+### async/await
+
+All public methods are also available as async alternatives:
+
+```swift
+await radialPresent(viewController: detailVC, fadeColor: .blue)
+// Continues only after the animation completes
+
+await radialDismiss()
+```
+
+### ProMotion (120fps)
+
+CircularRevealKit automatically requests high frame rates on ProMotion displays (iOS 15+). To enable 120fps in your app, add this key to your `Info.plist`:
+
+```xml
+<key>CADisableMinimumFrameDurationOnPhone</key>
+<true/>
+```
+
+> **Note:** This key is required on iPhone. iPad Pro enables 120fps by default.
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project, clone the repo and run `pod install` from the `Example` directory:
+
+```bash
+git clone https://github.com/T-Pro/CircularRevealKit.git
+cd CircularRevealKit/Example
+pod install
+open CircularRevealKit.xcworkspace
+```
 
 ## Author
 
 Pedro Paulo de Amorim
 
-## Based on:
+## Acknowledgments
 
-* [RadialTransition_swift][1]
+Based on [RadialTransition_swift](https://github.com/apadalko/RadialTransition_swift) by apadalko.
 
 ## License
 
-CircularRevealKit is available under the MIT license. See the LICENSE file for more info.
-
-[1]: https://github.com/apadalko/RadialTransition_swift
+CircularRevealKit is available under the MIT license. See the [LICENSE](LICENSE) file for details.

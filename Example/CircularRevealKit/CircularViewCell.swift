@@ -41,9 +41,8 @@ class CircularViewCell: UITableViewCell {
   internal lazy var titleLabel: UILabel = {
     let view = UILabel()
     view.translatesAutoresizingMaskIntoConstraints = false
-    view.text = "Not ready"
     view.textColor = UIColor.white
-    view.isHidden = false
+    view.isHidden = true
     return view
   }()
 
@@ -58,11 +57,11 @@ class CircularViewCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
 
-  func loadImage(named: String, disabled: Bool) {
+  func loadImage(named: String, disabled: Bool = false) {
     cardImageView.contentMode = UIView.ContentMode.scaleAspectFill
     cardImageView.center = imageView?.superview?.center ?? CGPoint.zero
     cardImageView.image = UIImage(named: named)
-    titleLabel.isHidden = !disabled
+    titleLabel.isHidden = true
     cardImageView.alpha = disabled ? 0.1 : 1.0
     backgroundColor = disabled ? UIColor.black : UIColor.white
   }

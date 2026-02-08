@@ -54,7 +54,7 @@ class FirstViewController: UIViewController {
     return view
   }()
 
-  internal let images = ["view_controller", "view_cell", ""]
+  internal let images = ["view_controller", ""]
 
   deinit {
     tableView.delegate = nil
@@ -104,20 +104,21 @@ class FirstViewController: UIViewController {
       size: CGSize(
         width: 0,
         height: 0))
-    
+
     stubView.drawAnimatedCircularMask(
       startFrame: rect,
       duration: 0.33,
-      revealType: RevealType.unreveal) { [weak self] in
+      revealType: RevealType.unreveal,
+      { [weak self] in
         self?.stubView.isHidden = true
-    }
+      })
 
   }
 
   private func show() {
-    let vc = SecondViewController()
-    vc.modalPresentationStyle = .overCurrentContext
-    self.radialPresent(viewController: vc, fadeColor: UIColor.blue)
+    let viewController = SecondViewController()
+    viewController.modalPresentationStyle = .overCurrentContext
+    self.radialPresent(viewController: viewController, fadeColor: UIColor.blue)
   }
 
   private func showSwiftUIDemo() {
@@ -138,8 +139,6 @@ extension FirstViewController: UITableViewDelegate {
     case 0:
       self.show()
     case 1:
-      self.present(SecondViewController(), animated: true)
-    case 2:
       if #available(iOS 15.0, *) {
         self.showSwiftUIDemo()
       }
@@ -156,7 +155,7 @@ extension FirstViewController: UITableViewDelegate {
 
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if let cell = cell as? CircularViewCell {
-      if indexPath.row == 2 {
+      if indexPath.row == 1 {
         let isSupported: Bool
         if #available(iOS 15.0, *) {
           isSupported = true
@@ -166,7 +165,7 @@ extension FirstViewController: UITableViewDelegate {
         cell.showSwiftUILabel(enabled: isSupported)
         cell.selectionStyle = isSupported ? .default : .none
       } else {
-        cell.loadImage(named: images[indexPath.row], disabled: indexPath.row != 0)
+        cell.loadImage(named: images[indexPath.row], disabled: false)
       }
     }
   }
@@ -176,7 +175,7 @@ extension FirstViewController: UITableViewDelegate {
 extension FirstViewController: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 3
+    return 2
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

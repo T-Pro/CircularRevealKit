@@ -190,15 +190,15 @@ final class CircularRevealKitTests: XCTestCase {
   // MARK: - UIViewController Extension Tests
 
   func testRadialPresentIsAvailable() {
-    let vc = UIViewController()
+    let viewController = UIViewController()
     // Verify the method exists and is callable (compilation test)
-    XCTAssertTrue(vc.responds(to: #selector(UIViewController.radialPresent)))
+    XCTAssertTrue(viewController.responds(to: #selector(UIViewController.radialPresent)))
   }
 
   func testRadialDismissIsAvailable() {
-    let vc = UIViewController()
+    let viewController = UIViewController()
     // Verify the method exists and is callable (compilation test)
-    XCTAssertTrue(vc.responds(to: #selector(UIViewController.radialDismiss)))
+    XCTAssertTrue(viewController.responds(to: #selector(UIViewController.radialDismiss)))
   }
 
 }

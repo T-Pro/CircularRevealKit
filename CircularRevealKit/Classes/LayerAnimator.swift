@@ -76,7 +76,6 @@ class LayerAnimator: NSObject, CAAnimationDelegate {
     completionBlock?()
     completionBlock = nil
     animationStarted = nil
-    
   }
 
 }

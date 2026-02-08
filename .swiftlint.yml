@@ -1,0 +1,18 @@
+included:
+  - CircularRevealKit/Classes
+  - Example
+  - Tests
+
+excluded:
+  - .build
+  - Pods
+
+identifier_name:
+  excluded:
+    - DEFAULT_CIRCULAR_ANIMATION_DURATION
+
+opt_in_rules:
+  - empty_count
+  - closure_spacing
+  - force_unwrapping
+  - implicitly_unwrapped_optional

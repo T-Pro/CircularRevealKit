@@ -88,6 +88,11 @@ public extension UIView {
     revealAnimation.toValue = newPath
     revealAnimation.duration = duration
 
+    if #available(iOS 15.0, *) {
+      revealAnimation.preferredFrameRateRange = CAFrameRateRange(
+        minimum: 80, maximum: 120, preferred: 120)
+    }
+
     maskLayer.path = newPath
 
     let completion: () -> Void = {

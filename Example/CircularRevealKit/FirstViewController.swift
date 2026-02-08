@@ -21,6 +21,7 @@
 //
 
 import UIKit
+import SwiftUI
 import CircularRevealKit
 
 let circularAnimationCell: String = "Cell"
@@ -54,7 +55,7 @@ class FirstViewController: UIViewController {
     return view
   }()
 
-  internal let images = ["view_controller", "view_cell"]
+  internal let images = ["view_controller", "view_cell", ""]
 
   deinit {
     tableView.delegate = nil
@@ -120,6 +121,14 @@ class FirstViewController: UIViewController {
     self.radialPresent(viewController: vc, fadeColor: UIColor.blue, delay: circularAnimationDelay)
   }
 
+  private func showSwiftUIDemo() {
+    if #available(iOS 15.0, *) {
+      let hostingController = UIHostingController(rootView: SwiftUIExampleView())
+      hostingController.modalPresentationStyle = .fullScreen
+      present(hostingController, animated: true)
+    }
+  }
+
 }
 
 extension FirstViewController: UITableViewDelegate {
@@ -131,7 +140,11 @@ extension FirstViewController: UITableViewDelegate {
       self.show()
     case 1:
       self.present(SecondViewController(), animated: true)
-      default: break
+    case 2:
+      if #available(iOS 15.0, *) {
+        self.showSwiftUIDemo()
+      }
+    default: break
     }
   }
 
@@ -144,7 +157,18 @@ extension FirstViewController: UITableViewDelegate {
 
   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if let cell = cell as? CircularViewCell {
-      cell.loadImage(named: images[indexPath.row], disabled: indexPath.row != 0)
+      if indexPath.row == 2 {
+        let isSupported: Bool
+        if #available(iOS 15.0, *) {
+          isSupported = true
+        } else {
+          isSupported = false
+        }
+        cell.showSwiftUILabel(enabled: isSupported)
+        cell.selectionStyle = isSupported ? .default : .none
+      } else {
+        cell.loadImage(named: images[indexPath.row], disabled: indexPath.row != 0)
+      }
     }
   }
 
@@ -153,7 +177,7 @@ extension FirstViewController: UITableViewDelegate {
 extension FirstViewController: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 2
+    return 3
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

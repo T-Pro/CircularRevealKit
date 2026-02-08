@@ -1,5 +1,5 @@
 PODS:
-  - CircularRevealKit (0.9.1)
+  - CircularRevealKit (0.9.6)
 
 DEPENDENCIES:
   - CircularRevealKit (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CircularRevealKit: 811384bdfeb7ca149eb6d36dd8390434bf85e173
+  CircularRevealKit: 6101a1e296bcc908aea032cb7d84abe95adf319a
 
 PODFILE CHECKSUM: fe24aa566560148352a162140f1938b91be64a80
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.16.2

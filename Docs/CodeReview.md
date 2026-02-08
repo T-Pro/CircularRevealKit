@@ -147,9 +147,12 @@ await radialDismiss(fadeColor: .blue)
 await view.drawAnimatedCircularMask(startFrame: rect, duration: 0.5, revealType: .reveal)
 ```
 
-### 15. No SwiftUI integration
+### ~~15. No SwiftUI integration~~ (FIXED)
 
-There is no SwiftUI wrapper. A `ViewModifier` or `UIViewControllerRepresentable` bridge would make the library usable in SwiftUI projects.
+SwiftUI support has been added via three components:
+- `CircularRevealShape` — an animatable `Shape` that draws the circular mask path.
+- `.circularReveal(isRevealed:origin:duration:)` — a view modifier for state-driven animations.
+- `.circularReveal(from:)` — a custom `AnyTransition` for conditional view insertion/removal.
 
 ### ~~16. Hardcoded `UIColor.black` backgrounds~~ (FIXED)
 
@@ -191,7 +194,7 @@ In `UICircularViewControllerExtension.swift`, the `animationBlock` closure captu
 | 12 | Medium | Testing | ~~Empty test file, no test coverage~~ | FIXED |
 | 13 | Medium | Modernization | ~~iOS 9 minimum deployment target~~ | FIXED |
 | 14 | Low | Modernization | ~~No async/await API~~ | FIXED |
-| 15 | Low | Modernization | No SwiftUI support | Open |
+| 15 | Low | Modernization | ~~No SwiftUI support~~ | FIXED |
 | 16 | Low | Bug | ~~Hardcoded black backgrounds ignore Dark Mode~~ | FIXED |
 | 17 | Low | Best Practice | ~~Properties on `LayerAnimator` should be private~~ | FIXED |
 | 18 | Medium | Best Practice | ~~Potential retain cycles in animation closures~~ | FIXED |

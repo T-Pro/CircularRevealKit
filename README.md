@@ -18,6 +18,7 @@ A lightweight library that brings Material Design's circular reveal effect to iO
 - Circular reveal and unreveal transitions for `UIViewController`
 - Works with both **navigation controller** (push/pop) and **modal** (present/dismiss) flows
 - Circular mask animation on any `UIView`
+- **SwiftUI** support — view modifier, custom transition, and animatable `Shape`
 - Optional fade color overlay between transitions
 - Configurable duration, start frame, and delay
 - **async/await** support alongside closure-based API
@@ -134,6 +135,40 @@ await radialPresent(viewController: detailVC, fadeColor: .blue)
 // Continues only after the animation completes
 
 await radialDismiss()
+```
+
+### SwiftUI
+
+Use the `.circularReveal` view modifier for state-driven animations:
+
+```swift
+import CircularRevealKit
+
+struct ContentView: View {
+    @State private var showImage = false
+
+    var body: some View {
+        Image("photo")
+            .circularReveal(isRevealed: showImage, origin: CGPoint(x: 200, y: 400))
+            .onTapGesture { showImage.toggle() }
+    }
+}
+```
+
+Or use the `.circularReveal` transition for conditional views:
+
+```swift
+if showDetail {
+    DetailView()
+        .transition(.circularReveal(from: CGPoint(x: 200, y: 400)))
+}
+```
+
+You can also use `CircularRevealShape` directly as a clip shape for full control:
+
+```swift
+MyView()
+    .clipShape(CircularRevealShape(progress: animationProgress, origin: center))
 ```
 
 ### ProMotion (120fps)

@@ -14,6 +14,7 @@
 		488A599C1EA2EC7300874AFA /* FirstViewControllerConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488A599B1EA2EC7300874AFA /* FirstViewControllerConstraints.swift */; };
 		488A599E1EA3D9E100874AFA /* CircularViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488A599D1EA3D9E000874AFA /* CircularViewCell.swift */; };
 		488A59A01EA3F02600874AFA /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488A599F1EA3F02600874AFA /* UIImageViewExtension.swift */; };
+		488D761A2F38152E00490551 /* SwiftUIExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D76192F38152E00490551 /* SwiftUIExampleView.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* FirstViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -38,6 +39,7 @@
 		488A599B1EA2EC7300874AFA /* FirstViewControllerConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewControllerConstraints.swift; sourceTree = "<group>"; };
 		488A599D1EA3D9E000874AFA /* CircularViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularViewCell.swift; sourceTree = "<group>"; };
 		488A599F1EA3F02600874AFA /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		488D76192F38152E00490551 /* SwiftUIExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExampleView.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* CircularRevealKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircularRevealKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		607FACD21AFB9204008FA782 /* Example for CircularRevealKit */ = {
 			isa = PBXGroup;
 			children = (
+				488D76192F38152E00490551 /* SwiftUIExampleView.swift */,
 				488A599F1EA3F02600874AFA /* UIImageViewExtension.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* FirstViewController.swift */,
@@ -318,6 +321,7 @@
 				488A599C1EA2EC7300874AFA /* FirstViewControllerConstraints.swift in Sources */,
 				488A599E1EA3D9E100874AFA /* CircularViewCell.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				488D761A2F38152E00490551 /* SwiftUIExampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -67,6 +67,22 @@ class CircularViewCell: UITableViewCell {
     backgroundColor = disabled ? UIColor.black : UIColor.white
   }
 
+  func showSwiftUILabel(enabled: Bool) {
+    cardImageView.image = nil
+    cardImageView.backgroundColor = UIColor.systemIndigo
+    cardImageView.alpha = enabled ? 1.0 : 0.3
+    titleLabel.isHidden = false
+    titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+    titleLabel.textColor = UIColor.white
+    if enabled {
+      titleLabel.text = "SwiftUI Demo"
+      backgroundColor = UIColor.systemIndigo
+    } else {
+      titleLabel.text = "SwiftUI Demo (Requires iOS 15+)"
+      backgroundColor = UIColor.darkGray
+    }
+  }
+
   override func updateConstraints() {
     if !viewReady {
       viewReady = true

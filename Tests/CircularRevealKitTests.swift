@@ -101,19 +101,19 @@ final class CircularRevealKitTests: XCTestCase {
   }
 
   func testDirectorConformsToAnimatedTransitioning() {
-    let director = CircularTransitionDirector()
+    let director: Any = CircularTransitionDirector()
     XCTAssertTrue(director is UIViewControllerAnimatedTransitioning,
                   "Director should conform to UIViewControllerAnimatedTransitioning")
   }
 
   func testDirectorConformsToInteractiveTransitioning() {
-    let director = CircularTransitionDirector()
+    let director: Any = CircularTransitionDirector()
     XCTAssertTrue(director is UIViewControllerInteractiveTransitioning,
                   "Director should conform to UIViewControllerInteractiveTransitioning")
   }
 
   func testDirectorConformsToNavigationControllerDelegate() {
-    let director = CircularTransitionDirector()
+    let director: Any = CircularTransitionDirector()
     XCTAssertTrue(director is UINavigationControllerDelegate,
                   "Director should conform to UINavigationControllerDelegate")
   }
@@ -129,7 +129,11 @@ final class CircularRevealKitTests: XCTestCase {
   // MARK: - Deprecated Typealias Tests
 
   func testDeprecatedTypealiasExists() {
-    let director: CicularTransactionDirector = CircularTransitionDirector()
+    let director: Any = {
+      // Silence deprecation warning — we intentionally test the deprecated alias.
+      let value: CicularTransactionDirector = CircularTransitionDirector()
+      return value
+    }()
     XCTAssertNotNil(director,
                     "CicularTransactionDirector typealias should still work for backward compatibility")
   }
@@ -145,10 +149,10 @@ final class CircularRevealKitTests: XCTestCase {
     view.drawAnimatedCircularMask(
       startFrame: CGRect(x: 50, y: 50, width: 0, height: 0),
       duration: 0.1,
-      revealType: .reveal
-    ) {
-      expectation.fulfill()
-    }
+      revealType: .reveal,
+      {
+        expectation.fulfill()
+      })
 
     XCTAssertFalse(view.isHidden,
                    "View should be visible after calling drawAnimatedCircularMask")
@@ -189,22 +193,17 @@ final class CircularRevealKitTests: XCTestCase {
 
   // MARK: - UIViewController Extension Tests
 
-  func testRadialPresentIsAvailable() {
+  func testRadialPresentIsCallable() {
+    // Compilation test — verifies the public API exists.
     let viewController = UIViewController()
-    // Verify the method exists and is callable (compilation test)
-    XCTAssertTrue(viewController.responds(to: #selector(UIViewController.radialPresent)))
+    viewController.radialPresent(
+      viewController: UIViewController())
   }
 
-  func testRadialDismissIsAvailable() {
+  func testRadialDismissIsCallable() {
+    // Compilation test — verifies the public API exists.
     let viewController = UIViewController()
-    // Verify the method exists and is callable (compilation test)
-    XCTAssertTrue(viewController.responds(to: #selector(UIViewController.radialDismiss)))
+    viewController.radialDismiss()
   }
 
-}
-
-// MARK: - Selector helpers for existence checks
-private extension UIViewController {
-  @objc func radialPresent() {}
-  @objc func radialDismiss() {}
 }

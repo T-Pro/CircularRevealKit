@@ -27,6 +27,8 @@ import ObjectiveC
 
 private var associatedDirectorKey: UInt8 = 0
 
+// MARK: - Public API
+
 public extension UIViewController {
 
   /// Presents a view controller with a circular reveal animation.
@@ -59,7 +61,9 @@ public extension UIViewController {
     fadeColor: UIColor? = nil,
     delay: TimeInterval = .zero,
     _ completion: (() -> Void)? = nil) {
-    self.push(viewController, duration, startFrame, fadeColor, delay, revealType: .reveal, completion)
+    self.performTransition(
+      to: viewController, duration: duration, startFrame: startFrame,
+      fadeColor: fadeColor, delay: delay, revealType: .reveal, completion)
   }
 
   /// Dismisses the current view controller with a circular unreveal animation.
@@ -88,350 +92,410 @@ public extension UIViewController {
     fadeColor: UIColor? = nil,
     delay: TimeInterval = .zero,
     _ completion: (() -> Void)? = nil) {
-    self.push(nil, duration, startFrame, fadeColor, delay, revealType: .unreveal, completion)
+    self.performTransition(
+      to: nil, duration: duration, startFrame: startFrame,
+      fadeColor: fadeColor, delay: delay, revealType: .unreveal, completion)
   }
 
-  private func validateUINavigationController() -> Bool {
-    var isNavigationController: Bool = false
+}
 
-    if self.presentingViewController != nil {
-      isNavigationController = self.presentingViewController is UINavigationController
+// MARK: - Shared Helpers
+
+private extension UIViewController {
+
+  /// Creates a snapshot of the given view with `systemBackground` and `isOpaque` pre-configured.
+  func configuredSnapshot(of view: UIView, afterScreenUpdates: Bool) -> UIView? {
+    guard let snapshot = view.snapshotView(afterScreenUpdates: afterScreenUpdates) else {
+      return nil
     }
-
-    if !isNavigationController && self.parent != nil {
-      isNavigationController = self.parent is UINavigationController
-    }
-
-    if !isNavigationController {
-      isNavigationController = self is UINavigationController
-    }
-
-    return isNavigationController
+    snapshot.backgroundColor = .systemBackground
+    snapshot.isOpaque = true
+    return snapshot
   }
 
-  private func buildStartRectIfNeeded(
-    _ startFrame: CGRect = CGRect.zero,
-    _ isNavigationController: Bool) -> CGRect {
-    if startFrame == CGRect.zero {
+  /// Inserts the fade view into a container and animates its alpha for the given reveal type.
+  func animateFadeView(
+    _ fadeView: UIView?,
+    in container: UIView,
+    revealType: RevealType,
+    duration: TimeInterval
+  ) {
+    guard let fadeView = fadeView else { return }
 
-      let viewControllerSize: CGSize?
-
-      if isNavigationController {
-        viewControllerSize = (self.parent as? UINavigationController)?.view.frame.size
-      } else {
-        viewControllerSize = self.view.frame.size
-      }
-      return CGRect(
-        origin: CGPoint(
-          x: (viewControllerSize?.width ?? 0)/2,
-          y: (viewControllerSize?.height ?? 0)/2),
-        size: CGSize(
-          width: 0,
-          height: 0))
+    switch revealType {
+    case .reveal:
+      fadeView.alpha = 0.01
+      container.addSubview(fadeView)
+      UIView.animate(withDuration: duration) { fadeView.alpha = 1.0 }
+    case .unreveal:
+      fadeView.alpha = 1.0
+      fadeView.isHidden = true
+      container.addSubview(fadeView)
+      UIView.animate(withDuration: duration) { fadeView.alpha = 0.01 }
     }
-    return startFrame
   }
 
-  private func buildFadeView(_ fadeColor: UIColor?, _ frame: CGRect) -> UIView? {
-    if let fadeColor: UIColor = fadeColor {
-      let fadeView = UIView(frame: frame)
-      fadeView.backgroundColor = fadeColor
-      return fadeView
-    }
-    return nil
+  /// Removes snapshot views from their superview and optionally unhides the real view.
+  static func cleanupSnapshots(_ views: [UIView?], unhide: UIView? = nil) {
+    views.forEach { $0?.removeFromSuperview() }
+    unhide?.isHidden = false
   }
-  
-  private func push(
-    _ viewController: UIViewController?,
-    _ duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION,
-    _ startFrame: CGRect = CGRect.zero,
-    _ fadeColor: UIColor?,
-    _ delay: TimeInterval,
-    revealType: RevealType = .reveal,
-    _ transitionCompletion: (() -> Void)? = nil) {
-    
-    let isNavigationController: Bool = validateUINavigationController()
-    let rect: CGRect = buildStartRectIfNeeded(startFrame, isNavigationController)
 
-    if isNavigationController {
-    
-      let animatorDirector = CircularTransitionDirector()
-      animatorDirector.duration = duration
-      animatorDirector.animationBlock = { [weak self] (transactionContext, animationTime, completion) in
+  /// Returns whether this view controller is hosted inside a `UINavigationController`.
+  func isInsideNavigationController() -> Bool {
+    return (presentingViewController is UINavigationController)
+      || (parent is UINavigationController)
+      || (self is UINavigationController)
+  }
 
-        transactionContext.containerView.backgroundColor = UIColor.systemBackground
-        transactionContext.containerView.isOpaque = true
-        
-        let toViewController: UIViewController? = transactionContext.viewController(
-          forKey: UITransitionContextViewControllerKey.to)
+  /// Builds a default start rect centered on the screen if the provided frame is `.zero`.
+  func buildStartRectIfNeeded(
+    _ startFrame: CGRect,
+    isNavController: Bool
+  ) -> CGRect {
+    guard startFrame == .zero else { return startFrame }
 
-        let fromViewController: UIViewController? = transactionContext.viewController(
-          forKey: UITransitionContextViewControllerKey.from)
+    let size: CGSize
+    if isNavController {
+      size = (parent as? UINavigationController)?.view.frame.size ?? .zero
+    } else {
+      size = view.frame.size
+    }
+    return CGRect(origin: CGPoint(x: size.width / 2, y: size.height / 2), size: .zero)
+  }
 
-        guard let toView: UIView = toViewController?.view,
-          let fromView: UIView = fromViewController?.view else {
-            completion(false)
-            return
-        }
+  /// Creates a colored overlay view if `fadeColor` is non-nil.
+  func buildFadeView(_ fadeColor: UIColor?, frame: CGRect) -> UIView? {
+    guard let fadeColor = fadeColor else { return nil }
+    let fadeView = UIView(frame: frame)
+    fadeView.backgroundColor = fadeColor
+    return fadeView
+  }
 
-        switch revealType {
+}
 
-        case RevealType.reveal:
+// MARK: - Transition Dispatcher
 
-          transactionContext.containerView.addSubview(toView)
-          transactionContext.containerView.addSubview(fromView)
+private extension UIViewController {
 
-          DispatchQueue.main.asyncAfter(deadline: .now()) {
+  /// Central dispatcher that resolves the transition path (navigation vs modal)
+  /// and delegates to the appropriate handler.
+  func performTransition(
+    to viewController: UIViewController?,
+    duration: TimeInterval,
+    startFrame: CGRect,
+    fadeColor: UIColor?,
+    delay: TimeInterval,
+    revealType: RevealType,
+    _ completion: (() -> Void)? = nil
+  ) {
+    let isNavController = isInsideNavigationController()
+    let rect = buildStartRectIfNeeded(startFrame, isNavController: isNavController)
 
-            guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
-              let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
-                completion(false)
-                return
-            }
+    if isNavController {
+      performNavigationTransition(
+        to: viewController, duration: duration, rect: rect,
+        fadeColor: fadeColor, delay: delay, revealType: revealType, completion)
+    } else {
+      performModalTransition(
+        to: viewController, duration: duration, rect: rect,
+        fadeColor: fadeColor, delay: delay, revealType: revealType, completion)
+    }
+  }
 
-            toViewSnapshot.backgroundColor = UIColor.systemBackground
-            fromViewSnapshot.backgroundColor = UIColor.systemBackground
-            toViewSnapshot.isOpaque = true
-            fromViewSnapshot.isOpaque = true
+}
 
-            toView.isHidden = true
+// MARK: - Navigation Controller Transition
 
-            transactionContext.containerView.bringSubviewToFront(toView)
+private extension UIViewController {
 
-            fromViewSnapshot.frame.origin = fromView.frame.origin
-            toViewSnapshot.frame.origin = fromView.frame.origin
+  /// Performs a circular transition via `UINavigationController` push/pop.
+  func performNavigationTransition(
+    to viewController: UIViewController?,
+    duration: TimeInterval,
+    rect: CGRect,
+    fadeColor: UIColor?,
+    delay: TimeInterval,
+    revealType: RevealType,
+    _ completion: (() -> Void)? = nil
+  ) {
+    let animatorDirector = CircularTransitionDirector()
+    animatorDirector.duration = duration
+    animatorDirector.animationBlock = { [weak self] (context, animationTime, transitionDone) in
 
-            let fadeView: UIView? = self?.buildFadeView(fadeColor, fromView.frame)
+      context.containerView.backgroundColor = .systemBackground
+      context.containerView.isOpaque = true
 
-            fromViewSnapshot.isOpaque = true
-            transactionContext.containerView.addSubview(fromViewSnapshot)
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-
-              if let fadeView: UIView = fadeView {
-                fadeView.alpha = 0.01
-                transactionContext.containerView.addSubview(fadeView)
-              }
-
-              toViewSnapshot.isHidden = true
-              transactionContext.containerView.addSubview(toViewSnapshot)
-
-              toViewSnapshot.layoutIfNeeded()
-              fromViewSnapshot.layoutIfNeeded()
-
-              UIView.animate(withDuration: animationTime) {
-                fadeView?.alpha = 1.0
-              }
-
-              toViewSnapshot.drawAnimatedCircularMask(
-                startFrame: rect,
-                duration: animationTime,
-                revealType: revealType,
-                startBlock: {
-
-                  fromViewSnapshot.isHidden = false
-                  toViewSnapshot.isHidden = false
-                  fadeView?.isHidden = false
-
-                }) { () -> Void in
-
-                  DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    completion(true)
-                    transitionCompletion?()
-                    fromViewSnapshot.removeFromSuperview()
-                    fadeView?.removeFromSuperview()
-                    toViewSnapshot.removeFromSuperview()
-                    toView.isHidden = false
-                  }
-
-                }
-
-            }
-
-          }
-
-        case RevealType.unreveal:
-
-          guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
-            let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
-              completion(false)
-              return
-          }
-
-          toViewSnapshot.isHidden = true
-          transactionContext.containerView.addSubview(toViewSnapshot)
-
-          DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-
-            let fadeView: UIView? = self?.buildFadeView(fadeColor, fromView.frame)
-
-            if let fadeView: UIView = fadeView {
-              fadeView.alpha = 1.0
-              fadeView.isHidden = true
-              transactionContext.containerView.addSubview(fadeView)
-            }
-
-            fromViewSnapshot.isHidden = true
-            transactionContext.containerView.addSubview(fromViewSnapshot)
-
-            transactionContext.containerView.insertSubview(
-              toView,
-              belowSubview: fromView)
-
-            toViewSnapshot.layoutIfNeeded()
-            fromViewSnapshot.layoutIfNeeded()
-
-            UIView.animate(withDuration: animationTime) {
-              fadeView?.alpha = 0.01
-            }
-
-            CATransaction.flush()
-
-            toViewSnapshot.isHidden = false
-
-            fromViewSnapshot.drawAnimatedCircularMask(
-              startFrame: rect,
-              duration: animationTime,
-              revealType: revealType) { () -> Void in
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                  completion(true)
-                  transitionCompletion?()
-                  fromViewSnapshot.removeFromSuperview()
-                  fadeView?.removeFromSuperview()
-                  toViewSnapshot.removeFromSuperview()
-                  fromViewController?.view.removeFromSuperview()
-                  toView.alpha = 1.0
-                  toView.isHidden = false
-                }
-
-            }
-
-            fromViewSnapshot.isHidden = false
-            toViewSnapshot.isHidden = false
-            fadeView?.isHidden = false
-
-          }
-          
-        }
-        
-      }
-
-      guard let navigationController: UINavigationController = self.parent as? UINavigationController else {
+      guard let toView = context.viewController(forKey: .to)?.view,
+            let fromView = context.viewController(forKey: .from)?.view else {
+        transitionDone(false)
         return
       }
 
-      // Retain the director via associated object since navigationController.delegate is weak.
-      // It will be released when the navigation controller is deallocated or when a new
-      // director is associated.
-      objc_setAssociatedObject(
-        navigationController,
-        &associatedDirectorKey,
-        animatorDirector,
-        .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+      let fromViewController = context.viewController(forKey: .from)
 
-      navigationController.delegate = animatorDirector
-      
       switch revealType {
-      case RevealType.reveal:
-        if let viewController: UIViewController = viewController {
-          navigationController.pushViewController(viewController, animated: true)
-          return
-        }
-      case RevealType.unreveal:
-        navigationController.popViewController(animated: true)
+      case .reveal:
+        self?.navRevealAnimation(
+          context: context, toView: toView, fromView: fromView,
+          rect: rect, fadeColor: fadeColor, delay: delay,
+          animationTime: animationTime, transitionDone: transitionDone,
+          transitionCompletion: completion)
+      case .unreveal:
+        self?.navUnrevealAnimation(
+          context: context, toView: toView, fromView: fromView,
+          fromViewController: fromViewController,
+          rect: rect, fadeColor: fadeColor, delay: delay,
+          animationTime: animationTime, transitionDone: transitionDone,
+          transitionCompletion: completion)
+      }
+    }
+
+    guard let navigationController = self.parent as? UINavigationController else { return }
+
+    // Retain the director via associated object since navigationController.delegate is weak.
+    objc_setAssociatedObject(
+      navigationController, &associatedDirectorKey,
+      animatorDirector, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+
+    navigationController.delegate = animatorDirector
+
+    switch revealType {
+    case .reveal:
+      if let viewController = viewController {
+        navigationController.pushViewController(viewController, animated: true)
+      }
+    case .unreveal:
+      navigationController.popViewController(animated: true)
+    }
+  }
+
+  /// Handles the reveal (expanding circle) animation inside a navigation transition.
+  func navRevealAnimation(
+    context: UIViewControllerContextTransitioning,
+    toView: UIView,
+    fromView: UIView,
+    rect: CGRect,
+    fadeColor: UIColor?,
+    delay: TimeInterval,
+    animationTime: TimeInterval,
+    transitionDone: @escaping (Bool) -> Void,
+    transitionCompletion: (() -> Void)?
+  ) {
+    context.containerView.addSubview(toView)
+    context.containerView.addSubview(fromView)
+
+    DispatchQueue.main.asyncAfter(deadline: .now()) { [weak self] in
+      guard let toSnapshot = self?.configuredSnapshot(of: toView, afterScreenUpdates: true),
+            let fromSnapshot = self?.configuredSnapshot(of: fromView, afterScreenUpdates: true) else {
+        transitionDone(false)
+        return
       }
 
+      toView.isHidden = true
+      context.containerView.bringSubviewToFront(toView)
+
+      fromSnapshot.frame.origin = fromView.frame.origin
+      toSnapshot.frame.origin = fromView.frame.origin
+
+      let fadeView = self?.buildFadeView(fadeColor, frame: fromView.frame)
+
+      context.containerView.addSubview(fromSnapshot)
+
+      DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+        self?.animateFadeView(fadeView, in: context.containerView, revealType: .reveal, duration: animationTime)
+
+        toSnapshot.isHidden = true
+        context.containerView.addSubview(toSnapshot)
+
+        toSnapshot.layoutIfNeeded()
+        fromSnapshot.layoutIfNeeded()
+
+        toSnapshot.drawAnimatedCircularMask(
+          startFrame: rect,
+          duration: animationTime,
+          revealType: .reveal,
+          startBlock: {
+            fromSnapshot.isHidden = false
+            toSnapshot.isHidden = false
+            fadeView?.isHidden = false
+          }) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+              transitionDone(true)
+              transitionCompletion?()
+              Self.cleanupSnapshots([fromSnapshot, fadeView, toSnapshot], unhide: toView)
+            }
+          }
+      }
+    }
+  }
+
+  /// Handles the unreveal (contracting circle) animation inside a navigation transition.
+  func navUnrevealAnimation(
+    context: UIViewControllerContextTransitioning,
+    toView: UIView,
+    fromView: UIView,
+    fromViewController: UIViewController?,
+    rect: CGRect,
+    fadeColor: UIColor?,
+    delay: TimeInterval,
+    animationTime: TimeInterval,
+    transitionDone: @escaping (Bool) -> Void,
+    transitionCompletion: (() -> Void)?
+  ) {
+    guard let toSnapshot = configuredSnapshot(of: toView, afterScreenUpdates: true),
+          let fromSnapshot = configuredSnapshot(of: fromView, afterScreenUpdates: true) else {
+      transitionDone(false)
       return
     }
-      
-    switch revealType {
 
-    case RevealType.reveal:
+    toSnapshot.isHidden = true
+    context.containerView.addSubview(toSnapshot)
 
-      guard let viewController = viewController,
-        let fromViewControllerSnapshot: UIView = self.view.snapshotView(afterScreenUpdates: true),
-        let toViewControllerSnapshot: UIView = viewController.view.snapshotView(afterScreenUpdates: true) else {
-          transitionCompletion?()
-          return
-      }
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+      let fadeView = self?.buildFadeView(fadeColor, frame: fromView.frame)
+      self?.animateFadeView(fadeView, in: context.containerView, revealType: .unreveal, duration: animationTime)
 
-      let fadeView: UIView? = buildFadeView(fadeColor, fromViewControllerSnapshot.frame)
-      fadeView?.alpha = 0.0
+      fromSnapshot.isHidden = true
+      context.containerView.addSubview(fromSnapshot)
+      context.containerView.insertSubview(toView, belowSubview: fromView)
 
-      fromViewControllerSnapshot.isOpaque = true
-      toViewControllerSnapshot.isOpaque = true
+      toSnapshot.layoutIfNeeded()
+      fromSnapshot.layoutIfNeeded()
 
-      self.view?.addSubview(fromViewControllerSnapshot)
-      if let fadeView: UIView = fadeView {
-        self.view?.addSubview(fadeView)
-      }
-      self.view?.addSubview(toViewControllerSnapshot)
+      CATransaction.flush()
 
-      UIView.animate(withDuration: duration) {
-        fadeView?.alpha = 1.0
-      }
+      toSnapshot.isHidden = false
 
-      toViewControllerSnapshot.drawAnimatedCircularMask(
+      fromSnapshot.drawAnimatedCircularMask(
         startFrame: rect,
-        duration: duration,
-        revealType: revealType) { () -> Void in
-          self.present(viewController, animated: false, completion: {
+        duration: animationTime,
+        revealType: .unreveal) {
+          DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            transitionDone(true)
             transitionCompletion?()
-            fromViewControllerSnapshot.removeFromSuperview()
-            toViewControllerSnapshot.removeFromSuperview()
-            fadeView?.removeFromSuperview()
-          })
-      }
+            Self.cleanupSnapshots([fromSnapshot, fadeView, toSnapshot])
+            fromViewController?.view.removeFromSuperview()
+            toView.alpha = 1.0
+            toView.isHidden = false
+          }
+        }
 
-    case RevealType.unreveal:
-
-      guard let fromViewControllerSnapshot: UIView =
-        self.view.snapshotView(afterScreenUpdates: true) else {
-        self.dismiss(animated: false, completion: {
-          transitionCompletion?()
-        })
-        return
-      }
-
-      guard let toViewControllerSnapshot: UIView = self.presentingViewController?.view.snapshotView(afterScreenUpdates: true)
-        ?? self.presentingViewController?.view.snapshotView(afterScreenUpdates: false) else {
-        self.dismiss(animated: false, completion: {
-          transitionCompletion?()
-        })
-        return
-      }
-
-      let fadeView: UIView? = buildFadeView(fadeColor, fromViewControllerSnapshot.frame)
-      fadeView?.alpha = 1.0
-
-      fromViewControllerSnapshot.isOpaque = true
-      toViewControllerSnapshot.isOpaque = true
-
-      self.view?.addSubview(toViewControllerSnapshot)
-      if let fadeView: UIView = fadeView {
-        self.view?.addSubview(fadeView)
-      }
-      self.view?.addSubview(fromViewControllerSnapshot)
-
-      UIView.animate(withDuration: duration) {
-        fadeView?.alpha = 0.01
-      }
-
-      fromViewControllerSnapshot.drawAnimatedCircularMask(
-        startFrame: rect,
-        duration: duration,
-        revealType: revealType) { () -> Void in
-          self.dismiss(animated: false, completion: {
-            transitionCompletion?()
-            toViewControllerSnapshot.removeFromSuperview()
-            fromViewControllerSnapshot.removeFromSuperview()
-            fadeView?.removeFromSuperview()
-          })
-      }
-
+      fromSnapshot.isHidden = false
+      toSnapshot.isHidden = false
+      fadeView?.isHidden = false
     }
-    
+  }
+
+}
+
+// MARK: - Modal Transition
+
+private extension UIViewController {
+
+  /// Performs a circular transition via modal present/dismiss.
+  func performModalTransition(
+    to viewController: UIViewController?,
+    duration: TimeInterval,
+    rect: CGRect,
+    fadeColor: UIColor?,
+    delay: TimeInterval,
+    revealType: RevealType,
+    _ completion: (() -> Void)? = nil
+  ) {
+    switch revealType {
+    case .reveal:
+      modalRevealTransition(
+        to: viewController, duration: duration, rect: rect,
+        fadeColor: fadeColor, completion: completion)
+    case .unreveal:
+      modalUnrevealTransition(
+        duration: duration, rect: rect,
+        fadeColor: fadeColor, completion: completion)
+    }
+  }
+
+  /// Modal reveal: snapshot both VCs, animate the circular mask, then present.
+  func modalRevealTransition(
+    to viewController: UIViewController?,
+    duration: TimeInterval,
+    rect: CGRect,
+    fadeColor: UIColor?,
+    completion: (() -> Void)?
+  ) {
+    guard let viewController = viewController,
+          let fromSnapshot = self.view.snapshotView(afterScreenUpdates: true),
+          let toSnapshot = viewController.view.snapshotView(afterScreenUpdates: true) else {
+      completion?()
+      return
+    }
+
+    let fadeView = buildFadeView(fadeColor, frame: fromSnapshot.frame)
+
+    fromSnapshot.isOpaque = true
+    toSnapshot.isOpaque = true
+
+    self.view?.addSubview(fromSnapshot)
+    if let fadeView = fadeView {
+      fadeView.alpha = 0.0
+      self.view?.addSubview(fadeView)
+    }
+    self.view?.addSubview(toSnapshot)
+
+    UIView.animate(withDuration: duration) { fadeView?.alpha = 1.0 }
+
+    toSnapshot.drawAnimatedCircularMask(
+      startFrame: rect,
+      duration: duration,
+      revealType: .reveal) {
+        self.present(viewController, animated: false) {
+          completion?()
+          Self.cleanupSnapshots([fromSnapshot, toSnapshot, fadeView])
+        }
+      }
+  }
+
+  /// Modal unreveal: snapshot both VCs, animate the circular mask, then dismiss.
+  func modalUnrevealTransition(
+    duration: TimeInterval,
+    rect: CGRect,
+    fadeColor: UIColor?,
+    completion: (() -> Void)?
+  ) {
+    guard let fromSnapshot = self.view.snapshotView(afterScreenUpdates: true) else {
+      self.dismiss(animated: false) { completion?() }
+      return
+    }
+
+    guard let toSnapshot = self.presentingViewController?.view.snapshotView(afterScreenUpdates: true)
+            ?? self.presentingViewController?.view.snapshotView(afterScreenUpdates: false) else {
+      self.dismiss(animated: false) { completion?() }
+      return
+    }
+
+    let fadeView = buildFadeView(fadeColor, frame: fromSnapshot.frame)
+
+    fromSnapshot.isOpaque = true
+    toSnapshot.isOpaque = true
+
+    self.view?.addSubview(toSnapshot)
+    if let fadeView = fadeView {
+      fadeView.alpha = 1.0
+      self.view?.addSubview(fadeView)
+    }
+    self.view?.addSubview(fromSnapshot)
+
+    UIView.animate(withDuration: duration) { fadeView?.alpha = 0.01 }
+
+    fromSnapshot.drawAnimatedCircularMask(
+      startFrame: rect,
+      duration: duration,
+      revealType: .unreveal) {
+        self.dismiss(animated: false) {
+          completion?()
+          Self.cleanupSnapshots([toSnapshot, fromSnapshot, fadeView])
+        }
+      }
   }
 
 }

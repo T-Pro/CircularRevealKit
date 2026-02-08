@@ -53,31 +53,25 @@ public extension UIView {
     let maskLayer: CAShapeLayer = CAShapeLayer()
     let radius: CGFloat = sqrt(pow(frame.size.width, 2) + pow(frame.size.height, 2)) * 2
 
+    let fullRect = CGRect(
+      origin: CGPoint(
+        x: frame.size.width / 2 - radius / 2,
+        y: frame.size.height / 2 - radius / 2),
+      size: CGSize(width: radius, height: radius))
+
     let originRect: CGRect
     let newRect: CGRect
     let timingFunction: String
 
     switch revealType {
-      case RevealType.reveal:
-        originRect = startFrame
-        newRect = CGRect(
-          origin: CGPoint(
-            x: frame.size.width/2-radius/2,
-            y: frame.size.height/2-radius/2),
-          size: CGSize(
-            width: radius,
-            height: radius))
-        timingFunction = CAMediaTimingFunctionName.easeIn.rawValue
-      case RevealType.unreveal:
-        originRect = CGRect(
-          origin: CGPoint(
-            x: frame.size.width/2-radius/2,
-            y: frame.size.height/2-radius/2),
-          size: CGSize(
-            width: radius,
-            height: radius))
-        newRect = startFrame
-        timingFunction = CAMediaTimingFunctionName.easeOut.rawValue
+    case .reveal:
+      originRect = startFrame
+      newRect = fullRect
+      timingFunction = CAMediaTimingFunctionName.easeIn.rawValue
+    case .unreveal:
+      originRect = fullRect
+      newRect = startFrame
+      timingFunction = CAMediaTimingFunctionName.easeOut.rawValue
     }
 
     let originPath: CGPath = CGPath(ellipseIn: originRect, transform: nil)

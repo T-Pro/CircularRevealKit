@@ -144,7 +144,7 @@ extension CircularTransitionDirector: UINavigationControllerDelegate {
   }
 
   /// Returns `nil` since interactive transitions are not currently supported.
-  public func  navigationController(
+  public func navigationController(
     navigationController: UINavigationController,
     interactionControllerForAnimationController
     animationController: UIViewControllerAnimatedTransitioning)

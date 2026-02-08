@@ -17,7 +17,7 @@
     "tag": "0.9.1"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "13.0"
   },
   "source_files": "CircularRevealKit/Classes/**/*",
   "frameworks": "UIKit"

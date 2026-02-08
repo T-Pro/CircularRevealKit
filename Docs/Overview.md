@@ -7,7 +7,7 @@
 - **Version**: 0.9.6
 - **License**: MIT
 - **Author**: Pedro Paulo de Amorim (T-Pro)
-- **Minimum iOS**: 9.0
+- **Minimum iOS**: 13.0
 - **Language**: Swift 5 (with Swift 4.2 compatibility noted)
 - **Size**: ~40 KB
 

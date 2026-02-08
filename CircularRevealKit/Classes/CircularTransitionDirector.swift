@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 T-Pro
+// Copyright (c) 2026 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -28,7 +28,10 @@ public typealias AnimationBlock = ((
   _ animationTime: TimeInterval,
   _ transitionCompletion: @escaping (_ didComplete: Bool) -> Void) -> Void)
 
-public class CicularTransactionDirector: NSObject {
+@available(*, deprecated, renamed: "CircularTransitionDirector")
+public typealias CicularTransactionDirector = CircularTransitionDirector
+
+public class CircularTransitionDirector: NSObject {
 
   public var duration: TimeInterval = DEFAULT_CIRCULAR_ANIMATION_DURATION
   public var transitionContext: UIViewControllerContextTransitioning?
@@ -40,7 +43,7 @@ public class CicularTransactionDirector: NSObject {
 
 }
 
-extension CicularTransactionDirector: UIViewControllerAnimatedTransitioning {
+extension CircularTransitionDirector: UIViewControllerAnimatedTransitioning {
 
   public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?)
       -> TimeInterval {
@@ -56,7 +59,7 @@ extension CicularTransactionDirector: UIViewControllerAnimatedTransitioning {
 
 }
 
-extension CicularTransactionDirector: UIViewControllerInteractiveTransitioning {
+extension CircularTransitionDirector: UIViewControllerInteractiveTransitioning {
 
   public func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
     self.transitionContext = transitionContext
@@ -67,7 +70,7 @@ extension CicularTransactionDirector: UIViewControllerInteractiveTransitioning {
 
 }
 
-extension CicularTransactionDirector: UINavigationControllerDelegate {
+extension CircularTransitionDirector: UINavigationControllerDelegate {
 
   public func navigationController(
     _ navigationController: UINavigationController,

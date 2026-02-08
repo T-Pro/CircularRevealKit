@@ -8,7 +8,7 @@ Overall, CircularRevealKit is a focused, lightweight library that achieves its g
 
 ## Bugs and Potential Issues
 
-### 1. Typo in class name: `CicularTransactionDirector`
+### ~~1. Typo in class name: `CicularTransactionDirector`~~ (FIXED)
 
 **File:** `CicularTransactionDirector.swift`
 **Severity:** Medium (public API)
@@ -20,14 +20,14 @@ Current:  CicularTransactionDirector
 Expected: CircularTransitionDirector
 ```
 
-### 2. Unused `MetalKit` import
+### ~~2. Unused `MetalKit` import~~ (FIXED)
 
 **File:** `UIViewRadial.swift` (line 26)
 **Severity:** Low
 
 `import MetalKit` is present but nothing from MetalKit is used. This adds an unnecessary framework dependency and may increase launch time marginally.
 
-### 3. Force-unwrap crash on missing snapshot (modal path)
+### ~~3. Force-unwrap crash on missing snapshot (modal path)~~ (FIXED)
 
 **File:** `UICircularViewControllerExtension.swift` (lines 294-297, 319)
 **Severity:** High
@@ -47,7 +47,7 @@ self.present(viewController!, animated: false, ...)  // <-- force unwrap
 ```
 The `viewController` parameter comes from `push(_ viewController: UIViewController?, ...)` where it is optional.
 
-### 4. Silent failure in navigation controller reveal path
+### ~~4. Silent failure in navigation controller reveal path~~ (FIXED)
 
 **File:** `UICircularViewControllerExtension.swift` (lines 139-142)
 **Severity:** Medium
@@ -61,14 +61,14 @@ guard let toViewSnapshot = toView.snapshotView(afterScreenUpdates: true),
 }
 ```
 
-### 5. `animatorDirector` can be deallocated prematurely
+### ~~5. `animatorDirector` can be deallocated prematurely~~ (FIXED)
 
 **File:** `UICircularViewControllerExtension.swift` (line 112)
 **Severity:** Medium
 
 `animatorDirector` is created as a local variable. It is then assigned as `navigationController.delegate`, which is a `weak` reference. If `animatorDirector` is not retained elsewhere, it may be deallocated before the animation completes, causing the animation block to never fire. The `animationBlock` closure captures `self` (the view controller), but nothing strongly retains the director itself.
 
-### 6. `needsUnreveal` is declared but never used
+### ~~6. `needsUnreveal` is declared but never used~~ (FIXED)
 
 **File:** `Example/CircularRevealKit/FirstViewController.swift` (line 32)
 **Severity:** Low (example code)
@@ -81,7 +81,7 @@ internal var needsUnreveal = true  // never read
 
 ## Code Quality Issues
 
-### 7. Inconsistent naming conventions
+### ~~7. Inconsistent naming conventions~~ (PARTIALLY FIXED)
 
 The codebase mixes naming styles:
 
@@ -94,31 +94,31 @@ The codebase mixes naming styles:
 
 Swift convention prefers `lowerCamelCase` for constants, not `SCREAMING_SNAKE_CASE`.
 
-### 8. Redundant `break` statements in `switch`
+### ~~8. Redundant `break` statements in `switch`~~ (FIXED)
 
 **File:** `UIViewRadial.swift` (lines 57, 68)
 
 In Swift, `switch` cases do not fall through by default. The `break` statements are unnecessary.
 
-### 9. Typo: "contraints" instead of "constraints"
+### ~~9. Typo: "contraints" instead of "constraints"~~ (FIXED)
 
 **Files:** `FirstViewControllerContraints.swift`, `CircularViewCell.swift`
 
 The variable name `contraints` is misspelled throughout the example code. The filename itself (`FirstViewControllerContraints.swift`) also contains the typo.
 
-### 10. Legacy constraint API
+### ~~10. Legacy constraint API~~ (FIXED)
 
 **Files:** `FirstViewControllerContraints.swift`, `SecondViewController.swift`, `CircularViewCell.swift`
 
 The example app uses the verbose `NSLayoutConstraint(item:attribute:relatedBy:toItem:attribute:multiplier:constant:)` initializer instead of the modern anchor-based API or `NSLayoutConstraint.activate()`. While functional, this is harder to read and maintain.
 
-### 11. `@UIApplicationMain` is deprecated
+### ~~11. `@UIApplicationMain` is deprecated~~ (FIXED)
 
 **File:** `Example/CircularRevealKit/AppDelegate.swift` (line 25)
 
 Starting with Swift 5.3, `@main` is the preferred attribute. `@UIApplicationMain` still works but is deprecated.
 
-### 12. Empty test file
+### ~~12. Empty test file~~ (FIXED)
 
 **File:** `Example/Tests/Tests.swift`
 
@@ -128,7 +128,7 @@ The test file is empty -- no tests exist. This means there is zero automated tes
 
 ## Modernization Recommendations
 
-### 13. Minimum deployment target is iOS 9
+### ~~13. Minimum deployment target is iOS 9~~ (FIXED)
 
 **File:** `Package.swift`, `CircularRevealKit.podspec`
 
@@ -149,7 +149,7 @@ func radialPresent(viewController: UIViewController, duration: TimeInterval = 0.
 
 There is no SwiftUI wrapper. A `ViewModifier` or `UIViewControllerRepresentable` bridge would make the library usable in SwiftUI projects.
 
-### 16. Hardcoded `UIColor.black` backgrounds
+### ~~16. Hardcoded `UIColor.black` backgrounds~~ (FIXED)
 
 **File:** `UICircularViewControllerExtension.swift` (lines 116-117, 144-147)
 
@@ -159,13 +159,13 @@ The container view and snapshots are hardcoded to `UIColor.black`. This does not
 
 ## Security and Best Practices
 
-### 17. No access control on `LayerAnimator`
+### ~~17. No access control on `LayerAnimator`~~ (FIXED)
 
 **File:** `LayerAnimator.swift`
 
 `LayerAnimator` has no explicit access modifier, defaulting to `internal`. This is correct for the library's use case, but the properties (`animationStarted`, `completionBlock`, `animLayer`, `caAnimation`) should be `private` to enforce encapsulation.
 
-### 18. Potential retain cycles
+### ~~18. Potential retain cycles~~ (FIXED)
 
 In `UICircularViewControllerExtension.swift`, the `animationBlock` closure captures `self` (the presenting view controller) strongly. While the block is nilled out in `deinit` of the director, if the director is retained in an unexpected way, this could cause a retain cycle. Using `[weak self]` in the closure would be safer.
 
@@ -173,23 +173,23 @@ In `UICircularViewControllerExtension.swift`, the `animationBlock` closure captu
 
 ## Summary Table
 
-| # | Severity | Category | Description |
-|---|---|---|---|
-| 1 | Medium | Bug/Naming | Class name typo: `CicularTransactionDirector` |
-| 2 | Low | Cleanup | Unused `MetalKit` import |
-| 3 | High | Bug | `fatalError` and force-unwrap on snapshot failure |
-| 4 | Medium | Bug | Silent transition failure on nil snapshots |
-| 5 | Medium | Bug | Transition director may deallocate prematurely |
-| 6 | Low | Cleanup | Unused `needsUnreveal` property |
-| 7 | Low | Style | Non-Swift naming conventions for constants |
-| 8 | Low | Style | Redundant `break` in switch cases |
-| 9 | Low | Style | Typo "contraints" in variable/file names |
-| 10 | Low | Style | Legacy constraint API in example |
-| 11 | Low | Style | Deprecated `@UIApplicationMain` |
-| 12 | Medium | Testing | Empty test file, no test coverage |
-| 13 | Medium | Modernization | iOS 9 minimum deployment target |
-| 14 | Low | Modernization | No async/await API |
-| 15 | Low | Modernization | No SwiftUI support |
-| 16 | Low | Bug | Hardcoded black backgrounds ignore Dark Mode |
-| 17 | Low | Best Practice | Properties on `LayerAnimator` should be private |
-| 18 | Medium | Best Practice | Potential retain cycles in animation closures |
+| # | Severity | Category | Description | Status |
+|---|---|---|---|---|
+| 1 | Medium | Bug/Naming | ~~Class name typo: `CicularTransactionDirector`~~ | FIXED |
+| 2 | Low | Cleanup | ~~Unused `MetalKit` import~~ | FIXED |
+| 3 | High | Bug | ~~`fatalError` and force-unwrap on snapshot failure~~ | FIXED |
+| 4 | Medium | Bug | ~~Silent transition failure on nil snapshots~~ | FIXED |
+| 5 | Medium | Bug | ~~Transition director may deallocate prematurely~~ | FIXED |
+| 6 | Low | Cleanup | ~~Unused `needsUnreveal` property~~ | FIXED |
+| 7 | Low | Style | ~~Non-Swift naming conventions for constants~~ | PARTIALLY FIXED |
+| 8 | Low | Style | ~~Redundant `break` in switch cases~~ | FIXED |
+| 9 | Low | Style | ~~Typo "contraints" in variable/file names~~ | FIXED |
+| 10 | Low | Style | ~~Legacy constraint API in example~~ | FIXED |
+| 11 | Low | Style | ~~Deprecated `@UIApplicationMain`~~ | FIXED |
+| 12 | Medium | Testing | ~~Empty test file, no test coverage~~ | FIXED |
+| 13 | Medium | Modernization | ~~iOS 9 minimum deployment target~~ | FIXED |
+| 14 | Low | Modernization | No async/await API | Open |
+| 15 | Low | Modernization | No SwiftUI support | Open |
+| 16 | Low | Bug | ~~Hardcoded black backgrounds ignore Dark Mode~~ | FIXED |
+| 17 | Low | Best Practice | ~~Properties on `LayerAnimator` should be private~~ | FIXED |
+| 18 | Medium | Best Practice | ~~Potential retain cycles in animation closures~~ | FIXED |

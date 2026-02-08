@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 T-Pro
+// Copyright (c) 2026 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,6 +23,9 @@
 import Foundation
 import UIKit
 import QuartzCore
+import ObjectiveC
+
+private var associatedDirectorKey: UInt8 = 0
 
 public extension UIViewController {
 
@@ -109,11 +112,11 @@ public extension UIViewController {
 
     if isNavigationController {
     
-      let animatorDirector: CicularTransactionDirector = CicularTransactionDirector()
+      let animatorDirector = CircularTransitionDirector()
       animatorDirector.duration = duration
-      animatorDirector.animationBlock = { (transactionContext, animationTime, completion) in
+      animatorDirector.animationBlock = { [weak self] (transactionContext, animationTime, completion) in
 
-        transactionContext.containerView.backgroundColor = UIColor.black
+        transactionContext.containerView.backgroundColor = UIColor.systemBackground
         transactionContext.containerView.isOpaque = true
         
         let toViewController: UIViewController? = transactionContext.viewController(
@@ -124,6 +127,7 @@ public extension UIViewController {
 
         guard let toView: UIView = toViewController?.view,
           let fromView: UIView = fromViewController?.view else {
+            completion(false)
             return
         }
 
@@ -138,11 +142,12 @@ public extension UIViewController {
 
             guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
               let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
+                completion(false)
                 return
             }
 
-            toViewSnapshot.backgroundColor = UIColor.black
-            fromViewSnapshot.backgroundColor = UIColor.black
+            toViewSnapshot.backgroundColor = UIColor.systemBackground
+            fromViewSnapshot.backgroundColor = UIColor.systemBackground
             toViewSnapshot.isOpaque = true
             fromViewSnapshot.isOpaque = true
 
@@ -153,7 +158,7 @@ public extension UIViewController {
             fromViewSnapshot.frame.origin = fromView.frame.origin
             toViewSnapshot.frame.origin = fromView.frame.origin
 
-            let fadeView: UIView? = self.buildFadeView(fadeColor, fromView.frame)
+            let fadeView: UIView? = self?.buildFadeView(fadeColor, fromView.frame)
 
             fromViewSnapshot.isOpaque = true
             transactionContext.containerView.addSubview(fromViewSnapshot)
@@ -206,6 +211,7 @@ public extension UIViewController {
 
           guard let toViewSnapshot: UIView = toView.snapshotView(afterScreenUpdates: true),
             let fromViewSnapshot: UIView = fromView.snapshotView(afterScreenUpdates: true) else {
+              completion(false)
               return
           }
 
@@ -214,7 +220,7 @@ public extension UIViewController {
 
           DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
 
-            let fadeView: UIView? = self.buildFadeView(fadeColor, fromView.frame)
+            let fadeView: UIView? = self?.buildFadeView(fadeColor, fromView.frame)
 
             if let fadeView: UIView = fadeView {
               fadeView.alpha = 1.0
@@ -272,6 +278,15 @@ public extension UIViewController {
         return
       }
 
+      // Retain the director via associated object since navigationController.delegate is weak.
+      // It will be released when the navigation controller is deallocated or when a new
+      // director is associated.
+      objc_setAssociatedObject(
+        navigationController,
+        &associatedDirectorKey,
+        animatorDirector,
+        .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+
       navigationController.delegate = animatorDirector
       
       switch revealType {
@@ -291,9 +306,11 @@ public extension UIViewController {
 
     case RevealType.reveal:
 
-      guard let fromViewControllerSnapshot: UIView = self.view.snapshotView(afterScreenUpdates: true),
-        let toViewControllerSnapshot: UIView = viewController?.view.snapshotView(afterScreenUpdates: true) else {
-          fatalError("Error to take snapshots")
+      guard let viewController = viewController,
+        let fromViewControllerSnapshot: UIView = self.view.snapshotView(afterScreenUpdates: true),
+        let toViewControllerSnapshot: UIView = viewController.view.snapshotView(afterScreenUpdates: true) else {
+          transitionCompletion?()
+          return
       }
 
       let fadeView: UIView? = buildFadeView(fadeColor, fromViewControllerSnapshot.frame)
@@ -316,7 +333,7 @@ public extension UIViewController {
         startFrame: rect,
         duration: duration,
         revealType: revealType) { () -> Void in
-          self.present(viewController!, animated: false, completion: {
+          self.present(viewController, animated: false, completion: {
             transitionCompletion?()
             fromViewControllerSnapshot.removeFromSuperview()
             toViewControllerSnapshot.removeFromSuperview()
@@ -328,7 +345,10 @@ public extension UIViewController {
 
       guard let fromViewControllerSnapshot: UIView =
         self.view.snapshotView(afterScreenUpdates: true) else {
-        fatalError("Error to take sel snapshot")
+        self.dismiss(animated: false, completion: {
+          transitionCompletion?()
+        })
+        return
       }
 
       guard let toViewControllerSnapshot: UIView = self.presentingViewController?.view.snapshotView(afterScreenUpdates: true)

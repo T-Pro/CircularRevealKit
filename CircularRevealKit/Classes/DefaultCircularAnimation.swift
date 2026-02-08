@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 T-Pro
+// Copyright (c) 2026 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,4 +23,4 @@
 import Foundation
 
 public let DEFAULT_CIRCULAR_ANIMATION_DURATION: TimeInterval = 0.5
-internal let ANIMATION_KEY_PATH: String = "path"
+internal let animationKeyPath: String = "path"

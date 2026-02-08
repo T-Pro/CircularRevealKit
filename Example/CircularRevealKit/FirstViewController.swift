@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 T-Pro
+// Copyright (c) 2026 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -29,7 +29,6 @@ let CIRCULAR_ANIMATION_DELAY: TimeInterval = 0.5
 class FirstViewController: UIViewController {
 
   internal var viewReady = false
-  internal var needsUnreveal = true
   internal var cellHeight: CGFloat = 0.0
 
   internal lazy var tableView: UITableView = {

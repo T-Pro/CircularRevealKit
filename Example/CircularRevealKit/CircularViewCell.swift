@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 T-Pro
+// Copyright (c) 2026 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -77,63 +77,19 @@ class CircularViewCell: UITableViewCell {
   }
 
   func configTableViewConstraints() {
-    let contraints = [
-      NSLayoutConstraint(
-        item: self,
-        attribute: .top,
-        relatedBy: .equal,
-        toItem: cardImageView,
-        attribute: .top,
-        multiplier: 1,
-        constant: -8),
-      NSLayoutConstraint(
-        item: self,
-        attribute: .bottom,
-        relatedBy: .equal,
-        toItem: cardImageView,
-        attribute: .bottom,
-        multiplier: 1,
-        constant: 8),
-      NSLayoutConstraint(
-        item: self,
-        attribute: .left,
-        relatedBy: .equal,
-        toItem: cardImageView,
-        attribute: .left,
-        multiplier: 1,
-        constant: -8),
-      NSLayoutConstraint(
-        item: self,
-        attribute: .right,
-        relatedBy: .equal,
-        toItem: cardImageView,
-        attribute: .right,
-        multiplier: 1,
-        constant: 8)
-    ]
-    addConstraints(contraints)
+    NSLayoutConstraint.activate([
+      cardImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+      cardImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+      cardImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+      cardImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+    ])
   }
 
   func configTitleConstraints() {
-    let contraints = [
-      NSLayoutConstraint(
-        item: self,
-        attribute: .centerX,
-        relatedBy: .equal,
-        toItem: titleLabel,
-        attribute: .centerX,
-        multiplier: 1,
-        constant: 0),
-      NSLayoutConstraint(
-        item: self,
-        attribute: .centerY,
-        relatedBy: .equal,
-        toItem: titleLabel,
-        attribute: .centerY,
-        multiplier: 1,
-        constant: 0)
-    ]
-    addConstraints(contraints)
+    NSLayoutConstraint.activate([
+      titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+      titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
+    ])
   }
 
 }

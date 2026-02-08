@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 T-Pro
+// Copyright (c) 2026 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -26,10 +26,10 @@ import QuartzCore.CALayer
 
 class LayerAnimator: NSObject, CAAnimationDelegate {
 
-  var animationStarted: (() -> Void)?
-  var completionBlock: (() -> Void)?
-  var animLayer: CALayer?
-  var caAnimation: CAAnimation?
+  private var animationStarted: (() -> Void)?
+  private var completionBlock: (() -> Void)?
+  private var animLayer: CALayer?
+  private var caAnimation: CAAnimation?
 
   deinit {
     animationStarted = nil

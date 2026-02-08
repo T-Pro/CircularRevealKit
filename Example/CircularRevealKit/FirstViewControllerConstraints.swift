@@ -20,28 +20,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+import Foundation
 import UIKit
 
-extension UIImageView {
+extension FirstViewController {
 
-  func roundCornersForAspectFit(radius: CGFloat) {
-    if let image = self.image {
-      //calculate drawingRect
-      let boundsScale = self.bounds.size.width / self.bounds.size.height
-      let imageScale = image.size.width / image.size.height
-      var drawingRect: CGRect = self.bounds
-      if boundsScale > imageScale {
-        drawingRect.size.width =  drawingRect.size.height * imageScale
-        drawingRect.origin.x = (self.bounds.size.width - drawingRect.size.width) / 2
-      } else {
-        drawingRect.size.height = drawingRect.size.width / imageScale
-        drawingRect.origin.y = (self.bounds.size.height - drawingRect.size.height) / 2
-      }
-      let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: radius)
-      let mask = CAShapeLayer()
-      mask.path = path.cgPath
-      self.layer.mask = mask
-    }
+  func configTableViewConstraints() {
+    NSLayoutConstraint.activate([
+      tableView.topAnchor.constraint(equalTo: view.topAnchor),
+      tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+    ])
+  }
+
+  func configStubViewConstraints() {
+    NSLayoutConstraint.activate([
+      stubView.topAnchor.constraint(equalTo: view.topAnchor),
+      stubView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      stubView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      stubView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+    ])
+  }
+
+  func configLogoViewConstraints() {
+    NSLayoutConstraint.activate([
+      logoView.widthAnchor.constraint(equalToConstant: 115),
+      logoView.heightAnchor.constraint(equalToConstant: 115),
+      logoView.centerXAnchor.constraint(equalTo: stubView.centerXAnchor),
+      logoView.centerYAnchor.constraint(equalTo: stubView.centerYAnchor)
+    ])
   }
 
 }

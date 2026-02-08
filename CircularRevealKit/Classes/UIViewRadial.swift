@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 T-Pro
+// Copyright (c) 2026 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -23,7 +23,6 @@
 import UIKit
 import QuartzCore
 import CoreGraphics
-import MetalKit
 
 public extension UIView {
 
@@ -54,7 +53,6 @@ public extension UIView {
             width: radius,
             height: radius))
         timingFunction = CAMediaTimingFunctionName.easeIn.rawValue
-        break
       case RevealType.unreveal:
         originRect = CGRect(
           origin: CGPoint(
@@ -65,7 +63,6 @@ public extension UIView {
             height: radius))
         newRect = startFrame
         timingFunction = CAMediaTimingFunctionName.easeOut.rawValue
-        break
     }
 
     let originPath: CGPath = CGPath(ellipseIn: originRect, transform: nil)
@@ -76,7 +73,7 @@ public extension UIView {
 
     layer.mask = maskLayer
 
-    let revealAnimation: CABasicAnimation = CABasicAnimation(keyPath: ANIMATION_KEY_PATH)
+    let revealAnimation: CABasicAnimation = CABasicAnimation(keyPath: animationKeyPath)
     revealAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName(rawValue: timingFunction))
     revealAnimation.fromValue = oldPath
     revealAnimation.toValue = newPath

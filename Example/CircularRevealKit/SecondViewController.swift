@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 T-Pro
+// Copyright (c) 2026 T-Pro
 //
 // Permission is hereby granted, free of charge, to any person
 // obtaining a copy of this software and associated documentation
@@ -81,99 +81,21 @@ class SecondViewController: UIViewController {
   override func updateViewConstraints() {
     if !viewReady {
       viewReady = true
-      let constraints = [
-        NSLayoutConstraint(
-          item: view!,
-          attribute: .centerX,
-          relatedBy: .equal,
-          toItem: randomButton,
-          attribute: .centerX,
-          multiplier: 1,
-          constant: 0),
-        NSLayoutConstraint(
-          item: view!,
-          attribute: .centerY,
-          relatedBy: .equal,
-          toItem: randomButton,
-          attribute: .centerY,
-          multiplier: 1,
-          constant: 0)]
-      view.addConstraints(constraints)
+      let guide = view.safeAreaLayoutGuide
 
-      if #available(iOS 11, *) {
-        let guide = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-          navigationBar.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
-        ])
-      } else {
-        let standardSpacing: CGFloat = 8.0
-        NSLayoutConstraint.activate([
-          navigationBar.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor, constant: standardSpacing),
-        ])
-      }
+      NSLayoutConstraint.activate([
+        randomButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        randomButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
-      let navigationBarConstraints = [
-        NSLayoutConstraint(
-          item: view!,
-          attribute: .left,
-          relatedBy: .equal,
-          toItem: navigationBar,
-          attribute: .left,
-          multiplier: 1,
-          constant: 0),
-        NSLayoutConstraint(
-          item: view!,
-          attribute: .right,
-          relatedBy: .equal,
-          toItem: navigationBar,
-          attribute: .right,
-          multiplier: 1,
-          constant: 0)
-      ]
+        navigationBar.topAnchor.constraint(equalToSystemSpacingBelow: guide.topAnchor, multiplier: 1.0),
+        navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
-      view.addConstraints(navigationBarConstraints)
-
-      if #available(iOS 11, *) {
-        let guide = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-          bottomBar.bottomAnchor.constraint(equalToSystemSpacingBelow: guide.bottomAnchor, multiplier: 1.0),
-        ])
-      } else {
-        let standardSpacing: CGFloat = 8.0
-        NSLayoutConstraint.activate([
-          bottomBar.bottomAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: standardSpacing),
-        ])
-      }
-
-      let bottomBarConstraints = [
-        NSLayoutConstraint(
-          item: view!,
-          attribute: .left,
-          relatedBy: .equal,
-          toItem: bottomBar,
-          attribute: .left,
-          multiplier: 1,
-          constant: 0),
-        NSLayoutConstraint(
-          item: view!,
-          attribute: .right,
-          relatedBy: .equal,
-          toItem: bottomBar,
-          attribute: .right,
-          multiplier: 1,
-          constant: 0),
-        NSLayoutConstraint(
-          item: bottomBar,
-          attribute: .height,
-          relatedBy: .equal,
-          toItem: nil,
-          attribute: .notAnAttribute,
-          multiplier: 1,
-          constant: 44)
-      ]
-
-      view.addConstraints(bottomBarConstraints)
-
+        bottomBar.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+        bottomBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        bottomBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        bottomBar.heightAnchor.constraint(equalToConstant: 44)
+      ])
     }
     super.updateViewConstraints()
   }

@@ -105,4 +105,33 @@ public extension UIView {
 
   }
 
+  /// Applies an animated circular mask using async/await.
+  ///
+  /// Async wrapper around the closure-based `drawAnimatedCircularMask`. Suspends
+  /// until the Core Animation mask transition completes.
+  ///
+  /// - Parameters:
+  ///   - startFrame: The rectangle that defines the circle's origin or destination.
+  ///   - duration: The duration of the animation in seconds.
+  ///   - revealType: The direction of the animation (`.reveal` or `.unreveal`).
+  ///   - startBlock: An optional closure invoked when the Core Animation begins.
+  @available(iOS 13.0, *)
+  @MainActor
+  func drawAnimatedCircularMask(
+    startFrame: CGRect,
+    duration: TimeInterval,
+    revealType: RevealType,
+    startBlock: (() -> Void)? = nil
+  ) async {
+    await withCheckedContinuation { continuation in
+      drawAnimatedCircularMask(
+        startFrame: startFrame,
+        duration: duration,
+        revealType: revealType,
+        startBlock: startBlock) {
+          continuation.resume()
+        }
+    }
+  }
+
 }

@@ -114,15 +114,6 @@ class FirstViewController: UIViewController {
 
   }
 
-//  private func showRecursive() {
-//    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-//      self?.show()
-//      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-//        self?.showRecursive()
-//      }
-//    }
-//  }
-
   private func show() {
     let vc = SecondViewController()
     vc.modalPresentationStyle = .overCurrentContext

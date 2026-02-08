@@ -4,7 +4,7 @@
 
 **CircularRevealKit** is an iOS library written in Swift 5 that brings Android's Material Design circular reveal animation to iOS. It provides a simple API for presenting and dismissing `UIViewController` instances (and masking `UIView` instances) with an expanding/contracting circular animation, similar to `ViewAnimationUtils.createCircularReveal()` on Android.
 
-- **Version**: 0.9.6
+- **Version**: 1.0.0
 - **License**: MIT
 - **Author**: Pedro Paulo de Amorim (T-Pro)
 - **Minimum iOS**: 13.0

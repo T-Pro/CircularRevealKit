@@ -46,7 +46,7 @@ Or add it to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/T-Pro/CircularRevealKit.git", from: "0.9.6")
+    .package(url: "https://github.com/T-Pro/CircularRevealKit.git", from: "1.0.0")
 ]
 ```
 
@@ -59,7 +59,7 @@ platform :ios, '13.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-  pod 'CircularRevealKit', '~> 0.9.6'
+  pod 'CircularRevealKit', '~> 1.0.0'
 end
 ```
 
@@ -131,10 +131,31 @@ view.drawAnimatedCircularMask(
 All public methods are also available as async alternatives:
 
 ```swift
-await radialPresent(viewController: detailVC, fadeColor: .blue)
-// Continues only after the animation completes
+func showDetail() async {
+    let detailVC = DetailViewController()
+    detailVC.modalPresentationStyle = .overCurrentContext
 
-await radialDismiss()
+    // Present with circular reveal — suspends until animation finishes
+    await radialPresent(viewController: detailVC, fadeColor: .blue)
+    print("Presentation complete")
+}
+
+func closeDetail() async {
+    // Dismiss with circular unreveal — suspends until animation finishes
+    await radialDismiss(fadeColor: .blue, delay: 0.3)
+    print("Dismissal complete")
+}
+```
+
+You can call these from a `Task` inside any UIKit callback:
+
+```swift
+@objc func buttonTapped() {
+    Task {
+        await showDetail()
+        // This runs only after the animation completes
+    }
+}
 ```
 
 ### SwiftUI
@@ -142,34 +163,72 @@ await radialDismiss()
 Use the `.circularReveal` view modifier for state-driven animations:
 
 ```swift
+import SwiftUI
 import CircularRevealKit
 
 struct ContentView: View {
-    @State private var showImage = false
+    @State private var showOverlay = false
+    @State private var tapOrigin: CGPoint = .zero
 
     var body: some View {
-        Image("photo")
-            .circularReveal(isRevealed: showImage, origin: CGPoint(x: 200, y: 400))
-            .onTapGesture { showImage.toggle() }
+        ZStack {
+            // Your main content
+            Color.blue.ignoresSafeArea()
+
+            Button("Reveal") {
+                showOverlay.toggle()
+            }
+            .font(.title2.bold())
+            .foregroundColor(.white)
+            .background(
+                GeometryReader { geometry in
+                    Color.clear.onAppear {
+                        let frame = geometry.frame(in: .global)
+                        tapOrigin = CGPoint(x: frame.midX, y: frame.midY)
+                    }
+                }
+            )
+
+            // Overlay revealed with circular mask
+            ZStack {
+                Color.orange
+                Text("Revealed!")
+                    .font(.largeTitle.bold())
+                    .foregroundColor(.white)
+            }
+            .ignoresSafeArea()
+            .mask(
+                CircularRevealShape(progress: showOverlay ? 1 : 0, origin: tapOrigin)
+                    .fill(Color.white)
+                    .edgesIgnoringSafeArea(.all)
+            )
+            .allowsHitTesting(showOverlay)
+            .onTapGesture { showOverlay = false }
+        }
+        .animation(.easeInOut(duration: 0.5), value: showOverlay)
     }
 }
 ```
 
-Or use the `.circularReveal` transition for conditional views:
+You can also use the convenience modifier for simpler cases:
+
+```swift
+Image("photo")
+    .circularReveal(isRevealed: isShowing, origin: center)
+```
+
+Or the transition API for conditional views:
 
 ```swift
 if showDetail {
     DetailView()
-        .transition(.circularReveal(from: CGPoint(x: 200, y: 400)))
+        .transition(.circularReveal(from: buttonCenter))
 }
 ```
 
-You can also use `CircularRevealShape` directly as a clip shape for full control:
-
-```swift
-MyView()
-    .clipShape(CircularRevealShape(progress: animationProgress, origin: center))
-```
+> **Note:** For full-screen reveals that cover the status bar, use `.mask()` with
+> `.edgesIgnoringSafeArea(.all)` on the shape fill as shown above. The convenience
+> modifier and transition handle this automatically.
 
 ### ProMotion (120fps)
 

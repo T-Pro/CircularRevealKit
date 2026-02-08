@@ -25,7 +25,6 @@ import SwiftUI
 import CircularRevealKit
 
 let circularAnimationCell: String = "Cell"
-let circularAnimationDelay: TimeInterval = 0.5
 
 class FirstViewController: UIViewController {
 
@@ -118,7 +117,7 @@ class FirstViewController: UIViewController {
   private func show() {
     let vc = SecondViewController()
     vc.modalPresentationStyle = .overCurrentContext
-    self.radialPresent(viewController: vc, fadeColor: UIColor.blue, delay: circularAnimationDelay)
+    self.radialPresent(viewController: vc, fadeColor: UIColor.blue)
   }
 
   private func showSwiftUIDemo() {

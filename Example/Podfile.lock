@@ -1,5 +1,5 @@
 PODS:
-  - CircularRevealKit (0.9.6)
+  - CircularRevealKit (1.0.0)
 
 DEPENDENCIES:
   - CircularRevealKit (from `../`)

@@ -34,7 +34,7 @@ private struct CircularRevealModifier: ViewModifier {
     content.mask(
       CircularRevealShape(progress: progress, origin: origin)
         .fill(Color.white)
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea(.all)
     )
   }
 
@@ -73,7 +73,7 @@ public extension View {
           origin: origin
         )
         .fill(Color.white)
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea(.all)
       )
       .animation(.easeInOut(duration: duration), value: isRevealed)
   }
